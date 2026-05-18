@@ -41,23 +41,20 @@
       #custom-cursor { display: block; }
     }
 
-    /* Línea de tiempo mejorada */
-    .timeline {
-      position: relative;
-    }
+    /* Línea de tiempo */
     .timeline::before {
       content: '';
       position: absolute;
       left: 18px;
-      top: 0;
-      bottom: 0;
+      top: 10px;
+      bottom: 10px;
       width: 3px;
       background: #450a0a;
     }
     .timeline-item {
       position: relative;
-      padding-left: 60px;
-      margin-bottom: 2.5rem;
+      padding-left: 70px;
+      margin-bottom: 2.8rem;
     }
     .timeline-dot {
       position: absolute;
@@ -97,7 +94,41 @@
     </div>
   </section>
 
-  <!-- Otras secciones (Quiénes Somos y Líder) se mantienen iguales -->
+  <!-- ¿QUIÉNES SOMOS? -->
+  <section class="py-20 md:py-32 border-t border-red-900 bg-zinc-950">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="title-font text-5xl md:text-6xl font-bold mb-10 text-red-600">¿QUIÉNES SOMOS?</h2>
+      <p class="text-gray-300 text-lg md:text-xl leading-relaxed">
+        Team JXLL es una comunidad de <span class="text-red-500">Red Team</span>, desarrolladores de software y especialistas 
+        en ciberseguridad defensiva y ofensiva.
+      </p>
+    </div>
+  </section>
+
+  <!-- ¿QUIÉN ES SU LÍDER? -->
+  <section class="py-20 md:py-32 border-t border-red-900 bg-black">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="title-font text-5xl md:text-6xl font-bold text-center mb-16 text-red-600">¿QUIÉN ES SU LÍDER?</h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="text-4xl text-red-500 title-font mb-6">Keybreaker (JXLL_Commander)</h3>
+          <p class="text-gray-300 text-lg">
+            Nuestro líder es <strong>Keybreaker</strong>, un programador y especialista en seguridad ofensiva y defensiva. 
+            Fundador y CEO de Team JXLL.
+          </p>
+        </div>
+        <div class="bg-zinc-900 border border-red-900 p-8 rounded-lg">
+          <h4 class="text-red-500 text-xl mb-6">Datos relevantes:</h4>
+          <ul class="space-y-3 text-gray-300">
+            <li>🔺 CEO y Fundador de Team JXLL</li>
+            <li>⚔️ Especialista en Red Team Operations</li>
+            <li>🔍 Experto en OSINT y Adversary Simulation</li>
+            <li>🛠 Desarrollador de herramientas de seguridad</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ¿CÓMO EMPEZÓ TODO? + LÍNEA DE TIEMPO -->
   <section class="py-20 md:py-32 border-t border-red-900 bg-zinc-950">
@@ -105,43 +136,53 @@
       <h2 class="title-font text-5xl md:text-6xl font-bold text-center mb-16 text-red-600">¿CÓMO EMPEZÓ TODO?</h2>
       
       <div class="max-w-3xl mx-auto text-gray-300 text-base md:text-lg leading-relaxed text-center space-y-8 mb-16">
-        <p>Todo comenzó cuando un apasionado de la ciberseguridad entró al mundo de los legionarios de WhatsApp...</p>
-        <!-- (texto resumido) -->
+        <p>
+          Todo comenzó cuando un apasionado de la ciberseguridad entró al mundo de los legionarios de WhatsApp. 
+          Lo que empezó como curiosidad se convirtió en obsesión.
+        </p>
+        <p>
+          Pasó de ser estudiante a profesor, luego a script kiddie dominando Termux. Creó su primera comunidad y 
+          comenzó a aprender programación desde cero.
+        </p>
+        <p>
+          Con años de dedicación constante, se convirtió en programador avanzado, pentester profesional 
+          y uno de los hackers más reconocidos en la escena hispana.
+        </p>
       </div>
 
-      <!-- LÍNEA DE TIEMPO CORREGIDA -->
+      <!-- LÍNEA DE TIEMPO -->
       <div class="timeline max-w-3xl mx-auto">
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="md:w-32 text-red-500 hacker-font">Inicio</div>
+          <div class="text-red-500 hacker-font">Inicio</div>
           <p class="font-semibold">Entrada al mundo de los Legionarios de WhatsApp</p>
           <p class="text-gray-500">Primer contacto serio con la ciberseguridad</p>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="md:w-32 text-red-500 hacker-font">Etapa 1</div>
+          <div class="text-red-500 hacker-font">Etapa 1</div>
           <p class="font-semibold">De estudiante a profesor</p>
-          <p class="text-gray-500">Comienza a enseñar lo aprendido</p>
+          <p class="text-gray-500">Comienza a enseñar lo aprendido en comunidades</p>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="md:w-32 text-red-500 hacker-font">Etapa 2</div>
+          <div class="text-red-500 hacker-font">Etapa 2</div>
           <p class="font-semibold">Script Kiddie + Termux</p>
-          <p class="text-gray-500">Crea su primera comunidad</p>
+          <p class="text-gray-500">Crea su primera pequeña comunidad</p>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="md:w-32 text-red-500 hacker-font">Etapa 3</div>
+          <div class="text-red-500 hacker-font">Etapa 3</div>
           <p class="font-semibold">Aprendizaje profundo</p>
           <p class="text-gray-500">Estudia programación y desarrollo de herramientas</p>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="md:w-32 text-red-500 hacker-font">Actualidad</div>
+          <div class="text-red-500 hacker-font">Actualidad</div>
           <p class="font-semibold">Fundador de Team JXLL</p>
           <p class="text-gray-500">Red Team Elite reconocido</p>
         </div>
