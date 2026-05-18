@@ -1,1 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INTEGRANTES • JXLL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=VT323&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    .title-font { 
+      font-family: 'Cinzel', serif; 
+      letter-spacing: 6px;
+      font-weight: 900;
+    }
+    .hacker-font { font-family: 'VT323', monospace; }
 
+    #custom-cursor {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 2px solid #ff0000;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 35px #ff0000, 0 0 70px rgba(255,0,0,0.7);
+      mix-blend-mode: difference;
+      display: none;
+    }
+
+    @media (pointer: fine) {
+      #custom-cursor { display: block; }
+    }
+
+    .member-card {
+      transition: all 0.4s ease;
+    }
+    .member-card:hover {
+      transform: translateY(-8px);
+      border-color: #ff0000;
+      box-shadow: 0 20px 40px -10px rgba(255, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div id="custom-cursor"></div>
+
+  <!-- NAVBAR (sin botón INTEGRANTES) -->
+  <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-red-900">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-5 flex justify-between items-center">
+      <h1 class="title-font text-4xl md:text-5xl text-red-600 tracking-widest">TEAM JXLL</h1>
+      <div class="flex gap-6 md:gap-10 text-sm md:text-lg hacker-font tracking-widest">
+        <a href="index.html" class="hover:text-red-500">INICIO</a>
+        <a href="redes.html" class="hover:text-red-500">REDES</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-[70vh] flex items-center justify-center relative bg-black pt-20">
+    <div class="text-center px-6">
+      <p class="hacker-font text-red-500 text-xl tracking-[6px] mb-6">EL EQUIPO QUE OPERA EN LA SOMBRA</p>
+      <h1 class="title-font text-6xl md:text-8xl font-black text-red-600 tracking-widest">INTEGRANTES</h1>
+    </div>
+  </section>
+
+  <!-- ESTRUCTURA PROFESIONAL -->
+  <section class="py-20 bg-zinc-950">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- OWNER -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="px-4 py-1 bg-red-600 text-black text-sm font-bold tracking-widest">#OWNER</span>
+        </div>
+        <a href="https://t.me/KeyBreaker" target="_blank" class="member-card block bg-black border border-red-600 p-8 rounded-3xl hover:border-red-500">
+          <div class="text-3xl font-bold">@KeyBreaker</div>
+          <p class="text-red-500 mt-2">Fundador & CEO</p>
+        </a>
+      </div>
+
+      <!-- CO-OWNER -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="px-4 py-1 bg-red-500/80 text-black text-sm font-bold tracking-widest">#CO-OWNER</span>
+        </div>
+        <a href="https://t.me/ropsx_ninja" target="_blank" class="member-card block bg-black border border-red-500 p-8 rounded-3xl hover:border-red-500">
+          <div class="text-3xl font-bold">@ropsx_ninja</div>
+        </a>
+      </div>
+
+      <!-- STAFF -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-8">
+          <span class="px-4 py-1 bg-red-400/70 text-black text-sm font-bold tracking-widest">#STAFF</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="https://t.me/Import_404" target="_blank" class="member-card bg-black border border-red-900 p-6 rounded-2xl hover:border-red-500">@Import_404</a>
+          <a href="https://t.me/Nemoris_Hacking" target="_blank" class="member-card bg-black border border-red-900 p-6 rounded-2xl hover:border-red-500">@Nemoris_Hacking</a>
+          <a href="https://t.me/emmamyers1321" target="_blank" class="member-card bg-black border border-red-900 p-6 rounded-2xl hover:border-red-500">@emmamyers1321</a>
+          <a href="https://t.me/h4ckzu5" target="_blank" class="member-card bg-black border border-red-900 p-6 rounded-2xl hover:border-red-500">@h4ckzu5</a>
+        </div>
+      </div>
+
+      <!-- ALIADOS -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-8">
+          <span class="px-4 py-1 bg-red-400/50 text-black text-sm font-bold tracking-widest">#ALIADOS</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="https://t.me/RIPNetwork" target="_blank" class="member-card bg-black border border-red-900/70 p-6 rounded-2xl hover:border-red-500">@RIPNetwork</a>
+          <a href="https://t.me/realityofc2" target="_blank" class="member-card bg-black border border-red-900/70 p-6 rounded-2xl hover:border-red-500">@realityofc2</a>
+        </div>
+      </div>
+
+      <!-- INTEGRANTES -->
+      <div>
+        <div class="flex items-center gap-3 mb-8">
+          <span class="px-4 py-1 bg-red-400/30 text-black text-sm font-bold tracking-widest">#INTEGRANTES</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="https://t.me/Darkness_info" target="_blank" class="member-card bg-black border border-red-900/50 p-6 rounded-2xl hover:border-red-500">@Darkness_info</a>
+          <a href="https://t.me/noahlp03" target="_blank" class="member-card bg-black border border-red-900/50 p-6 rounded-2xl hover:border-red-500">@noahlp03</a>
+          <a href="https://t.me/Yoevani" target="_blank" class="member-card bg-black border border-red-900/50 p-6 rounded-2xl hover:border-red-500">@Yoevani</a>
+          <a href="https://t.me/LDSDARK3" target="_blank" class="member-card bg-black border border-red-900/50 p-6 rounded-2xl hover:border-red-500">@LDSDARK3</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-red-900 bg-black text-center">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="text-gray-500 text-sm tracking-widest">
+        © 2026 TEAM JXLL • ALL RIGHTS RESERVED
+      </p>
+      <p class="text-red-600 text-xs mt-3 tracking-[3px] hacker-font">
+        NINJA PROPERTY 🥷❤️
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('custom-cursor');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.clientX - 18}px`;
+      cursor.style.top = `${e.clientY - 18}px`;
+    });
+
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.6)');
+      link.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+    });
+  </script>
+</body>
+</html>
