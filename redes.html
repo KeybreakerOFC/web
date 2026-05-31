@@ -4,26 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>REDES • JXLL</title>
+  <meta name="description" content="Redes sociales oficiales de Team JXLL. Conéctate con nosotros en X, Telegram, GitHub, Discord y más.">
+  <meta name="keywords" content="jxll, redes sociales, telegram, github, discord, keybreaker, red team">
+  <meta name="author" content="Team JXLL">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="REDES • JXLL">
+  <meta property="og:description" content="Redes sociales oficiales de Team JXLL">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://jxll.vercel.app/redes">
+  
+  <!-- ===== SEGURIDAD: CSP ===== -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    img-src 'self' data: https:;
+    connect-src 'self';
+    frame-src 'none';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+  
+  <!-- ===== SEGURIDAD: Headers adicionales ===== -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=VT323&display=swap');
     
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* ===== SEGURIDAD: Antiselección ===== */
     body {
       font-family: 'Inter', sans-serif;
       background: #000;
       color: #fff;
       overflow-x: hidden;
       cursor: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
+    
     .title-font { 
       font-family: 'Cinzel', serif; 
       letter-spacing: 6px;
       font-weight: 900;
     }
+    
     .hacker-font { font-family: 'VT323', monospace; }
 
-    /* CURSOR ROJO */
+    /* ===== SEGURIDAD: Warning DevTools ===== */
+    #devtools-warning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #ff0000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      font-family: 'VT323', monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    #devtools-warning h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    #devtools-warning p {
+      font-size: 1.5rem;
+      color: #ff4444;
+    }
+
+    /* Cursor personalizado */
     #custom-cursor {
       position: fixed;
       width: 36px;
@@ -34,6 +102,8 @@
       z-index: 9999;
       box-shadow: 0 0 35px #ff0000, 0 0 70px rgba(255,0,0,0.7);
       mix-blend-mode: difference;
+      will-change: transform, left, top;
+      transition: transform 0.15s ease;
       display: none;
     }
 
@@ -41,136 +111,281 @@
       #custom-cursor { display: block; }
     }
 
-    /* Optimización Móvil */
+    /* ===== CARDS MEJORADAS ===== */
     .redes-card {
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .redes-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,0,0,0.05), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .redes-card:hover::before {
+      left: 100%;
+    }
+    
     .redes-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px) scale(1.02);
       border-color: #ff0000;
+      box-shadow: 0 0 40px rgba(255,0,0,0.15), 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .redes-card:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    /* ===== EFECTO GLITCH EN HERO ===== */
+    .glitch-hover:hover {
+      animation: glitch 0.3s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 2px); }
+      40% { transform: translate(3px, -2px); }
+      60% { transform: translate(-2px, -3px); }
+      80% { transform: translate(2px, 3px); }
+      100% { transform: translate(0); }
+    }
+
+    /* ===== PARTÍCULAS ===== */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.12;
+    }
+
+    section, nav, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== ANIMACIONES ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .redes-card:nth-child(1) { animation-delay: 0.1s; }
+    .redes-card:nth-child(2) { animation-delay: 0.15s; }
+    .redes-card:nth-child(3) { animation-delay: 0.2s; }
+    .redes-card:nth-child(4) { animation-delay: 0.25s; }
+    .redes-card:nth-child(5) { animation-delay: 0.3s; }
+    .redes-card:nth-child(6) { animation-delay: 0.35s; }
+    .redes-card:nth-child(7) { animation-delay: 0.4s; }
+    .redes-card:nth-child(8) { animation-delay: 0.45s; }
+
+    /* ===== PULSO EN ICONOS ===== */
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .redes-card:hover i {
+      animation: iconPulse 1s infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
+  
+  <script>
+    // Configuración de Tailwind
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            red: {
+              900: '#1a0000',
+              950: '#0d0000'
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
 <body>
+
+  <!-- ===== SEGURIDAD: Warning DevTools ===== -->
+  <div id="devtools-warning">
+    <div>
+      <h1>&#128683; ACCESO DENEGADO</h1>
+      <p>No puedes inspeccionar esta p&aacute;gina.</p>
+    </div>
+  </div>
 
   <!-- Cursor -->
   <div id="custom-cursor"></div>
 
+  <!-- Partículas de fondo -->
+  <canvas id="particles-canvas"></canvas>
+
   <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-red-900">
-    <div class="max-w-7xl mx-auto px-5 md:px-6 py-5 flex justify-between items-center">
-      <h1 class="title-font text-4xl md:text-5xl text-red-600 tracking-widest">TEAM JXLL</h1>
+  <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-red-900" role="navigation" aria-label="Menú principal">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-4 md:py-5 flex justify-between items-center">
+      <a href="/" class="title-font text-3xl md:text-5xl text-red-600 tracking-widest no-underline hover:opacity-80 transition-opacity" aria-label="JXLL Inicio">TEAM JXLL</a>
       <div class="flex gap-5 md:gap-10 text-sm md:text-lg hacker-font tracking-widest">
-        <a href="index.html" class="hover:text-red-500">INICIO</a>
-        <a href="integrantes.html" class="hover:text-red-500">INTEGRANTES</a>
+        <a href="/" class="hover:text-red-500 transition-colors" onclick="return handleNavClick(event)">INICIO</a>
+        <a href="integrantes" class="hover:text-red-500 transition-colors" onclick="return handleNavClick(event)">INTEGRANTES</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO REDES -->
-  <section class="min-h-[70vh] flex items-center justify-center relative bg-black pt-20">
-    <div class="text-center px-6">
-      <p class="hacker-font text-red-500 text-base md:text-xl tracking-[6px] mb-6">CONÉCTATE CON NOSOTROS</p>
-      <h1 class="title-font text-6xl md:text-8xl font-black text-red-600 tracking-widest leading-none">REDES SOCIALES</h1>
+  <section class="min-h-[70vh] flex items-center justify-center relative bg-black pt-20" aria-label="Redes sociales">
+    <div class="text-center px-6 relative z-10">
+      <p class="hacker-font text-red-500 text-base md:text-xl tracking-[6px] mb-6">CON&Eacute;CTATE CON NOSOTROS</p>
+      <h1 class="title-font text-5xl sm:text-6xl md:text-8xl font-black text-red-600 tracking-widest leading-none glitch-hover">REDES SOCIALES</h1>
+      
+      <!-- Línea decorativa -->
+      <div class="flex items-center justify-center gap-4 mt-10">
+        <div class="h-px w-16 bg-red-900"></div>
+        <span class="text-red-600 hacker-font text-lg">///</span>
+        <div class="h-px w-16 bg-red-900"></div>
+      </div>
     </div>
   </section>
 
   <!-- LISTADO DE REDES -->
-  <section class="py-12 md:py-20 bg-zinc-950">
-    <div class="max-w-5xl mx-auto px-5 md:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <section class="py-12 md:py-20 bg-zinc-950" aria-label="Lista de redes">
+    <div class="max-w-6xl mx-auto px-5 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
         <!-- X -->
-        <a href="https://x.com/JXLL_Commander" target="_blank" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fab fa-x-twitter text-5xl"></i>
+        <a href="https://x.com/JXLL_Commander" target="_blank" rel="noopener noreferrer" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fab fa-x-twitter text-4xl"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xl md:text-2xl font-bold">@JXLL_Commander</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
-            <p class="text-gray-400 text-sm">Cuenta Oficial • X / Twitter</p>
+            <p class="text-gray-400 text-sm">Cuenta Oficial &bull; X / Twitter</p>
           </div>
+          <i class="fas fa-external-link-alt text-gray-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity"></i>
         </a>
 
         <!-- Telegram Personal -->
-        <a href="https://t.me/Keybreaker" target="_blank" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fab fa-telegram text-5xl text-[#229ED9]"></i>
+        <a href="https://t.me/Keybreakerr" target="_blank" rel="noopener noreferrer" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fab fa-telegram text-4xl text-[#229ED9]"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-xl md:text-2xl font-bold">@Keybreaker</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-xl md:text-2xl font-bold">Keybreaker</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
             <p class="text-gray-400 text-sm">Telegram Personal</p>
           </div>
         </a>
 
         <!-- Canal Telegram -->
-        <a href="https://t.me/+icjkLL6rtKcxNzRh" target="_blank" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fab fa-telegram text-5xl text-[#229ED9]"></i>
+        <a href="https://t.me/+BX4BUezAyng3NDJh" target="_blank" rel="noopener noreferrer" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fab fa-telegram text-4xl text-[#229ED9]"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xl md:text-2xl font-bold">Canal Oficial</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
             <p class="text-gray-400 text-sm">Canal de Actualizaciones</p>
           </div>
         </a>
 
         <!-- Grupo Telegram -->
-        <a href="https://t.me/team_jxll_chat" target="_blank" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fab fa-telegram text-5xl text-[#229ED9]"></i>
+        <a href="https://t.me/+69U-qCNOATwwYWJh" target="_blank" rel="noopener noreferrer" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fab fa-telegram text-4xl text-[#229ED9]"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xl md:text-2xl font-bold">Grupo Oficial</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
             <p class="text-gray-400 text-sm">Chat Comunitario</p>
           </div>
         </a>
 
         <!-- Redirectorio -->
-        <a href="https://t.me/zconchita" target="_blank" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fab fa-telegram text-5xl text-[#229ED9]"></i>
+        <a href="https://t.me/JXLL_commander" target="_blank" rel="noopener noreferrer" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fab fa-telegram text-4xl text-[#229ED9]"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-xl md:text-2xl font-bold">@zconchita</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-xl md:text-2xl font-bold">Links JXLL</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
             <p class="text-gray-400 text-sm">Redirectorio Oficial</p>
           </div>
         </a>
 
         <!-- GitHub -->
-        <a href="https://github.com/KeybreakerOFC" target="_blank" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fab fa-github text-5xl"></i>
+        <a href="https://github.com/KeybreakerOFC" target="_blank" rel="noopener noreferrer" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fab fa-github text-4xl"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xl md:text-2xl font-bold">KeybreakerOFC</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
             <p class="text-gray-400 text-sm">GitHub Oficial</p>
           </div>
         </a>
 
         <!-- Correo -->
-        <a href="mailto:team_jxll@proton.me" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fas fa-envelope text-5xl text-red-500"></i>
+        <a href="mailto:team_jxll@proton.me" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fas fa-envelope text-4xl text-red-500"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xl md:text-2xl font-bold">team_jxll@proton.me</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
             <p class="text-gray-400 text-sm">Correo Oficial</p>
           </div>
         </a>
 
         <!-- Discord -->
-        <a href="https://discord.gg/QAafEwZV" target="_blank" class="redes-card bg-black border border-red-900 hover:border-red-500 p-6 md:p-8 rounded-xl transition-all flex items-center gap-6">
-          <i class="fab fa-discord text-5xl text-[#5865F2]"></i>
+        <a href="https://discord.gg/QAafEwZV" target="_blank" rel="noopener noreferrer" class="redes-card bg-black border border-zinc-800 hover:border-red-500 p-6 md:p-8 rounded-xl flex items-center gap-6 fade-in">
+          <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-zinc-900/50">
+            <i class="fab fa-discord text-4xl text-[#5865F2]"></i>
+          </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xl md:text-2xl font-bold">Team JXLL</span>
-              <span class="text-blue-500 text-2xl">✔</span>
+              <span class="text-blue-500 text-lg">&#10003;</span>
             </div>
             <p class="text-gray-400 text-sm">Servidor de Discord</p>
           </div>
@@ -184,25 +399,227 @@
   <footer class="py-12 border-t border-red-900 bg-black text-center">
     <div class="max-w-7xl mx-auto px-6">
       <p class="text-gray-500 text-sm tracking-widest">
-        © 2026 TEAM JXLL • ALL RIGHTS RESERVED
+        &copy; 2026 TEAM JXLL &bull; ALL RIGHTS RESERVED
       </p>
       <p class="text-red-600 text-xs mt-3 tracking-[3px] hacker-font">
-        NINJA PROPERTY 🥷❤️
+        NINJA PROPERTY &#129353;&#65039;&#10084;&#65039;
       </p>
     </div>
   </footer>
 
   <script>
-    const cursor = document.getElementById('custom-cursor');
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = `${e.clientX - 18}px`;
-      cursor.style.top = `${e.clientY - 18}px`;
+    // ============================================================
+    // SEGURIDAD: Anti-Click derecho
+    // ============================================================
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
     });
 
-    document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.6)');
-      link.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+    // ============================================================
+    // SEGURIDAD: Anti-Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12
+    // ============================================================
+    document.addEventListener('keydown', function(e) {
+      // F12
+      if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+U (ver código fuente)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+Shift+I (Inspect)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+Shift+J (Console)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'j') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+Shift+C (Inspect element)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+S (Guardar página)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+P (Imprimir)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+    });
+
+    // ============================================================
+    // SEGURIDAD: Detectar DevTools abiertas
+    // ============================================================
+    let devtoolsOpen = false;
+    
+    function checkDevTools() {
+      const threshold = 160;
+      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+      
+      if (widthThreshold || heightThreshold) {
+        if (!devtoolsOpen) {
+          devtoolsOpen = true;
+          showDevToolsWarning();
+        }
+      } else {
+        devtoolsOpen = false;
+      }
+    }
+    
+    setInterval(checkDevTools, 1000);
+    window.addEventListener('resize', checkDevTools);
+
+    // ============================================================
+    // SEGURIDAD: Anti-copiar, Anti-arrastre
+    // ============================================================
+    document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('paste', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
+
+    // ============================================================
+    // SEGURIDAD: Mostrar warning de DevTools
+    // ============================================================
+    function showDevToolsWarning() {
+      const warning = document.getElementById('devtools-warning');
+      if (warning) {
+        warning.style.display = 'flex';
+        try { console.clear(); } catch(e) {}
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(function() {
+          warning.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 3000);
+      }
+    }
+
+    // ============================================================
+    // SEGURIDAD: Anti-debugger loop
+    // ============================================================
+    function debuggerLoop() {
+      const startTime = Date.now();
+      debugger;
+      const endTime = Date.now();
+      if (endTime - startTime > 100) {
+        showDevToolsWarning();
+      }
+    }
+    
+    setInterval(debuggerLoop, 3000);
+
+    // ============================================================
+    // SEGURIDAD: Navegación protegida
+    // ============================================================
+    function handleNavClick(event) {
+      if (event.ctrlKey || event.metaKey || event.button === 1) {
+        event.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      return true;
+    }
+
+    // ============================================================
+    // SEGURIDAD: Sobrescribir console
+    // ============================================================
+    try {
+      const noop = function() {};
+      ['log', 'info', 'warn', 'debug', 'dir', 'table', 'trace'].forEach(function(method) {
+        console[method] = noop;
+      });
+    } catch(e) {}
+
+    // ===== CURSOR =====
+    const cursor = document.getElementById('custom-cursor');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = (e.clientX - 18) + 'px';
+      cursor.style.top = (e.clientY - 18) + 'px';
+    });
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.6)');
+      el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+    });
+
+    // ===== PARTÍCULAS =====
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = Math.min(60, Math.floor(canvas.width * canvas.height / 18000));
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+    initParticles();
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      animationId = requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    window.addEventListener('beforeunload', () => {
+      if (animationId) cancelAnimationFrame(animationId);
     });
   </script>
 </body>
