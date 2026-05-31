@@ -4,26 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JXLL | RED TEAM</title>
+  <meta name="description" content="Team JXLL - Red Team élite de ciberseguridad ofensiva. Simulaciones de ataques avanzados y fortalecimiento de defensas.">
+  <meta name="keywords" content="red team, hacking, ciberseguridad, jxll, keybreaker, pentesting">
+  <meta name="author" content="Team JXLL">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="JXLL | RED TEAM">
+  <meta property="og:description" content="Red Team élite de ciberseguridad ofensiva">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://jxll.vercel.app/">
+  
+  <!-- ===== SEGURIDAD: CSP ===== -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    img-src 'self' data: https:;
+    connect-src 'self';
+    frame-src 'none';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+  
+  <!-- ===== SEGURIDAD: Headers adicionales (meta equivalentes) ===== -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=VT323&display=swap');
     
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* ===== SEGURIDAD: Prevenir selección y copia no autorizada ===== */
     body {
       font-family: 'Inter', sans-serif;
       background: #000;
       color: #fff;
       overflow-x: hidden;
       cursor: none;
+      -webkit-touch-callout: none;
     }
+    
+    /* Antiselección en elementos sensibles */
+    .no-select {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    /* Permitir selección solo en textos que deben ser seleccionables */
+    .selectable-text {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+    
     .title-font { 
       font-family: 'Cinzel', serif; 
       letter-spacing: 6px;
       font-weight: 900;
     }
+    
     .hacker-font { font-family: 'VT323', monospace; }
 
-    /* CURSOR ROJO */
+    /* ===== SEGURIDAD: Anti-devtools / Anti-inspect ===== */
+    #devtools-warning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #ff0000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      font-family: 'VT323', monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    #devtools-warning h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    #devtools-warning p {
+      font-size: 1.5rem;
+      color: #ff4444;
+    }
+
+    /* Cursor personalizado */
     #custom-cursor {
       position: fixed;
       width: 36px;
@@ -34,6 +114,8 @@
       z-index: 9999;
       box-shadow: 0 0 35px #ff0000, 0 0 70px rgba(255,0,0,0.7);
       mix-blend-mode: difference;
+      will-change: transform, left, top;
+      transition: transform 0.15s ease;
       display: none;
     }
 
@@ -41,75 +123,216 @@
       #custom-cursor { display: block; }
     }
 
+    /* Efecto glitch */
+    .glitch-hover:hover {
+      animation: glitch 0.3s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 2px); }
+      40% { transform: translate(3px, -2px); }
+      60% { transform: translate(-2px, -3px); }
+      80% { transform: translate(2px, 3px); }
+      100% { transform: translate(0); }
+    }
+
+    /* Línea de tiempo */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #ff0000, #ff4444, #ff0000);
+      box-shadow: 0 0 15px rgba(255,0,0,0.5);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 20px 25px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      border-color: #ff0000;
+      box-shadow: 0 0 25px rgba(255,0,0,0.15);
+      transform: translateX(5px);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -33px;
+      top: 24px;
+      width: 16px;
+      height: 16px;
+      background: #ff0000;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255,0,0,0.8);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 20px rgba(255,0,0,0.8); }
+      50% { box-shadow: 0 0 40px rgba(255,0,0,1); }
+    }
+
     /* FAQ */
     .faq-item {
       transition: all 0.3s ease;
     }
+    
+    .faq-item:hover {
+      border-color: #ff0000;
+    }
+    
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease;
+      transition: max-height 0.4s ease, padding 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      padding: 0 2rem;
     }
+    
     .faq-item.open .faq-answer {
       max-height: 500px;
+      opacity: 1;
+      padding: 0 2rem 1.5rem;
+    }
+
+    .faq-item.open .faq-question span:last-child {
+      transform: rotate(180deg);
+    }
+
+    .faq-question span:last-child {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Partículas */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+
+    section, nav, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
     }
   </style>
+  
+  <script>
+    // Configuración de Tailwind
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            red: {
+              900: '#1a0000',
+              950: '#0d0000'
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
 <body>
 
-  <!-- Cursor -->
+  <!-- ===== SEGURIDAD: Warning DevTools ===== -->
+  <div id="devtools-warning">
+    <div>
+      <h1>&#128683; ACCESO DENEGADO</h1>
+      <p>No puedes inspeccionar esta página.</p>
+    </div>
+  </div>
+
+  <!-- Cursor personalizado -->
   <div id="custom-cursor"></div>
 
+  <!-- Partículas de fondo -->
+  <canvas id="particles-canvas"></canvas>
+
   <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-red-900">
-    <div class="max-w-7xl mx-auto px-5 md:px-6 py-5 flex justify-between items-center">
-      <h1 class="title-font text-4xl md:text-5xl text-red-600 tracking-widest">TEAM JXLL</h1>
+  <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-red-900 no-select" role="navigation" aria-label="Menú principal">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-4 md:py-5 flex justify-between items-center">
+      <a href="/" class="title-font text-3xl md:text-5xl text-red-600 tracking-widest no-underline hover:opacity-80 transition-opacity" aria-label="JXLL Inicio">TEAM JXLL</a>
       <div class="flex gap-6 md:gap-10 text-sm md:text-lg hacker-font tracking-widest">
-        <a href="redes.html" class="hover:text-red-500">REDES</a>
-        <a href="integrantes.html" class="hover:text-red-500">INTEGRANTES</a>
+        <a href="redes" class="hover:text-red-500 transition-colors" onclick="return handleNavClick(event)">REDES</a>
+        <a href="integrantes" class="hover:text-red-500 transition-colors" onclick="return handleNavClick(event)">INTEGRANTES</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="min-h-screen flex items-center justify-center relative bg-black pt-16">
-    <div class="text-center px-6">
-      <p class="hacker-font text-red-500 text-base md:text-xl tracking-[6px] mb-4">RED TEAM • HACKING OPERATIONS • 2026</p>
-      <h1 class="title-font text-[110px] md:text-[220px] leading-none font-black text-red-600 tracking-[-6px]">JXLL</h1>
-      <p class="hacker-font text-4xl md:text-6xl text-white mt-2 tracking-widest">RED TEAM - HACKING</p>
+  <section class="min-h-screen flex items-center justify-center relative bg-black pt-16 no-select" aria-label="Sección principal">
+    <div class="text-center px-6 relative z-10">
+      <p class="hacker-font text-red-500 text-sm md:text-xl tracking-[6px] mb-4">RED TEAM &bull; HACKING OPERATIONS &bull; 2026</p>
+      <h1 class="title-font text-[100px] sm:text-[150px] md:text-[200px] lg:text-[240px] leading-none font-black text-red-600 tracking-[-6px] glitch-hover">
+        JXLL
+      </h1>
+      <p class="hacker-font text-2xl sm:text-4xl md:text-6xl text-white mt-2 tracking-widest">RED TEAM - HACKING</p>
     </div>
   </section>
 
   <!-- ¿QUIÉNES SOMOS? -->
-  <section class="py-20 md:py-32 border-t border-red-900 bg-zinc-950">
+  <section class="py-20 md:py-32 border-t border-red-900 bg-zinc-950 no-select" aria-label="Quiénes somos">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="title-font text-5xl md:text-6xl font-bold mb-10 text-red-600">¿QUIÉNES SOMOS?</h2>
-      <p class="text-gray-300 text-lg md:text-xl leading-relaxed">
-        Team JXLL es una comunidad de <span class="text-red-500">Red Team</span>, desarrolladores de software y especialistas 
+      <h2 class="title-font text-4xl md:text-6xl font-bold mb-10 text-red-600">&iquest;QUI&Eacute;NES SOMOS?</h2>
+      <p class="text-gray-300 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto selectable-text">
+        Team JXLL es una comunidad de <span class="text-red-500 font-semibold">Red Team</span>, desarrolladores de software y especialistas 
         en ciberseguridad defensiva y ofensiva.
       </p>
     </div>
   </section>
 
   <!-- ¿QUIÉN ES SU LÍDER? -->
-  <section class="py-20 md:py-32 border-t border-red-900 bg-black">
+  <section class="py-20 md:py-32 border-t border-red-900 bg-black no-select" aria-label="Quién es el líder">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="title-font text-5xl md:text-6xl font-bold text-center mb-16 text-red-600">¿QUIÉN ES SU LÍDER?</h2>
+      <h2 class="title-font text-4xl md:text-6xl font-bold text-center mb-16 text-red-600">&iquest;QUI&Eacute;N ES SU L&Iacute;DER?</h2>
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h3 class="text-4xl text-red-500 title-font mb-6">Keybreaker (JXLL_Commander)</h3>
-          <p class="text-gray-300 text-lg">
-            Nuestro líder es <strong>Keybreaker</strong>, un programador y especialista en seguridad ofensiva y defensiva. 
+          <h3 class="text-3xl md:text-4xl text-red-500 title-font mb-6">Keybreaker <span class="text-gray-400 text-xl">(JXLL_Commander)</span></h3>
+          <p class="text-gray-300 text-lg leading-relaxed selectable-text">
+            Nuestro l&iacute;der es <strong class="text-white">Keybreaker</strong>, un programador y especialista en seguridad ofensiva y defensiva. 
             Fundador y CEO de Team JXLL.
           </p>
         </div>
-        <div class="bg-zinc-900 border border-red-900 p-8 rounded-lg">
-          <h4 class="text-red-500 text-xl mb-6">Datos relevantes:</h4>
-          <ul class="space-y-3 text-gray-300">
-            <li>🔺 CEO y Fundador de Team JXLL</li>
-            <li>⚔️ Especialista en Red Team Operations</li>
-            <li>🔍 Experto en OSINT y Adversary Simulation</li>
-            <li>🛠 Desarrollador de herramientas de seguridad</li>
+        <div class="bg-zinc-900/80 border border-red-900 p-8 rounded-lg backdrop-blur-sm">
+          <h4 class="text-red-500 text-xl mb-6 font-semibold">Datos relevantes:</h4>
+          <ul class="space-y-4 text-gray-300">
+            <li class="flex items-start gap-3"><span class="text-red-500 mt-1">&#128306;</span> CEO y Fundador de Team JXLL</li>
+            <li class="flex items-start gap-3"><span class="text-red-500 mt-1">&#9876;&#65039;</span> Especialista en Red Team Operations</li>
+            <li class="flex items-start gap-3"><span class="text-red-500 mt-1">&#128270;</span> Experto en OSINT y Adversary Simulation</li>
+            <li class="flex items-start gap-3"><span class="text-red-500 mt-1">&#128736;&#65039;</span> Desarrollador de herramientas de seguridad</li>
           </ul>
         </div>
       </div>
@@ -117,146 +340,413 @@
   </section>
 
   <!-- ¿CÓMO EMPEZÓ TODO? + LÍNEA DE TIEMPO -->
-  <section class="py-20 md:py-32 border-t border-red-900 bg-zinc-950">
+  <section class="py-20 md:py-32 border-t border-red-900 bg-zinc-950 no-select" aria-label="Historia">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="title-font text-5xl md:text-6xl font-bold text-center mb-16 text-red-600">¿CÓMO EMPEZÓ TODO?</h2>
+      <h2 class="title-font text-4xl md:text-6xl font-bold text-center mb-16 text-red-600">&iquest;C&Oacute;MO EMPEZ&Oacute; TODO?</h2>
       
-      <div class="max-w-3xl mx-auto text-gray-300 text-base md:text-lg leading-relaxed text-center space-y-8 mb-16">
+      <div class="max-w-3xl mx-auto text-gray-300 text-base md:text-lg leading-relaxed text-center space-y-6 mb-16 selectable-text">
         <p>
-          Todo comenzó cuando un apasionado de la ciberseguridad entró al mundo de los legionarios de WhatsApp. 
-          Lo que empezó como curiosidad se convirtió en obsesión.
+          Todo comenz&oacute; cuando un apasionado de la ciberseguridad entr&oacute; al mundo de los legionarios de WhatsApp. 
+          Lo que empez&oacute; como curiosidad se convirti&oacute; en obsesi&oacute;n.
         </p>
         <p>
-          Pasó de ser estudiante a profesor, luego a script kiddie dominando Termux. Creó su primera comunidad y 
-          comenzó a aprender programación desde cero.
+          Pas&oacute; de ser estudiante a profesor, luego a script kiddie dominando Termux. Cre&oacute; su primera comunidad y 
+          comenz&oacute; a aprender programaci&oacute;n desde cero.
         </p>
         <p>
-          Con años de dedicación constante, se convirtió en programador avanzado, pentester profesional 
-          y uno de los hackers más reconocidos en la escena hispana.
+          Con a&ntilde;os de dedicaci&oacute;n constante, se convirti&oacute; en programador avanzado, pentester profesional 
+          y uno de los hackers m&aacute;s reconocidos en la escena hispana.
         </p>
       </div>
 
       <!-- LÍNEA DE TIEMPO -->
-      <div class="timeline max-w-3xl mx-auto">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="text-red-500 hacker-font">Inicio</div>
-          <p class="font-semibold">Entrada al mundo de los Legionarios de WhatsApp</p>
-          <p class="text-gray-500">Primer contacto serio con la ciberseguridad</p>
+      <div class="timeline max-w-3xl mx-auto" role="list">
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="text-red-500 hacker-font text-lg mb-1">Inicio</div>
+          <p class="font-semibold text-white">Entrada al mundo de los Legionarios de WhatsApp</p>
+          <p class="text-gray-500 text-sm mt-1">Primer contacto serio con la ciberseguridad</p>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="text-red-500 hacker-font">Etapa 1</div>
-          <p class="font-semibold">De estudiante a profesor</p>
-          <p class="text-gray-500">Comienza a enseñar lo aprendido en comunidades</p>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="text-red-500 hacker-font text-lg mb-1">Etapa 1</div>
+          <p class="font-semibold text-white">De estudiante a profesor</p>
+          <p class="text-gray-500 text-sm mt-1">Comienza a ense&ntilde;ar lo aprendido en comunidades</p>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="text-red-500 hacker-font">Etapa 2</div>
-          <p class="font-semibold">Script Kiddie + Termux</p>
-          <p class="text-gray-500">Crea su primera pequeña comunidad</p>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="text-red-500 hacker-font text-lg mb-1">Etapa 2</div>
+          <p class="font-semibold text-white">Script Kiddie + Termux</p>
+          <p class="text-gray-500 text-sm mt-1">Crea su primera peque&ntilde;a comunidad</p>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="text-red-500 hacker-font">Etapa 3</div>
-          <p class="font-semibold">Aprendizaje profundo</p>
-          <p class="text-gray-500">Estudia programación y desarrollo de herramientas</p>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="text-red-500 hacker-font text-lg mb-1">Etapa 3</div>
+          <p class="font-semibold text-white">Aprendizaje profundo</p>
+          <p class="text-gray-500 text-sm mt-1">Estudia programaci&oacute;n y desarrollo de herramientas</p>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="text-red-500 hacker-font">Actualidad</div>
-          <p class="font-semibold">Fundador de Team JXLL</p>
-          <p class="text-gray-500">Red Team Elite reconocido</p>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="text-red-500 hacker-font text-lg mb-1">Actualidad</div>
+          <p class="font-semibold text-white">Fundador de Team JXLL</p>
+          <p class="text-gray-500 text-sm mt-1">Red Team Elite reconocido</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PREGUNTAS FRECUENTES -->
-   <section class="py-20 md:py-32 border-t border-red-900 bg-black">
+  <section class="py-20 md:py-32 border-t border-red-900 bg-black no-select" aria-label="Preguntas frecuentes">
     <div class="max-w-4xl mx-auto px-6">
-      <h2 class="title-font text-5xl md:text-6xl font-bold text-center mb-16 text-red-600">PREGUNTAS FRECUENTES</h2>
+      <h2 class="title-font text-4xl md:text-6xl font-bold text-center mb-16 text-red-600">PREGUNTAS FRECUENTES</h2>
       
-      <div class="space-y-4">
-        <div class="faq-item bg-zinc-950 border border-red-900 rounded-lg overflow-hidden">
-          <button onclick="toggleFAQ(this)" class="faq-question w-full px-8 py-6 text-left flex justify-between items-center hover:bg-zinc-900">
-            <span class="text-lg">¿Qué es Team JXLL?</span>
-            <span class="text-2xl transition-transform duration-300">↓</span>
+      <div class="space-y-3">
+        <div class="faq-item bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
+          <button onclick="toggleFAQ(this)" class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-zinc-900/50 transition-colors cursor-pointer" aria-expanded="false">
+            <span class="text-lg font-medium">&iquest;Qu&eacute; es Team JXLL?</span>
+            <span class="text-red-500 text-xl">+</span>
           </button>
-          <div class="faq-answer px-8 pb-6 text-gray-400">
-            Team JXLL es un equipo élite de ciberseguridad ofensiva especializado en Red Team, simulaciones de ataques avanzados y fortalecimiento de defensas.
+          <div class="faq-answer text-gray-400">
+            Team JXLL es un equipo &eacute;lite de ciberseguridad ofensiva especializado en Red Team, simulaciones de ataques avanzados y fortalecimiento de defensas.
           </div>
         </div>
 
-        <div class="faq-item bg-zinc-950 border border-red-900 rounded-lg overflow-hidden">
-          <button onclick="toggleFAQ(this)" class="faq-question w-full px-8 py-6 text-left flex justify-between items-center hover:bg-zinc-900">
-            <span class="text-lg">¿Keybreaker es el fundador?</span>
-            <span class="text-2xl transition-transform duration-300">↓</span>
+        <div class="faq-item bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
+          <button onclick="toggleFAQ(this)" class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-zinc-900/50 transition-colors cursor-pointer" aria-expanded="false">
+            <span class="text-lg font-medium">&iquest;Keybreaker es el fundador?</span>
+            <span class="text-red-500 text-xl">+</span>
           </button>
-          <div class="faq-answer px-8 pb-6 text-gray-400">
-            Sí. Keybreaker (JXLL_Commander) es el fundador y líder actual de Team JXLL.
+          <div class="faq-answer text-gray-400">
+            S&iacute;. Keybreaker (JXLL_Commander) es el fundador y l&iacute;der actual de Team JXLL.
           </div>
         </div>
 
-        <div class="faq-item bg-zinc-950 border border-red-900 rounded-lg overflow-hidden">
-          <button onclick="toggleFAQ(this)" class="faq-question w-full px-8 py-6 text-left flex justify-between items-center hover:bg-zinc-900">
-            <span class="text-lg">¿Realizan ataques reales?</span>
-            <span class="text-2xl transition-transform duration-300">↓</span>
+        <div class="faq-item bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
+          <button onclick="toggleFAQ(this)" class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-zinc-900/50 transition-colors cursor-pointer" aria-expanded="false">
+            <span class="text-lg font-medium">&iquest;Realizan ataques reales?</span>
+            <span class="text-red-500 text-xl">+</span>
           </button>
-          <div class="faq-answer px-8 pb-6 text-gray-400">
-            Solo realizamos simulaciones autorizadas (Red Team) con permiso expreso del cliente. Nunca atacamos sistemas sin autorización.
+          <div class="faq-answer text-gray-400">
+            Solo realizamos simulaciones autorizadas (Red Team) con permiso expreso del cliente. Nunca atacamos sistemas sin autorizaci&oacute;n.
           </div>
         </div>
 
-        <div class="faq-item bg-zinc-950 border border-red-900 rounded-lg overflow-hidden">
-          <button onclick="toggleFAQ(this)" class="faq-question w-full px-8 py-6 text-left flex justify-between items-center hover:bg-zinc-900">
-            <span class="text-lg">¿Cómo puedo unirme al equipo?</span>
-            <span class="text-2xl transition-transform duration-300">↓</span>
+        <div class="faq-item bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
+          <button onclick="toggleFAQ(this)" class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-zinc-900/50 transition-colors cursor-pointer" aria-expanded="false">
+            <span class="text-lg font-medium">&iquest;C&oacute;mo puedo unirme al equipo?</span>
+            <span class="text-red-500 text-xl">+</span>
           </button>
-          <div class="faq-answer px-8 pb-6 text-gray-400">
-            Actualmente solo aceptamos miembros por invitación. Si tienes un nivel avanzado, puedes contactarnos a través de nuestras redes.
+          <div class="faq-answer text-gray-400">
+            Actualmente solo aceptamos miembros por invitaci&oacute;n. Si tienes un nivel avanzado, puedes contactarnos a trav&eacute;s de nuestras redes.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-
   <!-- FOOTER -->
-  <footer class="py-12 border-t border-red-900 bg-black text-center">
+  <footer class="py-12 border-t border-red-900 bg-black text-center no-select">
     <div class="max-w-7xl mx-auto px-6">
       <p class="text-gray-500 text-sm tracking-widest">
-        © 2026 TEAM JXLL • ALL RIGHTS RESERVED
+        &copy; 2026 TEAM JXLL &bull; ALL RIGHTS RESERVED
       </p>
       <p class="text-red-600 text-xs mt-3 tracking-[3px] hacker-font">
-        NINJA PROPERTY 🥷❤️
+        NINJA PROPERTY &#129353;&#65039;&#10084;&#65039;
       </p>
     </div>
   </footer>
 
   <script>
+    // ============================================================
+    // SEGURIDAD: Anti-Click derecho
+    // ============================================================
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // ============================================================
+    // SEGURIDAD: Anti-Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12
+    // ============================================================
+    document.addEventListener('keydown', function(e) {
+      // F12
+      if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+U (ver código fuente)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+Shift+I (Inspect)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+Shift+J (Console)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'j') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+Shift+C (Inspect element)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+S (Guardar página)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      
+      // Ctrl+P (Imprimir)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+    });
+
+    // ============================================================
+    // SEGURIDAD: Detectar DevTools abiertas (método del tamaño)
+    // ============================================================
+    let devtoolsOpen = false;
+    
+    function checkDevTools() {
+      const threshold = 160;
+      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+      
+      if (widthThreshold || heightThreshold) {
+        if (!devtoolsOpen) {
+          devtoolsOpen = true;
+          showDevToolsWarning();
+        }
+      } else {
+        devtoolsOpen = false;
+      }
+    }
+    
+    // Verificar cada 1 segundo
+    setInterval(checkDevTools, 1000);
+    
+    // También al redimensionar
+    window.addEventListener('resize', checkDevTools);
+
+    // ============================================================
+    // SEGURIDAD: Anti-arrastre de imágenes/elementos
+    // ============================================================
+    document.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // ============================================================
+    // SEGURIDAD: Anti-copiar (Ctrl+C bloqueado)
+    // ============================================================
+    document.addEventListener('copy', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    document.addEventListener('cut', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    document.addEventListener('paste', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // ============================================================
+    // SEGURIDAD: Anti-selección con mouse
+    // ============================================================
+    document.addEventListener('selectstart', function(e) {
+      // Permitir selección solo en elementos .selectable-text
+      if (!e.target.closest('.selectable-text')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // ============================================================
+    // SEGURIDAD: Mostrar warning de DevTools
+    // ============================================================
+    function showDevToolsWarning() {
+      const warning = document.getElementById('devtools-warning');
+      if (warning) {
+        warning.style.display = 'flex';
+        // También intentar limpiar la consola
+        try {
+          console.clear();
+        } catch(e) {}
+        
+        // Congelar la página
+        document.body.style.overflow = 'hidden';
+        
+        // Después de 3 segundos, ocultar pero dejar la página congelada
+        setTimeout(function() {
+          warning.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 3000);
+      }
+    }
+
+    // ============================================================
+    // SEGURIDAD: Proteger console.log (sobrescribir)
+    // ============================================================
+    try {
+      // Sobrescribir console.log para que no muestre nada útil
+      const noop = function() {};
+      const methods = ['log', 'info', 'warn', 'error', 'debug', 'dir', 'table', 'trace'];
+      methods.forEach(function(method) {
+        const original = console[method];
+        console[method] = function() {
+          // Mostrar solo si es error real
+          if (method === 'error') {
+            original.apply(console, arguments);
+          }
+        };
+      });
+    } catch(e) {
+      // Silenciar errores de esta protección
+    }
+
+    // ============================================================
+    // SEGURIDAD: Anti-debugger loop
+    // ============================================================
+    function debuggerLoop() {
+      const startTime = Date.now();
+      debugger;
+      const endTime = Date.now();
+      if (endTime - startTime > 100) {
+        // Detectaron devtools
+        showDevToolsWarning();
+        // Recargar la página
+        window.location.reload();
+      }
+    }
+    
+    // Ejecutar el debugger loop periódicamente
+    setInterval(debuggerLoop, 2000);
+
+    // ============================================================
+    // SEGURIDAD: Navegación protegida
+    // ============================================================
+    function handleNavClick(event) {
+      // Verificar si es un clic real (no Ctrl+click, no clic medio)
+      if (event.ctrlKey || event.metaKey || event.button === 1) {
+        event.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      return true;
+    }
+
+    // ===== CURSOR =====
     const cursor = document.getElementById('custom-cursor');
-
+    
     document.addEventListener('mousemove', (e) => {
-      cursor.style.left = `${e.clientX - 18}px`;
-      cursor.style.top = `${e.clientY - 18}px`;
+      cursor.style.left = (e.clientX - 18) + 'px';
+      cursor.style.top = (e.clientY - 18) + 'px';
     });
 
-    document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.6)');
-      link.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+    document.querySelectorAll('a, button, .faq-question').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.6)');
+      el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
     });
 
+    // ===== FAQ =====
     function toggleFAQ(btn) {
       const item = btn.parentElement;
-      item.classList.toggle('open');
+      const isOpen = item.classList.contains('open');
       const arrow = btn.querySelector('span:last-child');
-      arrow.textContent = item.classList.contains('open') ? '↑' : '↓';
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      
+      item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', !expanded);
+      arrow.textContent = isOpen ? '+' : '\u2212';
     }
+
+    // ===== PARTÍCULAS =====
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = Math.min(80, Math.floor(canvas.width * canvas.height / 15000));
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      animationId = requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    window.addEventListener('beforeunload', () => {
+      if (animationId) cancelAnimationFrame(animationId);
+    });
   </script>
 </body>
 </html>
