@@ -4,25 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>INTEGRANTES • JXLL</title>
+  <meta name="description" content="Conoce al equipo de Team JXLL. Fundador, Co-owners, Staff y Aliados del Red Team élite.">
+  <meta name="keywords" content="jxll, integrantes, red team, keybreaker, hacking, ciberseguridad">
+  <meta name="author" content="Team JXLL">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="INTEGRANTES • JXLL">
+  <meta property="og:description" content="El equipo que opera en la sombra">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://jxll.vercel.app/integrantes">
+  
+  <!-- ===== SEGURIDAD: CSP ===== -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    img-src 'self' data: https: https://i93.servimg.com;
+    connect-src 'self';
+    frame-src 'none';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+  
+  <!-- ===== SEGURIDAD: Headers adicionales ===== -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=VT323&display=swap');
     
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* ===== SEGURIDAD: Antiselección ===== */
     body {
       font-family: 'Inter', sans-serif;
       background: #000;
       color: #fff;
       overflow-x: hidden;
       cursor: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
+    
     .title-font { 
       font-family: 'Cinzel', serif; 
       letter-spacing: 6px;
       font-weight: 900;
     }
+    
     .hacker-font { font-family: 'VT323', monospace; }
 
+    /* ===== SEGURIDAD: Warning DevTools ===== */
+    #devtools-warning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #ff0000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      font-family: 'VT323', monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    #devtools-warning h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    #devtools-warning p {
+      font-size: 1.5rem;
+      color: #ff4444;
+    }
+
+    /* Cursor personalizado */
     #custom-cursor {
       position: fixed;
       width: 36px;
@@ -33,6 +102,8 @@
       z-index: 9999;
       box-shadow: 0 0 35px #ff0000, 0 0 70px rgba(255,0,0,0.7);
       mix-blend-mode: difference;
+      will-change: transform, left, top;
+      transition: transform 0.15s ease;
       display: none;
     }
 
@@ -40,77 +111,259 @@
       #custom-cursor { display: block; }
     }
 
+    /* ===== CARDS MEJORADAS ===== */
     .member-card {
       transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,0,0,0.05), transparent);
+      transition: left 0.6s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .member-card:hover::before {
+      left: 100%;
+    }
+    
     .member-card:hover {
       transform: translateY(-8px);
-      border-color: #ff0000;
-      box-shadow: 0 20px 40px -10px rgba(255, 0, 0, 0.4);
+      border-color: #ff0000 !important;
+      box-shadow: 0 20px 50px -10px rgba(255, 0, 0, 0.4);
     }
+    
+    .member-card:active {
+      transform: translateY(-3px) scale(0.98);
+    }
+
     .avatar {
       width: 110px;
       height: 110px;
       object-fit: cover;
       border: 3px solid #ff0000;
       transition: all 0.3s;
+      position: relative;
+      z-index: 2;
     }
+    
     .member-card:hover .avatar {
       border-color: #fff;
-      transform: scale(1.05);
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(255,0,0,0.4);
+    }
+
+    /* ===== EFECTO GLITCH ===== */
+    .glitch-hover:hover {
+      animation: glitch 0.3s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 2px); }
+      40% { transform: translate(3px, -2px); }
+      60% { transform: translate(-2px, -3px); }
+      80% { transform: translate(2px, 3px); }
+      100% { transform: translate(0); }
+    }
+
+    /* ===== PARTÍCULAS ===== */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.12;
+    }
+
+    section, nav, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== ANIMACIÓN FADE-IN ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(25px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .member-card { animation-delay: calc(0.1s * var(--i, 1)); }
+
+    /* ===== BADGE DE RECLUTAMIENTO ===== */
+    @keyframes pulse-recruit {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(0, 255, 0, 0.7); }
+    }
+
+    @keyframes blink-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .recruit-badge {
+      animation: pulse-recruit 2s infinite;
+    }
+
+    .recruit-dot {
+      animation: blink-dot 1.5s infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            red: {
+              900: '#1a0000',
+              950: '#0d0000'
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
 <body>
+
+  <!-- ===== SEGURIDAD: Warning DevTools ===== -->
+  <div id="devtools-warning">
+    <div>
+      <h1>&#128683; ACCESO DENEGADO</h1>
+      <p>No puedes inspeccionar esta p&aacute;gina.</p>
+    </div>
+  </div>
 
   <!-- Cursor -->
   <div id="custom-cursor"></div>
 
+  <!-- Partículas de fondo -->
+  <canvas id="particles-canvas"></canvas>
+
   <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-red-900">
-    <div class="max-w-7xl mx-auto px-5 md:px-6 py-5 flex justify-between items-center">
-      <h1 class="title-font text-4xl md:text-5xl text-red-600 tracking-widest">TEAM JXLL</h1>
-      <div class="flex gap-6 md:gap-10 text-sm md:text-lg hacker-font tracking-widest">
-        <a href="index.html" class="hover:text-red-500">INICIO</a>
-        <a href="redes.html" class="hover:text-red-500">REDES</a>
+  <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-red-900" role="navigation" aria-label="Menú principal">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-4 md:py-5 flex justify-between items-center">
+      <a href="/" class="title-font text-3xl md:text-5xl text-red-600 tracking-widest no-underline hover:opacity-80 transition-opacity" aria-label="JXLL Inicio">TEAM JXLL</a>
+      <div class="flex gap-5 md:gap-10 text-sm md:text-lg hacker-font tracking-widest">
+        <a href="/" class="hover:text-red-500 transition-colors" onclick="return handleNavClick(event)">INICIO</a>
+        <a href="redes" class="hover:text-red-500 transition-colors" onclick="return handleNavClick(event)">REDES</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="min-h-[65vh] flex items-center justify-center relative bg-black pt-16">
-    <div class="text-center px-6">
+  <section class="min-h-[65vh] flex items-center justify-center relative bg-black pt-16" aria-label="Integrantes del equipo">
+    <div class="text-center px-6 relative z-10">
       <p class="hacker-font text-red-500 text-base md:text-xl tracking-[6px] mb-4">EL EQUIPO QUE OPERA EN LA SOMBRA</p>
-      <h1 class="title-font text-5xl md:text-8xl font-black text-red-600 tracking-widest leading-none">INTEGRANTES</h1>
+      <h1 class="title-font text-5xl md:text-8xl font-black text-red-600 tracking-widest leading-none glitch-hover">INTEGRANTES</h1>
+      
+      <!-- Línea decorativa -->
+      <div class="flex items-center justify-center gap-4 mt-10">
+        <div class="h-px w-16 bg-red-900"></div>
+        <span class="text-red-600 hacker-font text-lg">///</span>
+        <div class="h-px w-16 bg-red-900"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN DE RECLUTAMIENTO ===== -->
+  <section class="py-12 md:py-16 bg-black border-t border-green-900/50" aria-label="Reclutamiento">
+    <div class="max-w-4xl mx-auto px-5 md:px-6 text-center">
+      <div class="recruit-badge border border-green-500/30 bg-green-950/20 rounded-xl p-8 md:p-12 backdrop-blur-sm">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <span class="recruit-dot w-3 h-3 bg-green-500 rounded-full inline-block"></span>
+          <span class="text-green-500 hacker-font text-lg tracking-[4px]">RECLUTAMIENTO ABIERTO</span>
+          <span class="recruit-dot w-3 h-3 bg-green-500 rounded-full inline-block"></span>
+        </div>
+        
+        <h2 class="title-font text-3xl md:text-5xl text-green-400 mb-6">&iquest;QUIERES UNIRTE A NOSOTROS?</h2>
+        
+        <p class="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-8">
+          Estamos buscando talento en <strong class="text-green-400">ciberseguridad ofensiva, desarrollo de herramientas 
+          y operaciones Red Team</strong>. Si tienes habilidades y est&aacute;s listo para operar al m&aacute;s alto nivel...
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-10 text-left">
+          <div class="bg-black/60 border border-green-900/30 rounded-lg p-5">
+            <span class="text-green-500 text-2xl block mb-2">&#128737;&#65039;</span>
+            <h4 class="text-green-400 font-bold mb-2">Red Team</h4>
+            <p class="text-gray-400 text-sm">Pentesters, exploit developers, adversary simulation</p>
+          </div>
+          <div class="bg-black/60 border border-green-900/30 rounded-lg p-5">
+            <span class="text-green-500 text-2xl block mb-2">&#128187;</span>
+            <h4 class="text-green-400 font-bold mb-2">Desarrolladores</h4>
+            <p class="text-gray-400 text-sm">Creadores de herramientas, automatizaci&oacute;n, malware dev</p>
+          </div>
+          <div class="bg-black/60 border border-green-900/30 rounded-lg p-5">
+            <span class="text-green-500 text-2xl block mb-2">&#128200;</span>
+            <h4 class="text-green-400 font-bold mb-2">OSINT / Intel</h4>
+            <p class="text-gray-400 text-sm">Inteligencia de fuentes abiertas, recolecci&oacute;n de datos</p>
+          </div>
+        </div>
+        
+        <a href="https://t.me/Keybreakerr" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 text-black font-bold px-8 py-4 rounded-lg transition-all hover:scale-105 text-lg hacker-font tracking-widest">
+          <i class="fab fa-telegram text-2xl"></i>
+          CONT&Aacute;CTANOS AHORA
+        </a>
+        
+        <p class="text-gray-500 text-sm mt-6">Solo aceptamos miembros por evaluaci&oacute;n. Demuestra tu nivel.</p>
+      </div>
     </div>
   </section>
 
   <!-- INTEGRANTES -->
-  <section class="py-16 md:py-24 bg-zinc-950">
+  <section class="py-16 md:py-24 bg-zinc-950" aria-label="Miembros del equipo">
     <div class="max-w-6xl mx-auto px-5 md:px-6">
 
       <!-- OWNER -->
       <div class="flex justify-center mb-20">
-        <a href="https://t.me/KeyBreaker" target="_blank" class="member-card text-center group">
-          <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_10.jpg" class="avatar mx-auto rounded-full" alt="KeyBreaker">
+        <a href="https://t.me/KeyBreakerr" target="_blank" rel="noopener noreferrer" class="member-card text-center group border border-zinc-800 rounded-xl p-8 bg-black/50 fade-in" style="--i: 1;">
+          <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_23.jpg" class="avatar mx-auto rounded-full" alt="KeyBreaker" loading="lazy">
           <div class="mt-6">
-            <span class="px-6 py-1.5 bg-red-600 text-black text-sm font-bold tracking-widest">#OWNER</span>
+            <span class="px-6 py-1.5 bg-red-600 text-black text-sm font-bold tracking-[3px]">#OWNER</span>
           </div>
-          <p class="text-2xl font-bold mt-5">@KeyBreaker</p>
-          <p class="text-red-500">Fundador & CEO</p>
+          <p class="text-2xl font-bold mt-5">KeyBreaker</p>
+          <p class="text-red-500">Fundador &amp; CEO</p>
         </a>
       </div>
 
       <!-- CO-OWNERS -->
       <div class="mb-20">
-        <h3 class="text-center text-red-500 text-2xl mb-10 tracking-widest">#CO-OWNERS</h3>
+        <h3 class="text-center text-red-500 text-2xl mb-10 tracking-[6px] hacker-font">#CO-OWNERS</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-2xl mx-auto">
-          <a href="https://t.me/ropsx_ninja" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_11.jpg" class="avatar mx-auto rounded-full" alt="ropsx_ninja">
+          <a href="https://t.me/ropsx_ninja" target="_blank" rel="noopener noreferrer" class="member-card text-center group border border-zinc-800 rounded-xl p-8 bg-black/50 fade-in" style="--i: 2;">
+            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_11.jpg" class="avatar mx-auto rounded-full" alt="ropsx_ninja" loading="lazy">
             <p class="text-2xl font-bold mt-5">@ropsx_ninja</p>
           </a>
-          <a href="https://t.me/h4ckzu5" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_15.jpg" class="avatar mx-auto rounded-full" alt="h4ckzu5">
+          <a href="https://t.me/h4ckzu5" target="_blank" rel="noopener noreferrer" class="member-card text-center group border border-zinc-800 rounded-xl p-8 bg-black/50 fade-in" style="--i: 3;">
+            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_15.jpg" class="avatar mx-auto rounded-full" alt="h4ckzu5" loading="lazy">
             <p class="text-2xl font-bold mt-5">@h4ckzu5</p>
           </a>
         </div>
@@ -118,14 +371,14 @@
 
       <!-- STAFF -->
       <div class="mb-20">
-        <h3 class="text-center text-red-500 text-2xl mb-10 tracking-widest">#STAFF</h3>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-          <a href="https://t.me/Import_404" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_12.jpg" class="avatar mx-auto rounded-full" alt="Import_404">
+        <h3 class="text-center text-red-500 text-2xl mb-10 tracking-[6px] hacker-font">#STAFF</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-xl mx-auto">
+          <a href="https://t.me/Import_404" target="_blank" rel="noopener noreferrer" class="member-card text-center group border border-zinc-800 rounded-xl p-6 bg-black/50 fade-in" style="--i: 4;">
+            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_12.jpg" class="avatar mx-auto rounded-full" alt="Import_404" loading="lazy">
             <p class="text-lg font-bold mt-4">@Import_404</p>
           </a>
-          <a href="https://t.me/emmamyers1321" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_14.jpg" class="avatar mx-auto rounded-full" alt="emmamyers1321">
+          <a href="https://t.me/emmamyers1321" target="_blank" rel="noopener noreferrer" class="member-card text-center group border border-zinc-800 rounded-xl p-6 bg-black/50 fade-in" style="--i: 5;">
+            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_14.jpg" class="avatar mx-auto rounded-full" alt="emmamyers1321" loading="lazy">
             <p class="text-lg font-bold mt-4">@emmamyers1321</p>
           </a>
         </div>
@@ -133,43 +386,15 @@
 
       <!-- ALIADOS -->
       <div class="mb-20">
-        <h3 class="text-center text-red-500 text-2xl mb-10 tracking-widest">#ALIADOS</h3>
+        <h3 class="text-center text-red-500 text-2xl mb-10 tracking-[6px] hacker-font">#ALIADOS</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <a href="https://t.me/ironatlas_organization" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_19.jpg" class="avatar mx-auto rounded-full" alt="Iron Atlas">
+          <a href="https://t.me/ironatlas_organization" target="_blank" rel="noopener noreferrer" class="member-card text-center group border border-zinc-800 rounded-xl p-6 bg-black/50 fade-in" style="--i: 6;">
+            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_19.jpg" class="avatar mx-auto rounded-full" alt="Iron Atlas" loading="lazy">
             <p class="text-lg font-bold mt-4">@ironatlas_organization</p>
           </a>
-          <a href="https://t.me/RIPNetwork" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_16.jpg" class="avatar mx-auto rounded-full" alt="RIPNetwork">
+          <a href="https://t.me/RIPNetwork" target="_blank" rel="noopener noreferrer" class="member-card text-center group border border-zinc-800 rounded-xl p-6 bg-black/50 fade-in" style="--i: 7;">
+            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_16.jpg" class="avatar mx-auto rounded-full" alt="RIPNetwork" loading="lazy">
             <p class="text-lg font-bold mt-4">@RIPNetwork</p>
-          </a>
-          <a href="https://t.me/realityofc2" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_17.jpg" class="avatar mx-auto rounded-full" alt="realityofc2">
-            <p class="text-lg font-bold mt-4">@realityofc2</p>
-          </a>
-          <!-- Nuevo Aliado: BSZ TEAM -->
-          <a href="https://t.me/+CbXwCs6wGgc1ZDQx" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_13.jpg" class="avatar mx-auto rounded-full" alt="BSZ TEAM">
-            <p class="text-lg font-bold mt-4">BSZ TEAM</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- INTEGRANTES -->
-      <div>
-        <h3 class="text-center text-red-500 text-2xl mb-10 tracking-widest">#INTEGRANTES</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <a href="https://t.me/noahlp03" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_18.jpg" class="avatar mx-auto rounded-full" alt="noahlp03">
-            <p class="text-lg font-bold mt-4">@noahlp03</p>
-          </a>
-          <a href="https://t.me/Yoevani" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_20.jpg" class="avatar mx-auto rounded-full" alt="Yoevani">
-            <p class="text-lg font-bold mt-4">@Yoevani</p>
-          </a>
-          <a href="https://t.me/LDSDARK3" target="_blank" class="member-card text-center group">
-            <img src="https://i93.servimg.com/u/f93/20/65/38/68/photo_22.jpg" class="avatar mx-auto rounded-full" alt="LDSDARK3">
-            <p class="text-lg font-bold mt-4">@LDSDARK3</p>
           </a>
         </div>
       </div>
@@ -181,25 +406,212 @@
   <footer class="py-12 border-t border-red-900 bg-black text-center">
     <div class="max-w-7xl mx-auto px-6">
       <p class="text-gray-500 text-sm tracking-widest">
-        © 2026 TEAM JXLL • ALL RIGHTS RESERVED
+        &copy; 2026 TEAM JXLL &bull; ALL RIGHTS RESERVED
       </p>
       <p class="text-red-600 text-xs mt-3 tracking-[3px] hacker-font">
-        NINJA PROPERTY 🥷❤️
+        NINJA PROPERTY &#129353;&#65039;&#10084;&#65039;
       </p>
     </div>
   </footer>
 
   <script>
-    const cursor = document.getElementById('custom-cursor');
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = `${e.clientX - 18}px`;
-      cursor.style.top = `${e.clientY - 18}px`;
+    // ============================================================
+    // SEGURIDAD: Anti-Click derecho
+    // ============================================================
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
     });
 
-    document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.6)');
-      link.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+    // ============================================================
+    // SEGURIDAD: Anti-Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12
+    // ============================================================
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'j') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+    });
+
+    // ============================================================
+    // SEGURIDAD: Detectar DevTools
+    // ============================================================
+    let devtoolsOpen = false;
+    
+    function checkDevTools() {
+      const threshold = 160;
+      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+      if (widthThreshold || heightThreshold) {
+        if (!devtoolsOpen) {
+          devtoolsOpen = true;
+          showDevToolsWarning();
+        }
+      } else {
+        devtoolsOpen = false;
+      }
+    }
+    
+    setInterval(checkDevTools, 1000);
+    window.addEventListener('resize', checkDevTools);
+
+    // ============================================================
+    // SEGURIDAD: Anti-copiar, Anti-arrastre
+    // ============================================================
+    document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('paste', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
+
+    // ============================================================
+    // SEGURIDAD: Mostrar warning DevTools
+    // ============================================================
+    function showDevToolsWarning() {
+      const warning = document.getElementById('devtools-warning');
+      if (warning) {
+        warning.style.display = 'flex';
+        try { console.clear(); } catch(e) {}
+        document.body.style.overflow = 'hidden';
+        setTimeout(function() {
+          warning.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 3000);
+      }
+    }
+
+    // ============================================================
+    // SEGURIDAD: Anti-debugger loop
+    // ============================================================
+    function debuggerLoop() {
+      const startTime = Date.now();
+      debugger;
+      const endTime = Date.now();
+      if (endTime - startTime > 100) {
+        showDevToolsWarning();
+      }
+    }
+    
+    setInterval(debuggerLoop, 3000);
+
+    // ============================================================
+    // SEGURIDAD: Navegación protegida
+    // ============================================================
+    function handleNavClick(event) {
+      if (event.ctrlKey || event.metaKey || event.button === 1) {
+        event.preventDefault();
+        showDevToolsWarning();
+        return false;
+      }
+      return true;
+    }
+
+    // ============================================================
+    // SEGURIDAD: Sobrescribir console
+    // ============================================================
+    try {
+      const noop = function() {};
+      ['log', 'info', 'warn', 'debug', 'dir', 'table', 'trace'].forEach(function(method) {
+        console[method] = noop;
+      });
+    } catch(e) {}
+
+    // ===== CURSOR =====
+    const cursor = document.getElementById('custom-cursor');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = (e.clientX - 18) + 'px';
+      cursor.style.top = (e.clientY - 18) + 'px';
+    });
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.6)');
+      el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+    });
+
+    // ===== PARTÍCULAS =====
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = Math.min(60, Math.floor(canvas.width * canvas.height / 18000));
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+    initParticles();
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      animationId = requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    window.addEventListener('beforeunload', () => {
+      if (animationId) cancelAnimationFrame(animationId);
     });
   </script>
 </body>
