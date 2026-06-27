@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>JXLL | Central de Operaciones</title>
+    <!-- Motor Three.js para el Androide Industrial -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         /* --- Configuración Base e Interfaz de Usuario (AMOLED) --- */
@@ -15,14 +16,14 @@
         }
 
         body {
-            background-color: #000000; /* Negro puro para apagar píxeles en pantallas Samsung */
+            background-color: #000000; /* Negro absoluto para optimizar pantallas AMOLED */
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* --- Arquitectura del Contenedor de Pantalla Dividida --- */
+        /* --- Arquitectura de Pantalla Dividida --- */
         .main-wrapper {
             display: flex;
             flex-direction: row;
@@ -30,7 +31,7 @@
             width: 100%;
         }
 
-        /* LADO IZQUIERDO: Laboratorio del Humanoide 3D Interactuable */
+        /* LADO IZQUIERDO: Laboratorio del Humanoide Interactivo */
         .canvas-container {
             flex: 1.1;
             position: sticky;
@@ -43,27 +44,11 @@
             z-index: 2;
         }
 
-        .hud-overlay {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            font-family: monospace;
-            color: #ff0044;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            pointer-events: none;
-            border-left: 2px solid #ff0044;
-            padding-left: 12px;
-            line-height: 1.6;
-            opacity: 0.85;
-        }
-
-        /* LADO DERECHO: Panel de Control del Contenido (Scrollable) */
+        /* LADO DERECHO: Panel de Control (Scrollable) */
         .content-panel {
             flex: 0.9;
             padding: 60px 50px;
-            background: rgba(2, 2, 2, 0.98);
+            background: rgba(1, 1, 1, 0.98);
             border-left: 1px solid rgba(255, 0, 68, 0.12);
             z-index: 1;
             box-shadow: -25px 0 50px rgba(0, 0, 0, 0.95);
@@ -92,7 +77,7 @@
             text-transform: uppercase;
         }
 
-        /* --- Botones de Acción Solicitados --- */
+        /* --- Botones de Acción con Redirección --- */
         .action-button-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -150,34 +135,6 @@
             font-size: 0.98rem;
         }
 
-        /* --- Apartado de Equipo --- */
-        .team-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .team-member {
-            background: rgba(255, 255, 255, 0.01);
-            border-left: 3px solid #ff0044;
-            padding: 15px 20px;
-            border-radius: 4px;
-        }
-
-        .member-role {
-            font-family: monospace;
-            color: #ff0044;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-        .member-name {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #ffffff;
-        }
-
         /* --- Sección Interactiva de Preguntas Frecuentes (FAQ) --- */
         .faq-item {
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -214,60 +171,14 @@
             margin-top: 12px;
         }
 
-        /* --- Línea de Tiempo del Proyecto --- */
-        .timeline-container {
-            position: relative;
-            margin-top: 25px;
-            padding-left: 30px;
-            border-left: 1px solid rgba(255, 0, 68, 0.15);
-        }
-
-        .timeline-event {
-            position: relative;
-            margin-bottom: 45px;
-            transition: transform 0.3s ease;
-        }
-
-        .timeline-event::before {
-            content: '';
-            position: absolute;
-            left: -36.5px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #000000;
-            border: 2px solid #ff0044;
-            box-shadow: 0 0 12px #ff0044;
-        }
-
-        .timeline-event:hover {
-            transform: translateX(8px);
-        }
-
-        .event-date {
-            font-family: monospace;
-            color: #ff0044;
-            font-weight: bold;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-        }
-
-        .event-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        /* --- Responsividad Completa y Parámetros Móviles --- */
+        /* --- Responsividad Avanzada --- */
         @media (max-width: 1024px) {
             .main-wrapper {
                 flex-direction: column;
             }
 
             .canvas-container {
-                height: 50vh; /* Ajustado para que el robot se vea imponente arriba en el teléfono */
+                height: 48vh;
                 position: relative;
             }
 
@@ -293,14 +204,10 @@
 
     <div class="main-wrapper">
         
-        <div class="canvas-container" id="canvas3d">
-            <div class="hud-overlay">
-                CORE_STATUS: OPERATIONAL<br>
-                HARDWARE_REF: JXLL_OP-G2<br>
-                AMOLED_DRIVE: 120HZ_ACTIVE
-            </div>
-        </div>
+        <!-- LADO IZQUIERDO: Contenedor Gráfico 3D (Limpio de HUD de texto) -->
+        <div class="canvas-container" id="canvas3d"></div>
 
+        <!-- LADO DERECHO: Centro de Información -->
         <div class="content-panel">
             
             <header class="brand-section">
@@ -308,31 +215,17 @@
                 <div class="brand-tagline">// Multidisciplinary Security & Code Collective</div>
             </header>
 
+            <!-- Botones Conectados a los Archivos Solicitados -->
             <div class="action-button-group">
-                <a href="#equipo" class="action-btn">Equipo</a>
-                <a href="#redes" class="action-btn">Redes Sociales</a>
+                <a href="equipo.html" class="action-btn">Equipo</a>
+                <a href="redes.html" class="action-btn">Redes Sociales</a>
             </div>
 
             <section class="info-card">
                 <h2>¿Qué es JXLL?</h2>
                 <p>
-                    Somos una comunidad multidisciplinaria de desarrolladores, programadores y entusiastas de la seguridad digital comprometidos con la solidez de las infraestructuras de red y la optimización tecnológica. Operando bajo metodologías de seguridad informática ofensiva y defensiva, mitigamos vulnerabilidades complejas mediante la automatización y arquitectura de software adaptativo.
+                    Somos una comunidad multidisciplinaria de desarrolladores, programadores y entusiastas de la seguridad digital comprometidos con la solidez de las infraestructuras de red y la optimización tecnológica. Operando bajo metodologías avanzadas de seguridad informática ofensiva y defensiva, mitigamos vulnerabilidades complejas mediante la automatización y arquitectura de software adaptativo.
                 </p>
-            </section>
-
-            <section class="info-card" id="equipo">
-                <h2>Estructura del Equipo</h2>
-                <p>La comunidad se rige bajo una estructura institucional y técnica descentralizada para proyectos de software conjunto:</p>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-role">Dirección Ejecutiva e Ingeniería de Sistemas</div>
-                        <div class="member-name">CEO & Co-Founder</div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-role">Auditoría Defensiva y Análisis de Datos</div>
-                        <div class="member-name">Core Developers & Security Analysts</div>
-                    </div>
-                </div>
             </section>
 
             <section class="info-card">
@@ -340,41 +233,24 @@
                 
                 <div class="faq-item">
                     <div class="faq-question">¿Cuál es el objetivo principal de Team JXLL? <span>+</span></div>
-                    <div class="faq-answer">Fortalecer la integridad de las redes digitales, desarrollar herramientas tecnológicas estables y mitigar delitos informáticos como el doxxing o las filtraciones mediante sistemas avanzados de defensa.</div>
+                    <div class="faq-answer">Fortalecer la integridad de las redes digitales, desarrollar herramientas tecnológicas estables y mitigar delitos informáticos mediante sistemas avanzados de defensa y respuesta automatizada.</div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">¿Cómo opera la comunidad? <span>+</span></div>
-                    <div class="faq-answer">Funcionamos a través de un ecosistema colaborativo privado en plataformas de mensajería cifrada y repositorios cerrados donde priorizamos el aprendizaje continuo y el impacto técnico real.</div>
+                    <div class="faq-answer">Funcionamos a través de un ecosistema colaborativo privado en plataformas de mensajería cifrada y repositorios cerrados donde priorizamos el aprendizaje técnico continuo y el impacto real.</div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">¿Qué tipo de proyectos desarrollan? <span>+</span></div>
-                    <div class="faq-answer">Desarrollamos scripts avanzados de automatización, bots de soporte de alta concurrencia, arquitecturas front-end de bajo consumo energético y auditorías de seguridad perimetral.</div>
-                </div>
-            </section>
-
-            <section class="info-card" id="redes">
-                <h2>Evolución de Operaciones</h2>
-                <div class="timeline-container">
-                    <div class="timeline-event">
-                        <div class="event-date">FASE 01 // ORIGINS</div>
-                        <div class="event-title">Arquitectura del Ecosistema Base</div>
-                    </div>
-                    <div class="timeline-event">
-                        <div class="event-date">FASE 02 // AUTOMATION</div>
-                        <div class="event-title">Despliegue de Infraestructura y Bots</div>
-                    </div>
-                    <div class="timeline-event">
-                        <div class="event-date">FASE 03 // EXPANSION</div>
-                        <div class="event-title">Interfaces y Paneles Unificados</div>
-                    </div>
+                    <div class="faq-answer">Desarrollamos scripts avanzados de automatización, bots de soporte de alta concurrencia, arquitecturas front-end eficientes de bajo consumo energético y auditorías perimetrales de red.</div>
                 </div>
             </section>
 
         </div>
     </div>
 
+    <!-- --- Renderizado y Cinemática Avanzada del Robot Industrial --- -->
     <script>
         let scene, camera, renderer, robotGroup;
         let head, leftEye, rightEye;
@@ -386,141 +262,161 @@
             const container = document.getElementById('canvas3d');
             
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 0.45, 4.3);
+            camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(0, 0.4, 4.2);
 
             renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
             renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limita la tasa para estabilidad a 120Hz
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 1.2;
+            renderer.toneMappingExposure = 1.3;
             container.appendChild(renderer.domElement);
 
-            // --- Iluminación Profesional de Estudio Metálico ---
-            const ambientLight = new THREE.AmbientLight(0x0a0a0a);
+            // --- Iluminación de Estudio Optimizada para Superficies Complejas ---
+            const ambientLight = new THREE.AmbientLight(0x080808);
             scene.add(ambientLight);
 
-            const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
-            keyLight.position.set(1, 3, 3);
+            const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+            keyLight.position.set(1.5, 3.5, 3);
             scene.add(keyLight);
 
-            const rimLightLeft = new THREE.DirectionalLight(0xffffff, 1.2);
-            rimLightLeft.position.set(-4, 2, -1);
+            const rimLightLeft = new THREE.DirectionalLight(0xffffff, 1.5);
+            rimLightLeft.position.set(-4, 2, -0.5);
             scene.add(rimLightLeft);
 
-            const rimLightRight = new THREE.DirectionalLight(0xffffff, 1.2);
-            rimLightRight.position.set(4, 1, 1);
+            const rimLightRight = new THREE.DirectionalLight(0xffffff, 1.5);
+            rimLightRight.position.set(4, 1.5, 0.5);
             scene.add(rimLightRight);
 
-            // --- Materiales Fotorrealistas Basados en la Referencia ---
+            // --- Configuración de Materiales Premium (PBR) ---
             const industrialGlossyBlack = new THREE.MeshStandardMaterial({ 
-                color: 0x030303, 
-                roughness: 0.12,  
-                metalness: 0.25,  
+                color: 0x020202, 
+                roughness: 0.1,  
+                metalness: 0.3,  
                 clearcoat: 1.0,   
-                clearcoatRoughness: 0.05
+                clearcoatRoughness: 0.03
             });
 
             const internalJointMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0x121212, 
-                roughness: 0.5
+                color: 0x0f0f0f, 
+                roughness: 0.45,
+                metalness: 0.2
             });
 
             const ledWhiteMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-            // Construcción del Modelo Robótico
             robotGroup = new THREE.Group();
 
-            // Cabeza
-            const headGeo = new THREE.SphereGeometry(0.48, 36, 36);
-            headGeo.scale(1, 1.22, 0.92);
+            // 1. Cabeza Facetada Industrial 
+            const headGeo = new THREE.ConeGeometry(0.48, 0.8, 6); 
+            headGeo.rotateX(Math.PI);
+            headGeo.scale(1, 1.2, 0.85);
             head = new THREE.Mesh(headGeo, industrialGlossyBlack);
             head.position.y = 1.15;
             robotGroup.add(head);
 
-            // Visor Liso Frontal
-            const visorGeo = new THREE.SphereGeometry(0.465, 36, 36);
-            visorGeo.scale(0.92, 0.82, 0.88);
+            // Visor Plano Afilado Integrado
+            const visorGeo = new THREE.CylinderGeometry(0.35, 0.38, 0.28, 6);
+            visorGeo.scale(0.9, 1, 0.85);
             const visor = new THREE.Mesh(visorGeo, industrialGlossyBlack);
-            visor.position.set(0, 0.04, 0.08);
+            visor.position.set(0, -0.05, 0.25);
+            visor.rotation.x = Math.PI / 2;
             head.add(visor);
 
-            // Ojos Digitales de Píxeles Rectangulares
-            const eyeGeo = new THREE.BoxGeometry(0.075, 0.035, 0.02);
+            // Matriz de Ojos Digitales de Alta Densidad
+            const eyeGeo = new THREE.BoxGeometry(0.08, 0.025, 0.02);
             leftEye = new THREE.Mesh(eyeGeo, ledWhiteMaterial);
-            leftEye.position.set(-0.15, 0.08, 0.42);
+            leftEye.position.set(-0.14, -0.02, 0.34);
             rightEye = new THREE.Mesh(eyeGeo, ledWhiteMaterial);
-            rightEye.position.set(0.15, 0.08, 0.42);
-            head.add(leftEye, rightEye);
+            rightEye.position.set(0.14, -0.02, 0.34);
+            visor.add(leftEye, rightEye);
 
-            // Cuello Mecánico
-            const neckGeo = new THREE.CylinderGeometry(0.11, 0.14, 0.22, 24);
+            // 2. Cuello Mecánico con Anillos de Soporte
+            const neckGeo = new THREE.CylinderGeometry(0.1, 0.13, 0.22, 8);
             const neck = new THREE.Mesh(neckGeo, internalJointMaterial);
-            neck.position.y = -0.65;
+            neck.position.y = -0.52;
             head.add(neck);
 
-            // Torso Superior Chasis
-            const torsoGeo = new THREE.SphereGeometry(0.68, 36, 36);
-            torsoGeo.scale(1, 1.12, 0.72);
+            // 3. Chasis del Torso Modular Esculpido
+            const torsoGeo = new THREE.CylinderGeometry(0.55, 0.25, 0.9, 6);
+            torsoGeo.scale(1.1, 1, 0.65);
             const torso = new THREE.Mesh(torsoGeo, industrialGlossyBlack);
-            torso.position.y = -0.15;
+            torso.position.y = 0.2;
             robotGroup.add(torso);
 
-            // Extremidades Superiores Estilizadas
-            const shoulderJointGeo = new THREE.SphereGeometry(0.14, 24, 24);
-            const armBicepGeo = new THREE.CylinderGeometry(0.11, 0.09, 0.68, 24);
-            armBicepGeo.rotateZ(Math.PI / 13);
+            // 4. Mecánica del Hombro y Brazos Poligonales
+            const shoulderJointGeo = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+            const armBicepGeo = new THREE.CylinderGeometry(0.1, 0.08, 0.7, 6);
+            armBicepGeo.rotateZ(Math.PI / 14);
 
+            // Hombro Izquierdo
             const leftShoulder = new THREE.Mesh(shoulderJointGeo, internalJointMaterial);
-            leftShoulder.position.set(-0.82, 0.42, -0.02);
+            leftShoulder.position.set(-0.75, 0.55, 0);
             const leftArm = new THREE.Mesh(armBicepGeo, industrialGlossyBlack);
-            leftArm.position.set(-0.14, -0.38, 0);
+            leftArm.position.set(-0.12, -0.4, 0);
             leftShoulder.add(leftArm);
             robotGroup.add(leftShoulder);
 
+            // Hombro Derecho
             const rightShoulder = new THREE.Mesh(shoulderJointGeo, internalJointMaterial);
-            rightShoulder.position.set(0.82, 0.42, -0.02);
+            rightShoulder.position.set(0.75, 0.55, 0);
             const rightArm = new THREE.Mesh(armBicepGeo, industrialGlossyBlack);
-            rightArm.position.set(0.14, -0.38, 0);
+            rightArm.position.set(0.12, -0.4, 0);
             rightShoulder.add(rightArm);
             robotGroup.add(rightShoulder);
 
+            // 5. Ensamblaje de la Base Pélvica Estructural
+            const pelvisJoint = new THREE.BoxGeometry(0.4, 0.15, 0.25);
+            const pelvis = new THREE.Mesh(pelvisJoint, internalJointMaterial);
+            pelvis.position.y = -0.32;
+            robotGroup.add(pelvis);
+
+            const thighGeo = new THREE.CylinderGeometry(0.12, 0.09, 0.55, 6);
+            
+            const leftThigh = new THREE.Mesh(thighGeo, industrialGlossyBlack);
+            leftThigh.position.set(-0.24, -0.65, 0);
+            pelvis.add(leftThigh);
+
+            const rightThigh = new THREE.Mesh(thighGeo, industrialGlossyBlack);
+            rightThigh.position.set(0.24, -0.65, 0);
+            pelvis.add(rightThigh);
+
             scene.add(robotGroup);
-            robotGroup.position.set(0, -0.05, 0);
+            robotGroup.position.set(0, -0.25, 0);
 
             animate();
         }
 
-        // --- Algoritmo de Seguimiento e Inercia Cinemática (Lerp) ---
+        // --- Algoritmo de Seguimiento e Inercia Cinemática (Persigue el Cursor) ---
         function animate() {
             requestAnimationFrame(animate);
 
-            const time = Date.now() * 0.001;
-            robotGroup.position.y = -0.05 + Math.sin(time) * 0.015;
+            const time = Date.now() * 0.0012;
+            robotGroup.position.y = -0.25 + Math.sin(time) * 0.012;
 
-            // Suavizado de la interpolación de movimiento de la cabeza (Persigue el cursor)
+            // Interpolación matemática lineal (Lerp) para un seguimiento fluido
             targetRotation.x += (mouse.x * 0.45 - targetRotation.x) * 0.06;
             targetRotation.y += (mouse.y * 0.28 - targetRotation.y) * 0.06;
 
             head.rotation.y = targetRotation.x;
             head.rotation.x = -targetRotation.y;
 
-            // Ajuste focal de los ojos digitales en tiempo real
-            leftEye.position.x = -0.15 + (targetRotation.x * 0.04);
-            rightEye.position.x = 0.15 + (targetRotation.x * 0.04);
-            leftEye.position.y = 0.08 + (targetRotation.y * 0.02);
-            rightEye.position.y = 0.08 + (targetRotation.y * 0.02);
+            // Desplazamiento reactivo de las pupilas LED
+            leftEye.position.x = -0.14 + (targetRotation.x * 0.03);
+            rightEye.position.x = 0.14 + (targetRotation.x * 0.03);
+            leftEye.position.y = -0.02 + (targetRotation.y * 0.015);
+            rightEye.position.y = -0.02 + (targetRotation.y * 0.015);
 
             renderer.render(scene, camera);
         }
 
-        // Captura de Eventos (PC)
+        // Eventos para la indexación posicional del Cursor (PC)
         window.addEventListener('mousemove', (e) => {
             mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
             mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
         });
 
-        // Captura de Eventos de Arrastre/Toques Táctiles (Samsung / Android)
+        // Eventos para Pantallas Táctiles Móviles
         window.addEventListener('touchmove', (e) => {
             if(e.touches.length > 0) {
                 mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
@@ -535,7 +431,7 @@
             renderer.setSize(container.clientWidth, container.clientHeight);
         });
 
-        // --- Lógica de Interacción del Menú FAQ Desplegable ---
+        // --- Controlador Desplegable FAQ ---
         document.addEventListener('DOMContentLoaded', () => {
             init3D();
 
@@ -546,8 +442,6 @@
                     faqItems.forEach(i => i.classList.remove('active'));
                     if (!isActive) {
                         item.classList.add('active');
-                        // Micro vibración háptica opcional si soporta el móvil Samsung
-                        if (navigator.vibrate) navigator.vibrate(10);
                     }
                 });
             });
