@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>JXLL | Central de Operaciones</title>
-    <!-- Motor Three.js para el Androide Industrial -->
+    <title>JXLL | Inicio</title>
+    <!-- Frameworks de Consistencia Gráfica y Estética -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* --- Configuración Base e Interfaz de Usuario (AMOLED) --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;600;800&family=VT323&display=swap');
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* ===== PARÁMETROS SAMSUNG AMOLED: Negro Puro Absoluto ===== */
         body {
-            background-color: #000000; /* Negro absoluto para optimizar pantallas AMOLED */
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
             color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
-            min-height: 100vh;
+            cursor: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
-        /* --- Arquitectura de Pantalla Dividida --- */
+        /* --- Estructura de Pantalla Dividida Consistente --- */
         .main-wrapper {
             display: flex;
             flex-direction: row;
@@ -31,7 +38,7 @@
             width: 100%;
         }
 
-        /* LADO IZQUIERDO: Laboratorio del Humanoide Interactivo */
+        /* LADO IZQUIERDO: Panel de Identidad Estética */
         .canvas-container {
             flex: 1.1;
             position: sticky;
@@ -39,12 +46,15 @@
             height: 100vh;
             background: #000000; 
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 2;
+            padding: 40px;
+            text-align: center;
         }
 
-        /* LADO DERECHO: Panel de Control (Scrollable) */
+        /* LADO DERECHO: Panel de Control Primario (Scrollable) */
         .content-panel {
             flex: 0.9;
             padding: 60px 50px;
@@ -54,9 +64,27 @@
             box-shadow: -25px 0 50px rgba(0, 0, 0, 0.95);
         }
 
-        /* --- Branding --- */
+        /* Branding Central / Superior */
+        .canvas-brand h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            background: linear-gradient(90deg, #ffffff, #ff0044);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .canvas-brand p {
+            color: #b5b5b5;
+            font-size: 1rem;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+
         .brand-section {
-            margin-bottom: 50px;
+            margin-bottom: 35px;
+            text-align: center;
         }
 
         .brand-title {
@@ -77,12 +105,221 @@
             text-transform: uppercase;
         }
 
-        /* --- Botones de Acción con Redirección --- */
+        /* Subtítulos de Secciones */
+        .section-header {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff;
+            border-left: 3px solid #ff0044;
+            padding-left: 12px;
+            margin: 40px 0 20px 0;
+            text-transform: uppercase;
+        }
+
+        /* ============================================================
+           COMPONENTE: ROBOT CON DISEÑO CSS Y ANIMACIÓN DE SALUDO
+        ============================================================ */
+        .hologram-bot-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 45px;
+            position: relative;
+            padding: 10px;
+        }
+
+        /* Burbuja Cyberpunk */
+        .bot-bubble {
+            position: relative;
+            background: rgba(255, 0, 68, 0.04);
+            border: 1px solid rgba(255, 0, 68, 0.4);
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: #ffffff;
+            font-family: 'VT323', monospace;
+            font-size: 1.35rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 0, 68, 0.15);
+            margin-bottom: 25px;
+            animation: floatBubble 4s ease-in-out infinite;
+        }
+
+        .bot-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: rgba(255, 0, 68, 0.4) transparent;
+            display: block;
+            width: 0;
+        }
+
+        .bot-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 7px 7px 0;
+            border-style: solid;
+            border-color: #000000 transparent;
+            z-index: 1;
+            display: block;
+            width: 0;
+        }
+
+        .terminal-cursor {
+            color: #ff0044;
+            animation: blink 1s infinite;
+            font-weight: bold;
+        }
+
+        /* ESTRUCTURA ANATOMÍA DEL ROBOT EN CSS */
+        .cyber-robot {
+            position: relative;
+            width: 80px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: floatBot 4s ease-in-out infinite;
+        }
+
+        /* Cabeza del Robot */
+        .robot-head {
+            width: 50px;
+            height: 38px;
+            background: #111111;
+            border: 2px solid #ff0044;
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(255, 0, 68, 0.2);
+            z-index: 3;
+        }
+
+        /* Ojos */
+        .robot-eye {
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff, 0 0 12px #ff0044;
+        }
+
+        /* Antena */
+        .robot-antenna {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 10px;
+            background: #ff0044;
+        }
+        .robot-antenna::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -2px;
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff;
+        }
+
+        /* Cuello */
+        .robot-neck {
+            width: 12px;
+            height: 6px;
+            background: #ff0044;
+            z-index: 2;
+        }
+
+        /* Torso */
+        .robot-torso {
+            width: 56px;
+            height: 40px;
+            background: #0d0d0d;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top: 2px solid #ff0044;
+            border-radius: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Brazo Izquierdo (Fijo) */
+        .robot-arm-left {
+            position: absolute;
+            left: -12px;
+            top: 44px;
+            width: 10px;
+            height: 26px;
+            background: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            transform-origin: top center;
+        }
+
+        /* Brazo Derecho (Saludo) */
+        .robot-arm-right {
+            position: absolute;
+            right: -12px;
+            top: 44px;
+            width: 10px;
+            height: 26px;
+            background: #111111;
+            border: 1px solid #ff0044;
+            border-radius: 4px;
+            transform-origin: top center;
+            animation: waveHand 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 0, 68, 0.1);
+        }
+
+        /* Brillo Inferior */
+        .hologram-glow {
+            position: absolute;
+            bottom: -12px;
+            width: 50px;
+            height: 4px;
+            background: #ff0044;
+            border-radius: 50%;
+            filter: blur(4px);
+            opacity: 0.6;
+        }
+
+        /* --- Cuadro Informativo: Qué es Team JXLL --- */
+        .info-manifesto-box {
+            background: rgba(255, 0, 68, 0.02);
+            border: 1px solid rgba(255, 0, 68, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            line-height: 1.6;
+            color: #d1d1d1;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .info-manifesto-box strong {
+            color: #ffffff;
+        }
+
+        /* --- Botones de Navegación del Panel --- */
         .action-button-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
 
         .action-btn {
@@ -110,342 +347,405 @@
             transform: translateY(-2px);
         }
 
-        /* --- Tarjetas Modulares de Información --- */
-        .info-card {
+        /* --- Cuadrícula de Módulos Operativos --- */
+        .system-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .system-card {
             background: rgba(255, 255, 255, 0.015);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 35px;
+            padding: 20px 25px;
             border-radius: 14px;
-            margin-bottom: 40px;
-            line-height: 1.65;
-        }
-
-        .info-card h2 {
-            font-size: 1.4rem;
-            letter-spacing: 2px;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-            color: #ffffff;
-            border-bottom: 1px solid rgba(255, 0, 68, 0.25);
-            padding-bottom: 10px;
-        }
-
-        .info-card p {
-            color: #b5b5b5;
-            font-size: 0.98rem;
-        }
-
-        /* --- Sección Interactiva de Preguntas Frecuentes (FAQ) --- */
-        .faq-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 18px 0;
-            cursor: pointer;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            font-size: 1rem;
-            color: #ffffff;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            transition: color 0.2s ease;
+            gap: 20px;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .faq-item:hover .faq-question {
+        .system-card:hover {
+            border-color: #ff0044;
+            background: rgba(255, 0, 68, 0.01);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            font-size: 1.3rem;
             color: #ff0044;
         }
 
-        .faq-answer {
-            max-height: 0;
+        .card-meta h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .card-meta p {
+            color: #777777;
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+
+        /* --- SECCIÓN FAQ (Preguntas Frecuentes Accordion al estilo AMOLED) --- */
+        .faq-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
             overflow: hidden;
-            color: #888888;
-            font-size: 0.92rem;
-            margin-top: 0;
+            transition: border-color 0.3s ease;
+        }
+
+        .faq-item[open] {
+            border-color: rgba(255, 0, 68, 0.4);
+            background: rgba(255, 0, 68, 0.005);
+        }
+
+        .faq-trigger {
+            padding: 18px 22px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-trigger::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-trigger::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: #ff0044;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item[open] .faq-trigger::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-content {
+            padding: 0 22px 20px 22px;
+            color: #aaaaaa;
+            font-size: 0.9rem;
             line-height: 1.6;
-            transition: max-height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), margin-top 0.3s ease;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            padding-top: 12px;
         }
 
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-            margin-top: 12px;
+        /* --- Canvas de Partículas Suaves de Fondo --- */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 1;
         }
 
-        /* --- Responsividad Avanzada --- */
+        /* Warning de Seguridad DevTools */
+        #devtools-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            color: #ff0044;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            font-family: 'VT323', monospace;
+            text-align: center;
+        }
+
+        /* Cursor Óptico (Solo PC) */
+        #custom-cursor {
+            position: fixed;
+            width: 28px;
+            height: 28px;
+            border: 2px solid #ff0044;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 20px rgba(255, 0, 68, 0.6);
+            will-change: transform;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        @media (pointer: fine) {
+            #custom-cursor { display: block; }
+        }
+
+        /* --- ANIMACIONES FLUIDAS --- */
+        @keyframes floatBot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes waveHand {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-35deg) translateY(-2px); }
+            50% { transform: rotate(-15deg); }
+            75% { transform: rotate(-35deg) translateY(-2px); }
+        }
+
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* --- Responsividad --- */
         @media (max-width: 1024px) {
-            .main-wrapper {
-                flex-direction: column;
-            }
-
-            .canvas-container {
-                height: 48vh;
-                position: relative;
-            }
-
-            .content-panel {
-                width: 100%;
-                padding: 40px 24px;
-                border-left: none;
-                border-top: 1px solid rgba(255, 0, 68, 0.15);
-            }
-
-            .brand-title {
-                font-size: 2.8rem;
-                text-align: center;
-            }
-
-            .brand-tagline {
-                text-align: center;
-            }
+            .main-wrapper { flex-direction: column; }
+            .canvas-container { height: 30vh; position: relative; padding: 20px; }
+            .canvas-brand h2 { font-size: 2.2rem; margin-bottom: 10px; }
+            .content-panel { width: 100%; padding: 40px 24px; border-left: none; border-top: 1px solid rgba(255, 0, 68, 0.15); }
+            .brand-title { font-size: 2.8rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- CONTROL DE SEGURIDAD INTERNA -->
+    <div id="devtools-warning">
+        <div>
+            <h1 class="text-5xl font-black tracking-widest">&lt; ACCESS_DENIED &gt;</h1>
+        </div>
+    </div>
+
+    <!-- Cursor Óptico -->
+    <div id="custom-cursor"></div>
+
     <div class="main-wrapper">
         
-        <!-- LADO IZQUIERDO: Contenedor Gráfico 3D (Limpio de HUD de texto) -->
-        <div class="canvas-container" id="canvas3d"></div>
+        <!-- LADO IZQUIERDO: Canvas e Identidad Visual Central -->
+        <div class="canvas-container">
+            <canvas id="particles-canvas"></canvas>
+            <div class="canvas-brand" style="position: relative; z-index: 2;">
+                <h2>BIENVENID@</h2>
+                <p>// systes status: ONLINE</p>
+            </div>
+        </div>
 
-        <!-- LADO DERECHO: Centro de Información -->
+        <!-- LADO DERECHO: Centro de Operación Interactivo -->
         <div class="content-panel">
             
             <header class="brand-section">
-                <h1 class="brand-title">CORE JXLL</h1>
-                <div class="brand-tagline">// Multidisciplinary Security & Code Collective</div>
+                <h1 class="brand-title">TEAM JXLL</h1>
+                <div class="brand-tagline">// Red Team Infrastructure &amp; Automation</div>
             </header>
 
-            <!-- Botones Conectados a los Archivos Solicitados -->
-            <div class="action-button-group">
-                <a href="equipo.html" class="action-btn">Equipo</a>
-                <a href="redes.html" class="action-btn">Redes Sociales</a>
+            <!-- ROBOT COMPUESTO CON ANIMACIÓN DE SALUDO -->
+            <div class="hologram-bot-container">
+                <div class="bot-bubble">
+                    <span>Bienvenidos a JXLL</span><span class="terminal-cursor">_</span>
+                </div>
+                
+                <div class="cyber-robot">
+                    <div class="robot-antenna"></div>
+                    <div class="robot-head">
+                        <div class="robot-eye"></div>
+                        <div class="robot-eye"></div>
+                    </div>
+                    <div class="robot-neck"></div>
+                    <div class="robot-torso"></div>
+                    <div class="robot-arm-left"></div>
+                    <div class="robot-arm-right"></div>
+                    <div class="hologram-glow"></div>
+                </div>
             </div>
 
-            <section class="info-card">
-                <h2>¿Qué es JXLL?</h2>
-                <p>
-                    Somos una comunidad multidisciplinaria de desarrolladores, programadores y entusiastas de la seguridad digital comprometidos con la solidez de las infraestructuras de red y la optimización tecnológica. Operando bajo metodologías avanzadas de seguridad informática ofensiva y defensiva, mitigamos vulnerabilidades complejas mediante la automatización y arquitectura de software adaptativo.
-                </p>
+            <!-- Botones de Enlace del Entorno -->
+            <div class="action-button-group">
+                <a href="redes.html" class="action-btn"><i class="fas fa-share-alt" style="margin-right: 8px;"></i>Redes</a>
+                <a href="equipo.html" class="action-btn"><i class="fas fa-users" style="margin-right: 8px;"></i>Equipo</a>
+            </div>
+
+            <!-- ¿QUÉ ES TEAM JXLL? -->
+            <section>
+                <div class="section-header">¿Qué es Team JXLL?</div>
+                <div class="info-manifesto-box">
+                    <strong>Team JXLL</strong> es una comunidad enfocada en el desarrollo de software, la automatización avanzada y la ciberseguridad. Nuestro principal objetivo es construir herramientas eficientes, auditar entornos web perimetrales y promover soluciones tecnológicas seguras. Nos dedicamos a limpiar y proteger los espacios de la red mediante programación ética, implementando directivas automatizadas y reportes estructurados para mitigar vulnerabilidades y malas prácticas.
+                </div>
             </section>
 
-            <section class="info-card">
-                <h2>Preguntas Frecuentes (FAQ)</h2>
-                
-                <div class="faq-item">
-                    <div class="faq-question">¿Cuál es el objetivo principal de Team JXLL? <span>+</span></div>
-                    <div class="faq-answer">Fortalecer la integridad de las redes digitales, desarrollar herramientas tecnológicas estables y mitigar delitos informáticos mediante sistemas avanzados de defensa y respuesta automatizada.</div>
+            <!-- Módulos Informativos -->
+            <section>
+                <div class="section-header">Núcleo Operativo</div>
+                <div class="system-grid">
+                    <div class="system-card">
+                        <div class="card-icon"><i class="fas fa-terminal"></i></div>
+                        <div class="card-meta">
+                            <h4>Programación y Automatización</h4>
+                            <p>Desarrollo robusto en Python, ingeniería de software, control con Git/GitHub y optimización mediante macros avanzadas VBA.</p>
+                        </div>
+                    </div>
+                    <div class="system-card">
+                        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="card-meta">
+                            <h4>Hacking Ético y Seguridad</h4>
+                            <p>Análisis táctico de entornos de red, mitigación perimetral de riesgos y auditoría completa de aplicaciones web.</p>
+                        </div>
+                    </div>
+                    <div class="system-card">
+                        <div class="card-icon"><i class="fas fa-robot"></i></div>
+                        <div class="card-meta">
+                            <h4>Centralización de Reportes</h4>
+                            <p>Sistemas automatizados de alerta y monitorización constante mediante la integración de bots especializados en Telegram.</p>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="faq-item">
-                    <div class="faq-question">¿Cómo opera la comunidad? <span>+</span></div>
-                    <div class="faq-answer">Funcionamos a través de un ecosistema colaborativo privado en plataformas de mensajería cifrada y repositorios cerrados donde priorizamos el aprendizaje técnico continuo y el impacto real.</div>
-                </div>
+            <!-- PREGUNTAS FRECUENTES (FAQ) -->
+            <section>
+                <div class="section-header">Preguntas Frecuentes</div>
+                <div class="faq-wrapper">
+                    
+                    <details class="faq-item">
+                        <summary class="faq-trigger">¿Cuál es el propósito principal de la comunidad?</summary>
+                        <div class="faq-content">
+                            Brindar soluciones tecnológicas eficientes enfocadas en automatizar tareas mediante código limpio y auditar la seguridad de las plataformas digitales para mantener un ecosistema en la red más confiable y libre de amenazas.
+                        </div>
+                    </details>
 
-                <div class="faq-item">
-                    <div class="faq-question">¿Qué tipo de proyectos desarrollan? <span>+</span></div>
-                    <div class="faq-answer">Desarrollamos scripts avanzados de automatización, bots de soporte de alta concurrencia, arquitecturas front-end eficientes de bajo consumo energético y auditorías perimetrales de red.</div>
+                    <details class="faq-item">
+                        <summary class="faq-trigger">¿Qué lenguajes y herramientas tecnologías utilizan?</summary>
+                        <div class="faq-content">
+                            Nuestra infraestructura y desarrollo se centran principalmente en Python para automatización y scripts complejos, control de versiones e integraciones mediante GitHub, y soluciones ofimáticas integradas con macros avanzadas VBA.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-trigger">¿Cómo funciona la directiva de reportes centralizados?</summary>
+                        <div class="faq-content">
+                            Utilizamos bots especializados configurados en la plataforma Telegram que recopilan de manera instantánea alertas sobre vulnerabilidades, contenido malicioso o fallos en los sistemas, agilizando el tiempo de respuesta y mitigación.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-trigger">¿Cómo puedo ponerme en contacto con el equipo?</summary>
+                        <div class="faq-content">
+                            Puedes acceder directamente a nuestra sección de "Redes" mediante los enlaces de navegación del panel superior para interactuar con nuestros canales oficiales de soporte y comunicación.
+                        </div>
+                    </details>
+
                 </div>
             </section>
 
         </div>
     </div>
 
-    <!-- --- Renderizado y Cinemática Avanzada del Robot Industrial --- -->
+    <!-- --- Scripts de Control e Interacciones Fluidas --- -->
     <script>
-        let scene, camera, renderer, robotGroup;
-        let head, leftEye, rightEye;
-        
-        const mouse = { x: 0, y: 0 };
-        const targetRotation = { x: 0, y: 0 };
-
-        function init3D() {
-            const container = document.getElementById('canvas3d');
-            
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 0.4, 4.2);
-
-            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 1.3;
-            container.appendChild(renderer.domElement);
-
-            // --- Iluminación de Estudio Optimizada para Superficies Complejas ---
-            const ambientLight = new THREE.AmbientLight(0x080808);
-            scene.add(ambientLight);
-
-            const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
-            keyLight.position.set(1.5, 3.5, 3);
-            scene.add(keyLight);
-
-            const rimLightLeft = new THREE.DirectionalLight(0xffffff, 1.5);
-            rimLightLeft.position.set(-4, 2, -0.5);
-            scene.add(rimLightLeft);
-
-            const rimLightRight = new THREE.DirectionalLight(0xffffff, 1.5);
-            rimLightRight.position.set(4, 1.5, 0.5);
-            scene.add(rimLightRight);
-
-            // --- Configuración de Materiales Premium (PBR) ---
-            const industrialGlossyBlack = new THREE.MeshStandardMaterial({ 
-                color: 0x020202, 
-                roughness: 0.1,  
-                metalness: 0.3,  
-                clearcoat: 1.0,   
-                clearcoatRoughness: 0.03
-            });
-
-            const internalJointMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0x0f0f0f, 
-                roughness: 0.45,
-                metalness: 0.2
-            });
-
-            const ledWhiteMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-            robotGroup = new THREE.Group();
-
-            // 1. Cabeza Facetada Industrial 
-            const headGeo = new THREE.ConeGeometry(0.48, 0.8, 6); 
-            headGeo.rotateX(Math.PI);
-            headGeo.scale(1, 1.2, 0.85);
-            head = new THREE.Mesh(headGeo, industrialGlossyBlack);
-            head.position.y = 1.15;
-            robotGroup.add(head);
-
-            // Visor Plano Afilado Integrado
-            const visorGeo = new THREE.CylinderGeometry(0.35, 0.38, 0.28, 6);
-            visorGeo.scale(0.9, 1, 0.85);
-            const visor = new THREE.Mesh(visorGeo, industrialGlossyBlack);
-            visor.position.set(0, -0.05, 0.25);
-            visor.rotation.x = Math.PI / 2;
-            head.add(visor);
-
-            // Matriz de Ojos Digitales de Alta Densidad
-            const eyeGeo = new THREE.BoxGeometry(0.08, 0.025, 0.02);
-            leftEye = new THREE.Mesh(eyeGeo, ledWhiteMaterial);
-            leftEye.position.set(-0.14, -0.02, 0.34);
-            rightEye = new THREE.Mesh(eyeGeo, ledWhiteMaterial);
-            rightEye.position.set(0.14, -0.02, 0.34);
-            visor.add(leftEye, rightEye);
-
-            // 2. Cuello Mecánico con Anillos de Soporte
-            const neckGeo = new THREE.CylinderGeometry(0.1, 0.13, 0.22, 8);
-            const neck = new THREE.Mesh(neckGeo, internalJointMaterial);
-            neck.position.y = -0.52;
-            head.add(neck);
-
-            // 3. Chasis del Torso Modular Esculpido
-            const torsoGeo = new THREE.CylinderGeometry(0.55, 0.25, 0.9, 6);
-            torsoGeo.scale(1.1, 1, 0.65);
-            const torso = new THREE.Mesh(torsoGeo, industrialGlossyBlack);
-            torso.position.y = 0.2;
-            robotGroup.add(torso);
-
-            // 4. Mecánica del Hombro y Brazos Poligonales
-            const shoulderJointGeo = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-            const armBicepGeo = new THREE.CylinderGeometry(0.1, 0.08, 0.7, 6);
-            armBicepGeo.rotateZ(Math.PI / 14);
-
-            // Hombro Izquierdo
-            const leftShoulder = new THREE.Mesh(shoulderJointGeo, internalJointMaterial);
-            leftShoulder.position.set(-0.75, 0.55, 0);
-            const leftArm = new THREE.Mesh(armBicepGeo, industrialGlossyBlack);
-            leftArm.position.set(-0.12, -0.4, 0);
-            leftShoulder.add(leftArm);
-            robotGroup.add(leftShoulder);
-
-            // Hombro Derecho
-            const rightShoulder = new THREE.Mesh(shoulderJointGeo, internalJointMaterial);
-            rightShoulder.position.set(0.75, 0.55, 0);
-            const rightArm = new THREE.Mesh(armBicepGeo, industrialGlossyBlack);
-            rightArm.position.set(0.12, -0.4, 0);
-            rightShoulder.add(rightArm);
-            robotGroup.add(rightShoulder);
-
-            // 5. Ensamblaje de la Base Pélvica Estructural
-            const pelvisJoint = new THREE.BoxGeometry(0.4, 0.15, 0.25);
-            const pelvis = new THREE.Mesh(pelvisJoint, internalJointMaterial);
-            pelvis.position.y = -0.32;
-            robotGroup.add(pelvis);
-
-            const thighGeo = new THREE.CylinderGeometry(0.12, 0.09, 0.55, 6);
-            
-            const leftThigh = new THREE.Mesh(thighGeo, industrialGlossyBlack);
-            leftThigh.position.set(-0.24, -0.65, 0);
-            pelvis.add(leftThigh);
-
-            const rightThigh = new THREE.Mesh(thighGeo, industrialGlossyBlack);
-            rightThigh.position.set(0.24, -0.65, 0);
-            pelvis.add(rightThigh);
-
-            scene.add(robotGroup);
-            robotGroup.position.set(0, -0.25, 0);
-
-            animate();
-        }
-
-        // --- Algoritmo de Seguimiento e Inercia Cinemática (Persigue el Cursor) ---
-        function animate() {
-            requestAnimationFrame(animate);
-
-            const time = Date.now() * 0.0012;
-            robotGroup.position.y = -0.25 + Math.sin(time) * 0.012;
-
-            // Interpolación matemática lineal (Lerp) para un seguimiento fluido
-            targetRotation.x += (mouse.x * 0.45 - targetRotation.x) * 0.06;
-            targetRotation.y += (mouse.y * 0.28 - targetRotation.y) * 0.06;
-
-            head.rotation.y = targetRotation.x;
-            head.rotation.x = -targetRotation.y;
-
-            // Desplazamiento reactivo de las pupilas LED
-            leftEye.position.x = -0.14 + (targetRotation.x * 0.03);
-            rightEye.position.x = 0.14 + (targetRotation.x * 0.03);
-            leftEye.position.y = -0.02 + (targetRotation.y * 0.015);
-            rightEye.position.y = -0.02 + (targetRotation.y * 0.015);
-
-            renderer.render(scene, camera);
-        }
-
-        // Eventos para la indexación posicional del Cursor (PC)
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
-        });
-
-        // Eventos para Pantallas Táctiles Móviles
-        window.addEventListener('touchmove', (e) => {
-            if(e.touches.length > 0) {
-                mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
-                mouse.y = (e.touches[0].clientY / window.innerHeight) * 2 - 1;
+        // SEGURIDAD DEL ENTORNO
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || e.keyCode === 123 ||
+                ((e.ctrlKey || e.metaKey) && ['u', 'i', 'j', 'c', 's', 'p'].includes(e.key.toLowerCase()))) {
+                e.preventDefault();
+                showDevToolsWarning();
+                return false;
             }
-        }, { passive: true });
-
-        window.addEventListener('resize', () => {
-            const container = document.getElementById('canvas3d');
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
         });
 
-        // --- Controlador Desplegable FAQ ---
-        document.addEventListener('DOMContentLoaded', () => {
-            init3D();
+        function showDevToolsWarning() {
+            const warning = document.getElementById('devtools-warning');
+            if (warning) {
+                warning.style.display = 'flex';
+                setTimeout(() => warning.style.display = 'none', 2500);
+            }
+        }
 
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    faqItems.forEach(i => i.classList.remove('active'));
-                    if (!isActive) {
-                        item.classList.add('active');
-                    }
-                });
-            });
+        // CURSOR ÓPTICO
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
         });
+
+        // CANVAS DE PARTÍCULAS (120Hz Adaptativo)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 0, 68, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(40, Math.floor(canvas.width * canvas.height / 15000));
+            for (let i = 0; i < count; i++) particles.push(new Particle());
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for(let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
 </html>
