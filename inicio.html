@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>JXLL | Central de Operaciones</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* --- Configuración Base Cyber-Premium (AMOLED) --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- Contenedor Principal en Pantalla Dividida --- */
+        .main-wrapper {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* --- LADO IZQUIERDO: El Laboratorio del Androide 3D --- */
+        .canvas-container {
+            flex: 1.1; /* Le damos un poco más de espacio al renderizado */
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            background: #000000; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* Marcador de Interfaz de Ingeniería sobre el Androide */
+        .hud-overlay {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: monospace;
+            color: #ff0044;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            pointer-events: none;
+            border-left: 2px solid #ff0044;
+            padding-left: 12px;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        /* --- LADO DERECHO: Panel de Información Avanzada --- */
+        .content-panel {
+            flex: 0.9;
+            padding: 60px 50px;
+            background: rgba(1, 1, 1, 0.98);
+            border-left: 1px solid rgba(255, 0, 68, 0.12);
+            z-index: 1;
+            box-shadow: -25px 0 50px rgba(0, 0, 0, 0.95);
+        }
+
+        /* Branding Superior */
+        .brand-section {
+            margin-bottom: 50px;
+        }
+
+        .brand-title {
+            font-size: 3.8rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            background: linear-gradient(90deg, #ffffff, #ff0044);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-tagline {
+            color: #ff0044;
+            font-family: monospace;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Secciones de Información */
+        .info-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 35px;
+            border-radius: 14px;
+            margin-bottom: 40px;
+            line-height: 1.65;
+        }
+
+        .info-card h2 {
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 0, 68, 0.25);
+            padding-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #b5b5b5;
+            font-size: 0.98rem;
+        }
+
+        /* --- LÍNEA DE TIEMPO INTERACTIVA --- */
+        .timeline-container {
+            position: relative;
+            margin-top: 25px;
+            padding-left: 30px;
+            border-left: 1px solid rgba(255, 0, 68, 0.15);
+        }
+
+        .timeline-event {
+            position: relative;
+            margin-bottom: 45px;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -36.5px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #000000;
+            border: 2px solid #ff0044;
+            box-shadow: 0 0 12px #ff0044;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-event:hover::before {
+            background: #ff0044;
+            scale: 1.4;
+            box-shadow: 0 0 18px #ff0044;
+        }
+
+        .timeline-event:hover {
+            transform: translateX(8px);
+        }
+
+        .event-date {
+            font-family: monospace;
+            color: #ff0044;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .event-desc {
+            color: #808080;
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        /* --- RESPONSIVIDAD AVANZADA --- */
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+
+            .canvas-container {
+                height: 55vh;
+                position: relative;
+            }
+
+            .content-panel {
+                width: 100%;
+                padding: 40px 24px;
+                border-left: none;
+                border-top: 1px solid rgba(255, 0, 68, 0.15);
+            }
+
+            .brand-title {
+                font-size: 2.8rem;
+                text-align: center;
+            }
+
+            .brand-tagline {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <div class="canvas-container" id="canvas3d">
+            <div class="hud-overlay">
+                CORE_STATUS: OPERATIONAL<br>
+                OBJECT_TRACKING: KINEMATIC_LERP<br>
+                HARDWARE_REF: JXLL_OP-G2
+            </div>
+        </div>
+
+        <div class="content-panel">
+            
+            <header class="brand-section">
+                <h1 class="brand-title">CORE JXLL</h1>
+                <div class="brand-tagline">// Multidisciplinary Security & Code Collective</div>
+            </header>
+
+            <section class="info-card">
+                <h2>¿Qué es JXLL?</h2>
+                <p>
+                    Somos una comunidad multidisciplinaria de desarrolladores, programadores y entusiastas de la seguridad digital comprometidos con la solidez de las infraestructuras de red y la optimización tecnológica. Operando bajo metodologías avanzadas de seguridad informática ofensiva y defensiva, mitigamos vulnerabilidades complejas mediante la automatización y arquitectura de software adaptativo.
+                </p>
+            </section>
+
+            <section class="info-card">
+                <h2>El Manifiesto</h2>
+                <p>
+                    Creemos firmemente que el conocimiento técnico no debe estar fragmentado ni reservado para fines monopólicos; debe estructurarse como una herramienta de resiliencia y libertad digital. Orientamos nuestras capacidades al desarrollo de ecosistemas integrales, la auditoría transparente de sistemas de información y el fortalecimiento continuo de las redes globales.
+                </p>
+            </section>
+
+            <section class="info-card">
+                <h2>Línea de Tiempo del Proyecto</h2>
+                <div class="timeline-container">
+                    
+                    <div class="timeline-event">
+                        <div class="event-date">FASE 01 // ORIGINS</div>
+                        <div class="event-title">Arquitectura del Ecosistema</div>
+                        <div class="event-desc">
+                            Fundación y consolidación de la red base en Telegram. Centralización de un repositorio privado orientado al intercambio técnico estructurado y la investigación de protocolos de red seguros.
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="event-date">FASE 02 // AUTOMATION</div>
+                        <div class="event-title">Integración de Bots de Soporte Técnico</div>
+                        <div class="event-desc">
+                            Despliegue de infraestructura automatizada (Telegram API y Webhooks) dedicada al monitoreo en tiempo real, control de abusos informáticos y limpieza proactiva de vectores maliciosos en la red.
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="event-date">FASE 03 // EXPANSION</div>
+                        <div class="event-title">Sistemas e Interfaz Unificada</div>
+                        <div class="event-desc">
+                            Migración hacia plataformas web de última generación optimizadas para entornos móviles de alta fidelidad y paneles AMOLED, integrando motores gráficos nativos para la visualización del Core de la firma.
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="event-date">FASE 04 // CURRENT</div>
+                        <div class="event-title">Operaciones de Resiliencia de Red</div>
+                        <div class="event-desc">
+                            Despliegue actual enfocado en auditorías defensivas avanzadas, protección de la privacidad contra el doxxing y la creación de soluciones financieras automatizadas de crecimiento escalable.
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        let scene, camera, renderer, robotGroup;
+        let head, leftEye, rightEye;
+        
+        // Coordenadas actuales del cursor y coordenadas suavizadas interactivas
+        const mouse = { x: 0, y: 0 };
+        const targetRotation = { x: 0, y: 0 };
+
+        function init3D() {
+            const container = document.getElementById('canvas3d');
+            
+            scene = new THREE.Scene();
+            
+            // Ajustamos perspectiva técnica de cámara de ingeniería
+            camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(0, 0.45, 4.3);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping; // Mapeo de tono cinematográfico profesional
+            renderer.toneMappingExposure = 1.2;
+            container.appendChild(renderer.domElement);
+
+            // --- Esquema de Iluminación de Estudio Industrial ---
+            const ambientLight = new THREE.AmbientLight(0x0a0a0a);
+            scene.add(ambientLight);
+
+            // Luz clave frontal (genera los reflejos curvos de la foto)
+            const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
+            keyLight.position.set(1, 3, 3);
+            scene.add(keyLight);
+
+            // Luz de contorno lateral izquierdo (Rim Light)
+            const rimLightLeft = new THREE.DirectionalLight(0xffffff, 1.2);
+            rimLightLeft.position.set(-4, 2, -1);
+            scene.add(rimLightLeft);
+
+            // Luz de contorno derecho
+            const rimLightRight = new THREE.DirectionalLight(0xffffff, 1.2);
+            rimLightRight.position.set(4, 1, 1);
+            scene.add(rimLightRight);
+
+            // Luz de rebote inferior metálica
+            const floorLight = new THREE.DirectionalLight(0x111111, 0.8);
+            floorLight.position.set(0, -3, 1);
+            scene.add(floorLight);
+
+
+            // --- Construcción Corpórea del Robot (Fibra Pulida / Glossy Black) ---
+            robotGroup = new THREE.Group();
+
+            // Configuración del material físico premium PBR
+            const industrialGlossyBlack = new THREE.MeshStandardMaterial({ 
+                color: 0x030303, 
+                roughness: 0.12,  // Control exacto de difusión de brillo
+                metalness: 0.25,  // Reflejo denso estructural
+                clearcoat: 1.0,   // Capa extra de lacado transparente tipo piano
+                clearcoatRoughness: 0.05
+            });
+
+            const internalJointMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x121212, 
+                roughness: 0.5,
+                metalness: 0.1
+            });
+
+            const ledWhiteMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+            // 1. Cabeza Humanoide Aerodinámica (Tesla Gen 2 Style)
+            const headGeo = new THREE.SphereGeometry(0.48, 36, 36);
+            headGeo.scale(1, 1.22, 0.92);
+            head = new THREE.Mesh(headGeo, industrialGlossyBlack);
+            head.position.y = 1.15;
+            robotGroup.add(head);
+
+            // Visor Curvo Integrado Plano Frontal
+            const visorGeo = new THREE.SphereGeometry(0.465, 36, 36);
+            visorGeo.scale(0.92, 0.82, 0.88);
+            const visor = new THREE.Mesh(visorGeo, industrialGlossyBlack);
+            visor.position.set(0, 0.04, 0.08);
+            head.add(visor);
+
+            // Matriz de Ojos Digitales Rectangulares de la Referencia
+            const eyeGeo = new THREE.BoxGeometry(0.075, 0.035, 0.02);
+            leftEye = new THREE.Mesh(eyeGeo, ledWhiteMaterial);
+            leftEye.position.set(-0.15, 0.08, 0.42);
+            rightEye = new THREE.Mesh(eyeGeo, ledWhiteMaterial);
+            rightEye.position.set(0.15, 0.08, 0.42);
+            head.add(leftEye, rightEye);
+
+            // 2. Mecanismo de Conexión Cervical (Cuello)
+            const neckGeo = new THREE.CylinderGeometry(0.11, 0.14, 0.22, 24);
+            const neck = new THREE.Mesh(neckGeo, internalJointMaterial);
+            neck.position.y = -0.65;
+            head.add(neck);
+
+            // 3. Chasis del Torso Orgánico Estilizado
+            const torsoGeo = new THREE.SphereGeometry(0.68, 36, 36);
+            torsoGeo.scale(1, 1.12, 0.72);
+            const torso = new THREE.Mesh(torsoGeo, industrialGlossyBlack);
+            torso.position.y = -0.15;
+            robotGroup.add(torso);
+
+            // 4. Mecánica de Hombros y Extremidades Superiores
+            const shoulderJointGeo = new THREE.SphereGeometry(0.14, 24, 24);
+            const armBicepGeo = new THREE.CylinderGeometry(0.11, 0.09, 0.68, 24);
+            armBicepGeo.rotateZ(Math.PI / 13); // Caída natural arqueada de los brazos
+
+            // Complejo de Hombro Izquierdo
+            const leftShoulder = new THREE.Mesh(shoulderJointGeo, internalJointMaterial);
+            leftShoulder.position.set(-0.82, 0.42, -0.02);
+            const leftArm = new THREE.Mesh(armBicepGeo, industrialGlossyBlack);
+            leftArm.position.set(-0.14, -0.38, 0);
+            leftShoulder.add(leftArm);
+            robotGroup.add(leftShoulder);
+
+            // Complejo de Hombro Derecho
+            const rightShoulder = new THREE.Mesh(shoulderJointGeo, internalJointMaterial);
+            rightShoulder.position.set(0.82, 0.42, -0.02);
+            const rightArm = new THREE.Mesh(armBicepGeo, industrialGlossyBlack);
+            rightArm.position.set(0.14, -0.38, 0);
+            rightShoulder.add(rightArm);
+            robotGroup.add(rightShoulder);
+
+            // 5. Ensamblaje Pélvico Inferior (Cintura y Muslos)
+            const pelvisJoint = new THREE.CylinderGeometry(0.18, 0.18, 0.18, 24);
+            pelvisJoint.rotateZ(Math.PI / 2);
+            const pelvis = new THREE.Mesh(pelvisJoint, internalJointMaterial);
+            pelvis.position.y = -0.92;
+            robotGroup.add(pelvis);
+
+            const thighGeo = new THREE.CylinderGeometry(0.15, 0.12, 0.55, 24);
+            
+            const leftThigh = new THREE.Mesh(thighGeo, industrialGlossyBlack);
+            leftThigh.position.set(-0.28, -1.3, 0);
+            robotGroup.add(leftThigh);
+
+            const rightThigh = new THREE.Mesh(thighGeo, industrialGlossyBlack);
+            rightThigh.position.set(0.28, -1.3, 0);
+            robotGroup.add(rightThigh);
+
+            scene.add(robotGroup);
+            robotGroup.position.set(0, -0.05, 0);
+
+            animate();
+        }
+
+        // --- Bucle de Animación y Persecución Cinemática ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Respiración inercial sutil del chasis completo
+            const time = Date.now() * 0.001;
+            robotGroup.position.y = -0.05 + Math.sin(time) * 0.015;
+
+            // --- ALGORITMO DE PERSECUCIÓN SUAVE (LERP) ---
+            // En lugar de rotar directo, se añade un factor de fricción (0.05) para un efecto fluido profesional
+            targetRotation.x += (mouse.x * 0.45 - targetRotation.x) * 0.05;
+            targetRotation.y += (mouse.y * 0.28 - targetRotation.y) * 0.05;
+
+            // Aplicamos las rotaciones calculadas a la cabeza del androide
+            head.rotation.y = targetRotation.x;
+            head.rotation.x = -targetRotation.y;
+
+            // Desplazamiento dinámico independiente de las pupilas LED dentro del visor (Enfoque Óptico)
+            leftEye.position.x = -0.15 + (targetRotation.x * 0.04);
+            rightEye.position.x = 0.15 + (targetRotation.x * 0.04);
+            leftEye.position.y = 0.08 + (targetRotation.y * 0.02);
+            rightEye.position.y = 0.08 + (targetRotation.y * 0.02);
+
+            renderer.render(scene, camera);
+        }
+
+        // Captura e indexación de coordenadas cartesianas normalizadas (PC)
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+        });
+
+        // Captura e indexación para pantallas táctiles (Android / Samsung)
+        window.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) {
+                mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+                mouse.y = (e.touches[0].clientY / window.innerHeight) * 2 - 1;
+            }
+        }, { passive: true });
+
+        // Ajuste dinámico de relaciones de aspecto de cámara
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('canvas3d');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+
+        document.addEventListener('DOMContentLoaded', init3D);
+    </script>
+</body>
+</html>
