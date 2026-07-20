@@ -10,11 +10,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;600;800&family=VT323&display=swap');
-        
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -30,6 +30,10 @@
             user-select: none;
         }
 
+        @media (pointer: coarse) {
+            body { cursor: auto; }
+        }
+
         /* --- Estructura de Pantalla Dividida Consistente --- */
         .main-wrapper {
             display: flex;
@@ -38,13 +42,13 @@
             width: 100%;
         }
 
-        /* LADO IZQUIERDO: Panel de Identidad Estética */
+        /* LADO IZQUIERDO: Panel de Identidad Estética / Escenario 3D */
         .canvas-container {
             flex: 1.1;
             position: sticky;
             top: 0;
             height: 100vh;
-            background: #000000; 
+            background: #000000;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -52,6 +56,79 @@
             z-index: 2;
             padding: 40px;
             text-align: center;
+            overflow: hidden;
+        }
+
+        /* Radar HUD que envuelve al planeta */
+        .hud-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: min(78vmin, 560px);
+            height: min(78vmin, 560px);
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 0, 68, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hud-ring::before {
+            content: '';
+            position: absolute;
+            inset: -22px;
+            border: 1px dashed rgba(255, 0, 68, 0.12);
+            border-radius: 50%;
+        }
+
+        .hud-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: min(70vmin, 500px);
+            height: min(70vmin, 500px);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, rgba(255,0,68,0.28), transparent 22%, transparent 100%);
+            mix-blend-mode: screen;
+            animation: sweepRotate 6s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hud-corner {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border: 2px solid rgba(255, 0, 68, 0.5);
+            z-index: 3;
+        }
+        .hud-corner.tl { top: 10%; left: 8%; border-right: none; border-bottom: none; }
+        .hud-corner.tr { top: 10%; right: 8%; border-left: none; border-bottom: none; }
+        .hud-corner.bl { bottom: 12%; left: 8%; border-right: none; border-top: none; }
+        .hud-corner.br { bottom: 12%; right: 8%; border-left: none; border-top: none; }
+
+        #planet-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: block;
+        }
+
+        .hud-label {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'VT323', monospace;
+            letter-spacing: 3px;
+            font-size: 0.95rem;
+            color: rgba(255, 0, 68, 0.75);
+            z-index: 3;
+            white-space: nowrap;
         }
 
         /* LADO DERECHO: Panel de Control Primario (Scrollable) */
@@ -65,6 +142,11 @@
         }
 
         /* Branding Central / Superior */
+        .canvas-brand {
+            position: relative;
+            z-index: 4;
+        }
+
         .canvas-brand h2 {
             font-size: 3rem;
             font-weight: 900;
@@ -130,7 +212,6 @@
             padding: 10px;
         }
 
-        /* Burbuja Cyberpunk */
         .bot-bubble {
             position: relative;
             background: rgba(255, 0, 68, 0.04);
@@ -180,7 +261,6 @@
             font-weight: bold;
         }
 
-        /* ESTRUCTURA ANATOMÍA DEL ROBOT EN CSS */
         .cyber-robot {
             position: relative;
             width: 80px;
@@ -191,7 +271,6 @@
             animation: floatBot 4s ease-in-out infinite;
         }
 
-        /* Cabeza del Robot */
         .robot-head {
             width: 50px;
             height: 38px;
@@ -207,7 +286,6 @@
             z-index: 3;
         }
 
-        /* Ojos */
         .robot-eye {
             width: 8px;
             height: 8px;
@@ -216,7 +294,6 @@
             box-shadow: 0 0 8px #ffffff, 0 0 12px #ff0044;
         }
 
-        /* Antena */
         .robot-antenna {
             position: absolute;
             top: -10px;
@@ -238,7 +315,6 @@
             box-shadow: 0 0 8px #ffffff;
         }
 
-        /* Cuello */
         .robot-neck {
             width: 12px;
             height: 6px;
@@ -246,7 +322,6 @@
             z-index: 2;
         }
 
-        /* Torso */
         .robot-torso {
             width: 56px;
             height: 40px;
@@ -258,7 +333,6 @@
             z-index: 2;
         }
 
-        /* Brazo Izquierdo (Fijo) */
         .robot-arm-left {
             position: absolute;
             left: -12px;
@@ -271,7 +345,6 @@
             transform-origin: top center;
         }
 
-        /* Brazo Derecho (Saludo) */
         .robot-arm-right {
             position: absolute;
             right: -12px;
@@ -286,7 +359,6 @@
             box-shadow: 0 0 10px rgba(255, 0, 68, 0.1);
         }
 
-        /* Brillo Inferior */
         .hologram-glow {
             position: absolute;
             bottom: -12px;
@@ -395,7 +467,7 @@
             margin-top: 2px;
         }
 
-        /* --- SECCIÓN FAQ (Preguntas Frecuentes Accordion al estilo AMOLED) --- */
+        /* --- SECCIÓN FAQ --- */
         .faq-wrapper {
             display: flex;
             flex-direction: column;
@@ -452,18 +524,6 @@
             line-height: 1.6;
             border-top: 1px solid rgba(255, 255, 255, 0.02);
             padding-top: 12px;
-        }
-
-        /* --- Canvas de Partículas Suaves de Fondo --- */
-        #particles-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.15;
-            z-index: 1;
         }
 
         /* Warning de Seguridad DevTools */
@@ -525,13 +585,32 @@
             50% { opacity: 0; }
         }
 
+        @keyframes sweepRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hud-sweep, .bot-bubble, .cyber-robot, .robot-arm-right, .terminal-cursor {
+                animation: none !important;
+            }
+        }
+
         /* --- Responsividad --- */
         @media (max-width: 1024px) {
             .main-wrapper { flex-direction: column; }
-            .canvas-container { height: 30vh; position: relative; padding: 20px; }
+            .canvas-container { height: 46vh; min-height: 300px; position: relative; padding: 20px; }
             .canvas-brand h2 { font-size: 2.2rem; margin-bottom: 10px; }
             .content-panel { width: 100%; padding: 40px 24px; border-left: none; border-top: 1px solid rgba(255, 0, 68, 0.15); }
             .brand-title { font-size: 2.8rem; }
+            .hud-label { font-size: 0.8rem; bottom: 5%; }
+            .hud-corner.tl, .hud-corner.tr { top: 6%; }
+            .hud-corner.bl, .hud-corner.br { bottom: 8%; }
+        }
+
+        @media (max-width: 480px) {
+            .canvas-container { height: 42vh; }
+            .brand-title { font-size: 2.2rem; letter-spacing: 4px; }
         }
     </style>
 </head>
@@ -548,19 +627,26 @@
     <div id="custom-cursor"></div>
 
     <div class="main-wrapper">
-        
-        <!-- LADO IZQUIERDO: Canvas e Identidad Visual Central -->
-        <div class="canvas-container">
-            <canvas id="particles-canvas"></canvas>
-            <div class="canvas-brand" style="position: relative; z-index: 2;">
+
+        <!-- LADO IZQUIERDO: Escenario 3D del Planeta de Ciberseguridad -->
+        <div class="canvas-container" id="planet-stage">
+            <canvas id="planet-canvas"></canvas>
+            <div class="hud-ring"></div>
+            <div class="hud-sweep"></div>
+            <div class="hud-corner tl"></div>
+            <div class="hud-corner tr"></div>
+            <div class="hud-corner bl"></div>
+            <div class="hud-corner br"></div>
+            <div class="canvas-brand">
                 <h2>BIENVENID@</h2>
-                <p>// systes status: ONLINE</p>
+                <p>// estado del sistema: ONLINE</p>
             </div>
+            <div class="hud-label" id="hud-label">NODO_CENTRAL :: PERÍMETRO ASEGURADO</div>
         </div>
 
         <!-- LADO DERECHO: Centro de Operación Interactivo -->
         <div class="content-panel">
-            
+
             <header class="brand-section">
                 <h1 class="brand-title">TEAM JXLL</h1>
                 <div class="brand-tagline">// Red Team Infrastructure &amp; Automation</div>
@@ -571,7 +657,7 @@
                 <div class="bot-bubble">
                     <span>Bienvenidos a JXLL</span><span class="terminal-cursor">_</span>
                 </div>
-                
+
                 <div class="cyber-robot">
                     <div class="robot-antenna"></div>
                     <div class="robot-head">
@@ -632,7 +718,7 @@
             <section>
                 <div class="section-header">Preguntas Frecuentes</div>
                 <div class="faq-wrapper">
-                    
+
                     <details class="faq-item">
                         <summary class="faq-trigger">¿Cuál es el propósito principal de la comunidad?</summary>
                         <div class="faq-content">
@@ -669,7 +755,7 @@
 
     <!-- --- Scripts de Control e Interacciones Fluidas --- -->
     <script>
-        // SEGURIDAD DEL ENTORNO
+        // ================= SEGURIDAD DEL ENTORNO =================
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.key === 'F12' || e.keyCode === 123 ||
@@ -688,64 +774,264 @@
             }
         }
 
-        // CURSOR ÓPTICO
+        // ================= CURSOR ÓPTICO (solo puntero fino) =================
         const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-        });
-
-        // CANVAS DE PARTÍCULAS (120Hz Adaptativo)
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            const container = canvas.parentElement;
-            canvas.width = container.clientWidth;
-            canvas.height = container.clientHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-                this.opacity = Math.random() * 0.5 + 0.1;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
-            }
-            draw() {
-                ctx.fillStyle = `rgba(255, 0, 68, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.addEventListener('mousemove', e => {
+                cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+            });
         }
 
-        function initParticles() {
-            particles = [];
-            const count = Math.min(40, Math.floor(canvas.width * canvas.height / 15000));
-            for (let i = 0; i < count; i++) particles.push(new Particle());
-        }
-        initParticles();
+        // ================= PLANETA 3D DE CIBERSEGURIDAD =================
+        (function initCyberPlanet() {
+            const stage = document.getElementById('planet-stage');
+            const canvasEl = document.getElementById('planet-canvas');
+            const hudLabel = document.getElementById('hud-label');
+            if (!stage || !canvasEl || typeof THREE === 'undefined') return;
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for(let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const isMobile = window.matchMedia('(max-width: 1024px), (pointer: coarse)').matches;
+
+            // --- Escena / Cámara / Renderer ---
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+            camera.position.set(0, 0, isMobile ? 7.6 : 6.4);
+
+            const renderer = new THREE.WebGLRenderer({
+                canvas: canvasEl,
+                alpha: true,
+                antialias: true,
+                powerPreference: 'low-power'
+            });
+            renderer.setClearColor(0x000000, 0);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.75 : 2));
+
+            function sizeRenderer() {
+                const w = stage.clientWidth;
+                const h = stage.clientHeight;
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
             }
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
+
+            // --- Textura de brillo suave para partículas ---
+            function makeGlowTexture(color) {
+                const size = 64;
+                const c = document.createElement('canvas');
+                c.width = c.height = size;
+                const ctx = c.getContext('2d');
+                const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+                grad.addColorStop(0, color);
+                grad.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, size, size);
+                const tex = new THREE.CanvasTexture(c);
+                tex.needsUpdate = true;
+                return tex;
+            }
+
+            const planetGroup = new THREE.Group();
+            scene.add(planetGroup);
+
+            // --- Núcleo sólido tenue (da profundidad al wireframe) ---
+            const coreDetail = isMobile ? 1 : 2;
+            const coreGeo = new THREE.IcosahedronGeometry(1.55, coreDetail);
+            const coreMat = new THREE.MeshBasicMaterial({
+                color: 0x0a0006,
+                transparent: true,
+                opacity: 0.85
+            });
+            const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+            planetGroup.add(coreMesh);
+
+            // --- Malla wireframe: "perímetro" del planeta ---
+            const wireGeo = new THREE.IcosahedronGeometry(1.6, coreDetail);
+            const wireMat = new THREE.MeshBasicMaterial({
+                color: 0xff0044,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.55
+            });
+            const wireMesh = new THREE.Mesh(wireGeo, wireMat);
+            planetGroup.add(wireMesh);
+
+            // --- Nodos de red distribuidos sobre la superficie ---
+            const nodeCount = isMobile ? 70 : 130;
+            const nodeGeo = new THREE.BufferGeometry();
+            const nodePositions = new Float32Array(nodeCount * 3);
+            for (let i = 0; i < nodeCount; i++) {
+                const phi = Math.acos(1 - 2 * (i + 0.5) / nodeCount);
+                const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+                const r = 1.62;
+                nodePositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                nodePositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                nodePositions[i * 3 + 2] = r * Math.cos(phi);
+            }
+            nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodePositions, 3));
+            const nodeMat = new THREE.PointsMaterial({
+                size: isMobile ? 0.05 : 0.045,
+                map: makeGlowTexture('rgba(255,255,255,1)'),
+                transparent: true,
+                opacity: 0.9,
+                depthWrite: false
+            });
+            const nodePoints = new THREE.Points(nodeGeo, nodeMat);
+            planetGroup.add(nodePoints);
+
+            // --- Anillo orbital tipo "radar" (satélites de monitoreo) ---
+            const ringGeo = new THREE.TorusGeometry(2.35, 0.006, 8, 96);
+            const ringMat = new THREE.MeshBasicMaterial({ color: 0xff0044, transparent: true, opacity: 0.5 });
+            const ring1 = new THREE.Mesh(ringGeo, ringMat);
+            ring1.rotation.x = Math.PI / 2.3;
+            planetGroup.add(ring1);
+
+            const ring2 = new THREE.Mesh(ringGeo.clone(), ringMat.clone());
+            ring2.scale.set(1.18, 1.18, 1.18);
+            ring2.material.opacity = 0.22;
+            ring2.rotation.x = Math.PI / 3.1;
+            ring2.rotation.y = Math.PI / 5;
+            planetGroup.add(ring2);
+
+            // --- Paquetes de datos orbitando en planos inclinados ---
+            const packetCount = isMobile ? 26 : 46;
+            const packetGeo = new THREE.BufferGeometry();
+            const packetPositions = new Float32Array(packetCount * 3);
+            packetGeo.setAttribute('position', new THREE.BufferAttribute(packetPositions, 3));
+            const packetMat = new THREE.PointsMaterial({
+                size: isMobile ? 0.07 : 0.06,
+                map: makeGlowTexture('rgba(255,0,68,1)'),
+                transparent: true,
+                opacity: 0.95,
+                depthWrite: false
+            });
+            const packets = new THREE.Points(packetGeo, packetMat);
+            scene.add(packets);
+
+            const packetData = [];
+            for (let i = 0; i < packetCount; i++) {
+                const radius = 2.0 + Math.random() * 1.3;
+                const axis = new THREE.Vector3(
+                    Math.random() - 0.5,
+                    Math.random() - 0.5,
+                    Math.random() - 0.5
+                ).normalize();
+                const up = Math.abs(axis.y) < 0.9 ? new THREE.Vector3(0, 1, 0) : new THREE.Vector3(1, 0, 0);
+                const u = new THREE.Vector3().crossVectors(axis, up).normalize();
+                const v = new THREE.Vector3().crossVectors(axis, u).normalize();
+                packetData.push({
+                    radius, u, v,
+                    speed: (0.15 + Math.random() * 0.3) * (Math.random() < 0.5 ? 1 : -1),
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+
+            function updatePackets(t) {
+                const pos = packetGeo.attributes.position.array;
+                for (let i = 0; i < packetCount; i++) {
+                    const d = packetData[i];
+                    const angle = d.phase + t * d.speed;
+                    const cx = Math.cos(angle) * d.radius;
+                    const cy = Math.sin(angle) * d.radius;
+                    const x = d.u.x * cx + d.v.x * cy;
+                    const y = d.u.y * cx + d.v.y * cy;
+                    const z = d.u.z * cx + d.v.z * cy;
+                    pos[i * 3] = x;
+                    pos[i * 3 + 1] = y;
+                    pos[i * 3 + 2] = z;
+                }
+                packetGeo.attributes.position.needsUpdate = true;
+            }
+
+            // --- Iluminación ambiental sutil (para futuros materiales no básicos) ---
+            scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+
+            // --- Interacción: paralaje con el puntero / inclinación ---
+            let targetRotX = 0, targetRotY = 0;
+            if (window.matchMedia('(pointer: fine)').matches) {
+                stage.addEventListener('mousemove', (e) => {
+                    const rect = stage.getBoundingClientRect();
+                    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                    const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+                    targetRotY = nx * 0.35;
+                    targetRotX = ny * 0.25;
+                });
+            }
+
+            // --- Bucle de animación ---
+            let running = true;
+            let clockStart = performance.now();
+
+            function renderStatic() {
+                sizeRenderer();
+                renderer.render(scene, camera);
+            }
+
+            function animate() {
+                if (!running) return;
+                requestAnimationFrame(animate);
+                const t = (performance.now() - clockStart) / 1000;
+
+                planetGroup.rotation.y += 0.0022;
+                wireMesh.rotation.y -= 0.0009;
+                ring1.rotation.z += 0.0016;
+                ring2.rotation.z -= 0.0012;
+
+                planetGroup.rotation.x += (targetRotX - planetGroup.rotation.x) * 0.04;
+                planetGroup.rotation.y += (targetRotY - planetGroup.rotation.y) * 0.02 * 0.0;
+
+                updatePackets(t);
+                renderer.render(scene, camera);
+            }
+
+            sizeRenderer();
+
+            if (reducedMotion) {
+                renderStatic();
+            } else {
+                animate();
+            }
+
+            // --- Pausar cuando la pestaña no es visible (rendimiento + batería) ---
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    running = false;
+                } else if (!reducedMotion) {
+                    running = true;
+                    clockStart = performance.now() - (clockStart ? 0 : 0);
+                    animate();
+                }
+            });
+
+            // --- Redimensionado responsivo ---
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    sizeRenderer();
+                    if (reducedMotion || document.hidden) renderStatic();
+                }, 120);
+            });
+
+            // --- Rotación sutil de la etiqueta HUD para dar señal de "escaneo" ---
+            if (hudLabel && !reducedMotion) {
+                const messages = [
+                    'NODO_CENTRAL :: PERÍMETRO ASEGURADO',
+                    'ESCANEANDO TRÁFICO DE RED...',
+                    'AMENAZAS DETECTADAS: 0',
+                    'CIFRADO ACTIVO :: AES-256'
+                ];
+                let idx = 0;
+                setInterval(() => {
+                    idx = (idx + 1) % messages.length;
+                    hudLabel.style.opacity = 0;
+                    setTimeout(() => {
+                        hudLabel.textContent = messages[idx];
+                        hudLabel.style.opacity = 1;
+                    }, 300);
+                }, 4200);
+                hudLabel.style.transition = 'opacity 0.3s ease';
+            }
+        })();
     </script>
 </body>
 </html>
