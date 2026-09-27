@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Nuestra Labor en JXLL - Recepción de reportes ciudadanos y formación gratuita en ciberseguridad a través de nuestro canal de Telegram.">
+    <meta name="description" content="Nuestra Labor en JXLL - Recepción de reportes ciudadanos y formación gratuita en ciberseguridad a través de nuestros canales oficiales de Telegram, WhatsApp y Proton.">
     <meta name="theme-color" content="#000000">
     <title>JXLL | Servicios y Labor Comunitaria</title>
 
@@ -309,67 +309,167 @@
             line-height: 1.7;
         }
 
-        .telegram-highlight {
-            background: linear-gradient(145deg, rgba(10, 10, 10, 0.9), rgba(5, 5, 5, 1));
+        .channels-highlight {
+            background: linear-gradient(145deg, rgba(10, 10, 10, 0.95), rgba(5, 5, 5, 1));
             border: 1px solid var(--border-color);
             border-radius: 24px;
-            padding: 60px 40px;
+            padding: 50px 35px;
             text-align: center;
             margin-top: 80px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(56, 189, 248, 0.05);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .telegram-highlight::after {
-            content: '\f2c6'; /* Telegram icon code */
-            font-family: 'Font Awesome 6 Brands';
+        .channels-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #2AABEE, #25D366, #6d4aff, transparent);
+        }
+
+        .channels-highlight::after {
+            content: '\f3ed'; /* Shield Icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             position: absolute;
             top: -20px;
             right: -20px;
-            font-size: 15rem;
+            font-size: 16rem;
             color: rgba(56, 189, 248, 0.03);
             pointer-events: none;
             transform: rotate(-15deg);
         }
 
-        .telegram-highlight h2 {
+        .channels-highlight h2 {
             font-size: 2.2rem;
             color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
             z-index: 2;
         }
 
-        .telegram-highlight p {
+        .channels-highlight p {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 700px;
+            font-size: 1.05rem;
+            max-width: 650px;
             margin: 0 auto 30px auto;
             position: relative;
             z-index: 2;
         }
 
-        .btn-telegram {
-            background: #2AABEE;
-            color: #ffffff;
-            padding: 16px 40px;
-            font-size: 1.1rem;
+        .channels-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 420px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-channel {
+            padding: 13px 22px;
+            font-size: 0.95rem;
             font-weight: 600;
             border-radius: 50px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
             transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
+            width: 100%;
+        }
+
+        .btn-telegram {
+            background: #2AABEE;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);
         }
 
         .btn-telegram:hover {
             background: #2298d6;
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(42, 171, 238, 0.4);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 30px rgba(42, 171, 238, 0.5);
+        }
+
+        .btn-whatsapp-chat {
+            background: #25D366;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp-chat:hover {
+            background: #1ebc59;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-whatsapp-channel {
+            background: rgba(37, 211, 102, 0.12);
+            color: #25D366;
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.1);
+        }
+
+        .btn-whatsapp-channel:hover {
+            background: #25D366;
+            color: #ffffff;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-proton {
+            background: rgba(109, 74, 255, 0.15);
+            color: #b7a6ff;
+            border: 1px solid rgba(109, 74, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(109, 74, 255, 0.1);
+        }
+
+        .btn-proton:hover {
+            background: #6d4aff;
+            color: #ffffff;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(109, 74, 255, 0.4);
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            z-index: 2;
+        }
+
+        .security-notice {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 25px;
+            padding: 15px 20px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            color: #10b981;
+            font-size: 0.9rem;
+            text-align: left;
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+            z-index: 2;
         }
 
         footer {
@@ -450,7 +550,7 @@
             .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
             .footer-content { grid-template-columns: 1fr; text-align: center; }
-            .telegram-highlight { padding: 40px 20px; }
+            .channels-highlight { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -479,7 +579,7 @@
         <div class="container">
             <div class="hero-content fade-in">
                 <h1>Nuestra <span>Labor</span></h1>
-                <p class="hero-subtitle">En JXLL no ofrecemos auditorías privadas ni servicios comerciales. Nuestra única labor es educar a la comunidad y neutralizar amenazas en la red mediante la recepción de reportes ciudadanos.</p>
+                <p class="hero-subtitle">En JXLL no ofrecemos auditorías privadas ni servicios comerciales. Nuestra única labor es educar a la comunidad y neutralizar amenazas en la red mediante la recepción de reportes ciudadanos a través de canales oficiales y seguros.</p>
             </div>
         </div>
     </section>
@@ -502,7 +602,7 @@
                 <div class="labor-card fade-in-up" style="transition-delay: 0.1s;">
                     <div class="labor-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                     <h3>Formación Gratuita</h3>
-                    <p>Creemos en democratizar la ciberseguridad. En nuestro canal compartimos guías, herramientas, tutoriales de concientización y cursos gratuitos para que cualquier persona pueda aprender a defenderse.</p>
+                    <p>Creemos en democratizar la ciberseguridad. En nuestros canales oficiales compartimos guías, herramientas, tutoriales de concientización y recursos gratuitos para que cualquier persona aprenda a defenderse.</p>
                 </div>
 
                 <div class="labor-card fade-in-up" style="transition-delay: 0.2s;">
@@ -519,12 +619,39 @@
 
             </div>
 
-            <div class="telegram-highlight fade-in">
-                <h2>El Único Punto de Encuentro</h2>
-                <p>Tanto si deseas acceder a nuestra biblioteca de conocimientos gratuitos, como si necesitas reportar un sitio fraudulento, todo se gestiona de manera centralizada a través de nuestro canal oficial.</p>
-                <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="btn-telegram">
-                    <i class="fa-brands fa-telegram"></i> Únete al Canal Oficial
-                </a>
+            <div class="channels-highlight fade-in">
+                <h2>Puntos de Encuentro Oficiales</h2>
+                <p>Tanto si deseas acceder a nuestra biblioteca de conocimientos gratuitos, como si necesitas reportar un sitio fraudulento de manera confidencial, contáctanos mediante nuestros canales autorizados.</p>
+                
+                <div class="channels-buttons">
+                    <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="btn-channel btn-telegram">
+                        <i class="fa-brands fa-telegram"></i> Ir a Canal De Telegram
+                    </a>
+
+                    <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-chat">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+
+                    <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-channel">
+                        <i class="fa-solid fa-bullhorn"></i> Canal Oficial de WhatsApp
+                    </a>
+
+                    <a href="mailto:team_jxll@proton.me" class="btn-channel btn-proton">
+                        <i class="fa-solid fa-envelope"></i> team_jxll@proton.me
+                    </a>
+                </div>
+
+                <div class="verified-badge">
+                    <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Canales Oficiales
+                </div>
+
+                <div class="security-notice">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 1.4rem;"></i>
+                    <div>
+                        <strong>100% Gratuito y Confidencial</strong><br>
+                        Ningún administrador de JXLL te cobrará por revisar un reporte o brindarte ayuda. Tu identidad se mantiene privada.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -548,9 +675,18 @@
                 </div>
                 <div class="footer-section">
                     <h3>Atención Exclusiva</h3>
-                    <p>Único canal para reportes y material educativo:</p>
+                    <p>Canales oficiales para reportes y material educativo:</p>
                     <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 600;">
-                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> t.me/jxll_canal
+                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> Canal Telegram
+                    </a>
+                    <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
+                        <i class="fa-brands fa-whatsapp" style="margin-right: 5px;"></i> WhatsApp (+57 350 5807674)
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
+                        <i class="fa-solid fa-bullhorn" style="margin-right: 5px;"></i> Canal de WhatsApp
+                    </a>
+                    <a href="mailto:team_jxll@proton.me" style="color: #b7a6ff; font-weight: 600;">
+                        <i class="fa-solid fa-envelope" style="margin-right: 5px;"></i> team_jxll@proton.me
                     </a>
                 </div>
             </div>
@@ -562,7 +698,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            
             // Lógica del menú móvil
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('navMenu');
