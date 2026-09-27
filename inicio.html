@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="JXLL - Comunidad de ciberseguridad ética. Investigamos y reportamos actividades ilegales o poco éticas en la red.">
+    <meta name="description" content="JXLL - Comunidad de ciberseguridad ética. Investigamos y reportamos actividades ilegales o poco éticas en la red a través de nuestros canales oficiales verificados.">
     <meta name="theme-color" content="#000000">
     <title>JXLL | Comunidad de Ciberseguridad</title>
 
@@ -400,62 +400,155 @@
             border-top: 1px solid var(--border-light);
         }
 
-        .contact-telegram-card {
-            background: var(--bg-card);
+        .contact-hub-card {
+            background: linear-gradient(145deg, rgba(10, 10, 10, 0.95), rgba(5, 5, 5, 1));
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 50px 30px;
-            max-width: 600px;
+            border-radius: 24px;
+            padding: 50px 35px;
+            max-width: 680px;
             margin: 0 auto;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(56, 189, 248, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(56, 189, 248, 0.05);
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .contact-telegram-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(56, 189, 248, 0.1);
+        .contact-hub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #2AABEE, #25D366, #6d4aff, transparent);
         }
 
-        .telegram-icon {
+        .contact-hub-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.12);
+        }
+
+        .hub-icon {
             font-size: 4rem;
-            color: #2AABEE;
+            color: var(--accent-primary);
             margin-bottom: 20px;
             display: inline-block;
-            filter: drop-shadow(0 0 10px rgba(42, 171, 238, 0.4));
+            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.3));
+            animation: pulse-glow 3s infinite alternate ease-in-out;
         }
 
-        .contact-telegram-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+        .contact-hub-card h3 {
+            font-size: 1.9rem;
+            margin-bottom: 14px;
             color: #ffffff;
         }
 
-        .contact-telegram-card p {
+        .contact-hub-card p {
             color: var(--text-muted);
             font-size: 1.05rem;
             margin-bottom: 30px;
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
-        .telegram-btn {
-            background: #2AABEE;
-            color: #ffffff;
-            padding: 16px 40px;
-            font-size: 1.1rem;
+        .channels-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto 12px auto;
+        }
+
+        .btn-channel {
+            padding: 13px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
             transition: all 0.3s ease;
+            width: 100%;
         }
 
-        .telegram-btn:hover {
+        .btn-telegram {
+            background: #2AABEE;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);
+        }
+
+        .btn-telegram:hover {
             background: #2298d6;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(42, 171, 238, 0.4);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 30px rgba(42, 171, 238, 0.5);
+        }
+
+        .btn-whatsapp-chat {
+            background: #25D366;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp-chat:hover {
+            background: #1ebc59;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-whatsapp-channel {
+            background: rgba(37, 211, 102, 0.12);
+            color: #25D366;
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.1);
+        }
+
+        .btn-whatsapp-channel:hover {
+            background: #25D366;
+            color: #ffffff;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-proton {
+            background: rgba(109, 74, 255, 0.15);
+            color: #b7a6ff;
+            border: 1px solid rgba(109, 74, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(109, 74, 255, 0.1);
+        }
+
+        .btn-proton:hover {
+            background: #6d4aff;
+            color: #ffffff;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(109, 74, 255, 0.4);
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .security-notice {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 25px;
+            padding: 15px 20px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            color: #10b981;
+            font-size: 0.9rem;
+            text-align: left;
+            width: 100%;
         }
 
         footer {
@@ -516,6 +609,11 @@
             100% { transform: translate(20px, 20px) scale(1.05); }
         }
 
+        @keyframes pulse-glow {
+            0% { filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.2)); }
+            100% { filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.6)); }
+        }
+
         @media (max-width: 1024px) {
             .about-content { grid-template-columns: 1fr; gap: 40px; }
             .footer-content { grid-template-columns: 1fr 1fr; }
@@ -544,7 +642,7 @@
 
             .stats { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; text-align: center; }
-            .contact-telegram-card { padding: 40px 20px; }
+            .contact-hub-card { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -578,7 +676,7 @@
         <div class="container">
             <div class="hero-content fade-in">
                 <h1>Por un Ciberespacio Limpio y Ético</h1>
-                <p class="hero-subtitle">Somos una comunidad de ciberseguridad 100% gratuita. Analizamos y neutralizamos actividades ilegales, estafas y comportamientos poco éticos en la red mediante el reporte ciudadano.</p>
+                <p class="hero-subtitle">Somos una comunidad de ciberseguridad 100% gratuita. Analizamos y neutralizamos actividades ilegales, estafas y comportamientos poco éticos en la red mediante el reporte ciudadano y la acción colaborativa.</p>
                 <div class="cta-buttons">
                     <a href="contacto.html" class="btn btn-primary">
                         Reportar Incidente <i class="fa-solid fa-shield-halved"></i>
@@ -600,7 +698,7 @@
                 <div class="service-card fade-in">
                     <div class="service-icon"><i class="fa-solid fa-inbox"></i></div>
                     <h3>Recepción de Reportes</h3>
-                    <p>Canal seguro y confidencial para que cualquier ciudadano pueda denunciar páginas fraudulentas, estafas o actividades ilícitas encontradas en internet.</p>
+                    <p>Canales seguros y confidenciales para que cualquier ciudadano pueda denunciar páginas fraudulentas, estafas o actividades ilícitas encontradas en internet.</p>
                 </div>
                 
                 <div class="service-card fade-in" style="transition-delay: 0.1s;">
@@ -670,15 +768,42 @@
     <section id="contacto" class="contact">
         <div class="container">
             <h2 class="section-title fade-in">Canal de Reportes</h2>
-            <p class="section-subtitle fade-in">Para mantener la privacidad y seguridad, nuestro único punto de atención y recepción de reportes es nuestro canal oficial en Telegram.</p>
+            <p class="section-subtitle fade-in">Para mantener la privacidad y seguridad, toda recepción de reportes se gestiona mediante nuestros canales oficiales y seguros.</p>
             
-            <div class="contact-telegram-card fade-in">
-                <i class="fa-brands fa-telegram telegram-icon"></i>
-                <h3>Atención JXLL</h3>
-                <p>¿Has detectado una estafa, un sitio fraudulento o actividad maliciosa? Envíanos tu reporte. Nuestra comunidad investigará el caso de forma gratuita.</p>
-                <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="telegram-btn">
-                    <i class="fa-regular fa-paper-plane"></i> Reportar vía Telegram
-                </a>
+            <div class="contact-hub-card fade-in">
+                <i class="fa-solid fa-shield-halved hub-icon"></i>
+                <h3>Atención y Conexión JXLL</h3>
+                <p>¿Has detectado una estafa, un sitio fraudulento o actividad maliciosa? Contáctanos a través de cualquiera de nuestras vías oficiales. Analizaremos tu caso de forma confidencial y gratuita.</p>
+                
+                <div class="channels-buttons">
+                    <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="btn-channel btn-telegram">
+                        <i class="fa-brands fa-telegram"></i> Ir a Canal De Telegram
+                    </a>
+
+                    <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-chat">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+
+                    <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-channel">
+                        <i class="fa-solid fa-bullhorn"></i> Canal Oficial de WhatsApp
+                    </a>
+
+                    <a href="mailto:team_jxll@proton.me" class="btn-channel btn-proton">
+                        <i class="fa-solid fa-envelope"></i> team_jxll@proton.me
+                    </a>
+                </div>
+
+                <div class="verified-badge">
+                    <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Canales Oficiales
+                </div>
+
+                <div class="security-notice">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 1.4rem;"></i>
+                    <div>
+                        <strong>100% Gratuito y Confidencial</strong><br>
+                        Ningún administrador de JXLL te cobrará por revisar un reporte o brindarte ayuda.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -702,9 +827,18 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contacto Oficial</h3>
-                    <p>Único canal de atención y reportes:</p>
+                    <p>Canales oficiales para reportes y material educativo:</p>
                     <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 600;">
-                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> t.me/jxll_canal
+                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> Canal Telegram
+                    </a>
+                    <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
+                        <i class="fa-brands fa-whatsapp" style="margin-right: 5px;"></i> WhatsApp (+57 350 5807674)
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
+                        <i class="fa-solid fa-bullhorn" style="margin-right: 5px;"></i> Canal de WhatsApp
+                    </a>
+                    <a href="mailto:team_jxll@proton.me" style="color: #b7a6ff; font-weight: 600;">
+                        <i class="fa-solid fa-envelope" style="margin-right: 5px;"></i> team_jxll@proton.me
                     </a>
                 </div>
             </div>
@@ -716,7 +850,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            
             // Mobile Menu Logic
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('navMenu');
