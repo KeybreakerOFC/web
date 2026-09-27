@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Contacto JXLL - Canal de reportes ciudadanos y acceso a nuestra comunidad gratuita de ciberseguridad a través de Telegram y WhatsApp oficial.">
+    <meta name="description" content="Contacto JXLL - Canal de reportes ciudadanos y acceso a nuestra comunidad gratuita de ciberseguridad a través de Telegram, WhatsApp y correo seguro Proton.">
     <meta name="theme-color" content="#000000">
     <title>JXLL | Contacto y Reportes</title>
 
@@ -282,10 +282,10 @@
         }
 
         .telegram-action-card {
-            background: linear-gradient(145deg, rgba(10, 10, 10, 0.9), rgba(5, 5, 1));
+            background: linear-gradient(145deg, rgba(10, 10, 10, 0.9), rgba(5, 5, 5, 1));
             border: 1px solid var(--border-color);
             border-radius: 24px;
-            padding: 50px 40px;
+            padding: 45px 35px;
             text-align: center;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(56, 189, 248, 0.05);
             position: relative;
@@ -304,22 +304,22 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, transparent, #2AABEE, #25D366, transparent);
+            background: linear-gradient(90deg, transparent, #2AABEE, #25D366, #6d4aff, transparent);
         }
 
         .channels-buttons {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
             margin-bottom: 10px;
         }
 
         .telegram-huge-icon {
-            font-size: 5rem;
+            font-size: 4rem;
             color: #2AABEE;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             filter: drop-shadow(0 0 25px rgba(42, 171, 238, 0.3));
             animation: pulse-glow 3s infinite alternate ease-in-out;
         }
@@ -327,26 +327,26 @@
         .telegram-action-card h3 {
             font-size: 1.8rem;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .telegram-action-card p {
             color: var(--text-muted);
             font-size: 1rem;
-            margin-bottom: 30px;
-            max-width: 400px;
+            margin-bottom: 22px;
+            max-width: 420px;
         }
 
         .btn-channel {
-            padding: 16px 30px;
-            font-size: 1.05rem;
+            padding: 13px 22px;
+            font-size: 0.95rem;
             font-weight: 600;
             border-radius: 50px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             transition: all 0.3s ease;
             width: 100%;
         }
@@ -359,20 +359,48 @@
 
         .btn-telegram:hover {
             background: #2298d6;
-            transform: scale(1.03) translateY(-2px);
+            transform: scale(1.02) translateY(-2px);
             box-shadow: 0 10px 30px rgba(42, 171, 238, 0.5);
         }
 
-        .btn-whatsapp {
+        .btn-whatsapp-chat {
             background: #25D366;
             color: #ffffff;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
-        .btn-whatsapp:hover {
+        .btn-whatsapp-chat:hover {
             background: #1ebc59;
-            transform: scale(1.03) translateY(-2px);
+            transform: scale(1.02) translateY(-2px);
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-whatsapp-channel {
+            background: rgba(37, 211, 102, 0.12);
+            color: #25D366;
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.1);
+        }
+
+        .btn-whatsapp-channel:hover {
+            background: #25D366;
+            color: #ffffff;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-proton {
+            background: rgba(109, 74, 255, 0.15);
+            color: #b7a6ff;
+            border: 1px solid rgba(109, 74, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(109, 74, 255, 0.1);
+        }
+
+        .btn-proton:hover {
+            background: #6d4aff;
+            color: #ffffff;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(109, 74, 255, 0.4);
         }
 
         .verified-badge {
@@ -389,7 +417,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-top: 25px;
+            margin-top: 20px;
             padding: 15px 20px;
             background: rgba(16, 185, 129, 0.05);
             border: 1px solid rgba(16, 185, 129, 0.2);
@@ -522,7 +550,7 @@
                 
                 <div class="contact-info-card fade-in">
                     <h2>Protocolo de Contacto</h2>
-                    <p>En JXLL no utilizamos formularios web abiertos ni intermediarios. Nuestro modelo es colaborativo y verificado a través de nuestros canales oficiales.</p>
+                    <p>En JXLL no utilizamos formularios web abiertos. Toda comunicación se canaliza exclusivamente por mensajería segura y correo cifrado extremo a extremo.</p>
                     <p><strong>¿Cómo realizar un reporte exitoso?</strong></p>
                     <ul class="guideline-list">
                         <li>
@@ -535,7 +563,7 @@
                         </li>
                         <li>
                             <i class="fa-solid fa-check"></i>
-                            <span><strong>Envío directo:</strong> Únete al canal o inicia contacto directo por WhatsApp Business verificado. Analizaremos tu caso sin ningún costo.</span>
+                            <span><strong>Envío directo:</strong> Escríbenos por Telegram, WhatsApp Business verificado o mediante correo cifrado Proton. Analizaremos tu caso sin costo.</span>
                         </li>
                     </ul>
                 </div>
@@ -550,13 +578,21 @@
                             <i class="fa-brands fa-telegram"></i> Ir a t.me/jxll_canal
                         </a>
 
-                        <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp">
+                        <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-chat">
                             <i class="fa-brands fa-whatsapp"></i> WhatsApp Empresa Verificado
+                        </a>
+
+                        <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-channel">
+                            <i class="fa-solid fa-bullhorn"></i> Canal Oficial de WhatsApp
+                        </a>
+
+                        <a href="mailto:team_jxll@proton.me" class="btn-channel btn-proton">
+                            <i class="fa-solid fa-envelope-shield"></i> team_jxll@proton.me
                         </a>
                     </div>
 
                     <div class="verified-badge">
-                        <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Cuenta Oficial
+                        <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Canales Oficiales
                     </div>
 
                     <div class="security-notice">
@@ -593,10 +629,16 @@
                     <h3>Atención Exclusiva</h3>
                     <p>Canales oficiales para reportes y material educativo:</p>
                     <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 600;">
-                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> t.me/jxll_canal
+                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> Canal Telegram
                     </a>
                     <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
                         <i class="fa-brands fa-whatsapp" style="margin-right: 5px;"></i> WhatsApp (+57 350 5807674)
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
+                        <i class="fa-solid fa-bullhorn" style="margin-right: 5px;"></i> Canal de WhatsApp
+                    </a>
+                    <a href="mailto:team_jxll@proton.me" style="color: #b7a6ff; font-weight: 600;">
+                        <i class="fa-solid fa-envelope" style="margin-right: 5px;"></i> team_jxll@proton.me
                     </a>
                 </div>
             </div>
