@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="JXLL - Comunidad de ciberseguridad ética. Investigamos y reportamos actividades ilegales o poco éticas en la red a través de nuestros canales oficiales verificados.">
     <meta name="theme-color" content="#000000">
-    <title>JXLL | Comunidad de Ciberseguridad Ética</title>
+    <title>JXLL | Comunidad de Ciberseguridad</title>
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -230,8 +230,8 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 15px 30px;
-            font-size: 0.98rem;
+            padding: 15px 28px;
+            font-size: 0.96rem;
             font-weight: 700;
             border-radius: 10px;
             text-decoration: none;
@@ -268,7 +268,7 @@
         }
 
         /* ==========================================
-           HERO SECTION (SPLIT 3D PHONE MOCKUP LAYOUT)
+           HERO SECTION
         ========================================== */
         .hero {
             min-height: 100vh;
@@ -338,12 +338,11 @@
 
         .cta-buttons {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             flex-wrap: wrap;
             margin-bottom: 42px;
         }
 
-        /* Tactical HUD Telemetry Strip (Sparta Style) */
         .hero-telemetry {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -377,7 +376,7 @@
         }
 
         /* ==========================================
-           REALISTIC SMARTPHONE FRAME (3D & FLAT)
+           SMARTPHONE FRAME (3D)
         ========================================== */
         .hero-visual {
             position: relative;
@@ -415,7 +414,6 @@
             flex-direction: column;
         }
 
-        /* Hardware Buttons on Phone Bezel */
         .phone-mockup::before {
             content: '';
             position: absolute;
@@ -451,7 +449,6 @@
             flex-direction: column;
         }
 
-        /* Dynamic Island / Notch */
         .phone-island {
             position: absolute;
             top: 10px;
@@ -477,7 +474,6 @@
             border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
-        /* Home Indicator Bar */
         .phone-home-bar {
             position: absolute;
             bottom: 7px;
@@ -490,7 +486,6 @@
             z-index: 15;
         }
 
-        /* Screen Glare */
         .phone-glare {
             position: absolute;
             inset: 0;
@@ -514,7 +509,6 @@
             transition: opacity 0.35s ease;
         }
 
-        /* Smart Live UI Fallback (Shows if local image file isn't in folder yet) */
         .screen-fallback {
             display: none;
             width: 100%;
@@ -528,7 +522,6 @@
             overflow-y: auto;
         }
 
-        /* Floating Orbit Badges around Hero Phone (Octo SMM Style) */
         .floating-badge {
             position: absolute;
             background: rgba(9, 13, 22, 0.88);
@@ -543,27 +536,12 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65);
             z-index: 25;
             animation: float-card 5s ease-in-out infinite alternate;
+            text-decoration: none;
         }
 
-        .floating-badge.badge-1 {
-            top: 40px;
-            right: -55px;
-            border-color: rgba(42, 171, 238, 0.45);
-        }
-
-        .floating-badge.badge-2 {
-            bottom: 150px;
-            left: -70px;
-            border-color: rgba(37, 211, 102, 0.45);
-            animation-delay: 1.2s;
-        }
-
-        .floating-badge.badge-3 {
-            bottom: 45px;
-            right: -45px;
-            border-color: rgba(56, 189, 248, 0.45);
-            animation-delay: 2.4s;
-        }
+        .floating-badge.badge-1 { top: 40px; right: -55px; border-color: rgba(42, 171, 238, 0.45); }
+        .floating-badge.badge-2 { bottom: 150px; left: -70px; border-color: rgba(37, 211, 102, 0.45); animation-delay: 1.2s; }
+        .floating-badge.badge-3 { bottom: 45px; right: -45px; border-color: rgba(56, 189, 248, 0.45); animation-delay: 2.4s; }
 
         @keyframes float-card {
             0% { transform: translateY(0px) translateZ(30px); }
@@ -581,19 +559,9 @@
             flex-shrink: 0;
         }
 
-        .badge-info strong {
-            display: block;
-            font-size: 0.85rem;
-            color: #ffffff;
-        }
+        .badge-info strong { display: block; font-size: 0.85rem; color: #ffffff; }
+        .badge-info span { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted); }
 
-        .badge-info span {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--text-muted);
-        }
-
-        /* Hero Phone Screen Switcher */
         .phone-tabs {
             display: flex;
             gap: 8px;
@@ -667,7 +635,7 @@
         }
 
         /* ==========================================
-           SERVICES GRID (OCTO 01-06 + SPARTA HUD)
+           SERVICES GRID
         ========================================== */
         .services-grid {
             display: grid;
@@ -688,15 +656,14 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
         }
 
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
+            top: 0; left: 0; width: 100%; height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
             opacity: 0.25;
             transition: opacity 0.35s ease;
@@ -709,9 +676,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        .service-card:hover::before {
-            opacity: 1;
-        }
+        .service-card:hover::before { opacity: 1; }
 
         .service-card-top {
             display: flex;
@@ -721,8 +686,7 @@
         }
 
         .service-icon {
-            width: 54px;
-            height: 54px;
+            width: 54px; height: 54px;
             background: var(--accent-glow);
             border: 1px solid rgba(56, 189, 248, 0.3);
             color: var(--accent-primary);
@@ -744,17 +708,8 @@
             border: 1px solid var(--border-light);
         }
 
-        .service-card h3 {
-            font-size: 1.32rem;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            font-size: 0.96rem;
-            margin-bottom: 20px;
-        }
+        .service-card h3 { font-size: 1.32rem; margin-bottom: 12px; color: #ffffff; }
+        .service-card p { color: var(--text-muted); font-size: 0.96rem; margin-bottom: 20px; }
 
         .service-footer {
             display: flex;
@@ -765,10 +720,11 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.76rem;
             color: var(--accent-primary);
+            font-weight: 700;
         }
 
         /* ==========================================
-           ABOUT & SPARTA BENCHMARK TELEMETRY
+           ABOUT SECTION & HUD BENCHMARK
         ========================================== */
         .about {
             background: linear-gradient(180deg, transparent, rgba(56, 189, 248, 0.02), transparent);
@@ -783,21 +739,9 @@
             align-items: center;
         }
 
-        .about-text h2 {
-            font-size: clamp(2rem, 3.5vw, 2.7rem);
-            margin-bottom: 24px;
-            color: #ffffff;
-        }
-
-        .about-text p {
-            margin-bottom: 18px;
-            color: var(--text-muted);
-            font-size: 1.04rem;
-        }
-
-        .about-text strong {
-            color: var(--accent-primary);
-        }
+        .about-text h2 { font-size: clamp(2rem, 3.5vw, 2.7rem); margin-bottom: 24px; color: #ffffff; }
+        .about-text p { margin-bottom: 18px; color: var(--text-muted); font-size: 1.04rem; }
+        .about-text strong { color: var(--accent-primary); }
 
         .hud-benchmark-card {
             background: var(--bg-card);
@@ -826,14 +770,10 @@
             transition: all 0.3s ease;
         }
 
-        .stat-item:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-3px);
-        }
+        .stat-item:hover { border-color: var(--accent-primary); transform: translateY(-3px); }
 
         .stat-icon {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 50%;
             background: rgba(56, 189, 248, 0.1);
             border: 1px solid rgba(56, 189, 248, 0.3);
@@ -845,22 +785,9 @@
             flex-shrink: 0;
         }
 
-        .stat-number {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #ffffff;
-            line-height: 1.1;
-            font-family: 'JetBrains Mono', monospace;
-        }
+        .stat-number { display: block; font-size: 1.8rem; font-weight: 800; color: #ffffff; line-height: 1.1; font-family: 'JetBrains Mono', monospace; }
+        .stat-label { color: var(--text-muted); font-size: 0.8rem; font-weight: 600; }
 
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Sparta Style Progress Bars */
         .benchmark-bars {
             border-top: 1px solid var(--border-light);
             padding-top: 22px;
@@ -869,37 +796,13 @@
             gap: 14px;
         }
 
-        .bar-item {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .bar-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.76rem;
-            color: var(--text-main);
-        }
-
-        .bar-track {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .bar-fill {
-            height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-whatsapp));
-            box-shadow: 0 0 12px var(--accent-primary);
-        }
+        .bar-item { display: flex; flex-direction: column; gap: 6px; }
+        .bar-header { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--text-main); }
+        .bar-track { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.06); border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent-primary), var(--accent-whatsapp)); box-shadow: 0 0 12px var(--accent-primary); }
 
         /* ==========================================
-           3 PHONE MOCKUPS SHOWCASE (CAPTURAS REALES)
+           3 PHONE SHOWCASE (REAL SCREENSHOTS)
         ========================================== */
         .showcase-phones-grid {
             display: grid;
@@ -929,73 +832,31 @@
             box-shadow: 0 25px 60px rgba(56, 189, 248, 0.12);
         }
 
-        .phone-showcase-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-8px);
-        }
-
-        .phone-showcase-card.featured:hover {
-            transform: translateY(-20px);
-        }
+        .phone-showcase-card:hover { border-color: var(--accent-primary); transform: translateY(-8px); }
+        .phone-showcase-card.featured:hover { transform: translateY(-20px); }
 
         .showcase-tag {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 5px 12px;
-            border-radius: 999px;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
+            font-size: 0.72rem; font-weight: 700;
+            padding: 5px 12px; border-radius: 999px;
+            margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.06em;
         }
 
-        .tag-tg {
-            background: rgba(42, 171, 238, 0.14);
-            color: var(--accent-telegram);
-            border: 1px solid rgba(42, 171, 238, 0.35);
-        }
+        .tag-tg { background: rgba(42, 171, 238, 0.14); color: var(--accent-telegram); border: 1px solid rgba(42, 171, 238, 0.35); }
+        .tag-wa { background: rgba(37, 211, 102, 0.14); color: var(--accent-whatsapp); border: 1px solid rgba(37, 211, 102, 0.35); }
+        .tag-lead { background: rgba(56, 189, 248, 0.14); color: var(--accent-primary); border: 1px solid rgba(56, 189, 248, 0.35); }
 
-        .tag-wa {
-            background: rgba(37, 211, 102, 0.14);
-            color: var(--accent-whatsapp);
-            border: 1px solid rgba(37, 211, 102, 0.35);
-        }
-
-        .tag-lead {
-            background: rgba(56, 189, 248, 0.14);
-            color: var(--accent-primary);
-            border: 1px solid rgba(56, 189, 248, 0.35);
-        }
-
-        /* Compact Phone Frame for 3-Column Showcase */
         .phone-frame-sm {
-            width: 265px;
-            height: 540px;
+            width: 265px; height: 540px;
             background: linear-gradient(145deg, #1e293b, #090d16 60%, #1e293b);
-            border-radius: 42px;
-            padding: 10px;
-            box-shadow: 
-                0 20px 45px rgba(0, 0, 0, 0.8),
-                inset 0 0 2px 1px rgba(255, 255, 255, 0.22);
-            position: relative;
-            margin-bottom: 24px;
+            border-radius: 42px; padding: 10px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 0 2px 1px rgba(255, 255, 255, 0.22);
+            position: relative; margin-bottom: 24px;
         }
 
-        .phone-frame-sm .phone-inner {
-            border-radius: 33px;
-        }
-
-        .phone-showcase-info h3 {
-            font-size: 1.25rem;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .phone-showcase-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 18px;
-        }
+        .phone-frame-sm .phone-inner { border-radius: 33px; }
+        .phone-showcase-info h3 { font-size: 1.25rem; color: #ffffff; margin-bottom: 8px; }
+        .phone-showcase-info p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px; }
 
         /* ==========================================
            CONTACT HUB CARD
@@ -1003,210 +864,67 @@
         .contact-hub-card {
             background: linear-gradient(145deg, rgba(12, 17, 28, 0.95), rgba(5, 7, 12, 0.98));
             border: 1px solid var(--border-color);
-            padding: 52px 40px;
-            max-width: 760px;
-            margin: 0 auto;
+            padding: 52px 40px; max-width: 760px; margin: 0 auto;
             text-align: center;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 40px rgba(56, 189, 248, 0.05);
-            position: relative;
-            overflow: hidden;
-            clip-path: var(--hud-clip);
+            position: relative; overflow: hidden; clip-path: var(--hud-clip);
         }
 
         .contact-hub-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
             background: linear-gradient(90deg, transparent, #2AABEE, #25D366, #6d4aff, transparent);
         }
 
-        .hub-icon {
-            font-size: 3.6rem;
-            color: var(--accent-primary);
-            margin-bottom: 18px;
-            display: inline-block;
-            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.35));
-        }
-
-        .contact-hub-card h3 {
-            font-size: 2rem;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        .contact-hub-card > p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 32px;
-            max-width: 580px;
-            margin-inline: auto;
-        }
+        .hub-icon { font-size: 3.6rem; color: var(--accent-primary); margin-bottom: 18px; display: inline-block; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.35)); }
+        .contact-hub-card h3 { font-size: 2rem; margin-bottom: 12px; color: #ffffff; }
+        .contact-hub-card > p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; max-width: 580px; margin-inline: auto; }
 
         .channels-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 20px auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+            width: 100%; max-width: 600px; margin: 0 auto 20px auto;
         }
 
         .btn-channel {
-            padding: 14px 20px;
-            font-size: 0.94rem;
-            font-weight: 700;
-            border-radius: 12px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            width: 100%;
+            padding: 14px 20px; font-size: 0.94rem; font-weight: 700; border-radius: 12px;
+            text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            transition: all 0.3s ease; width: 100%;
         }
 
-        .btn-telegram {
-            background: #2AABEE;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(42, 171, 238, 0.25);
-        }
-
-        .btn-telegram:hover {
-            background: #2298d6;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(42, 171, 238, 0.45);
-        }
-
-        .btn-whatsapp-chat {
-            background: #25D366;
-            color: #04140a;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
-        }
-
-        .btn-whatsapp-chat:hover {
-            background: #1ebc59;
-            color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
-        }
-
-        .btn-whatsapp-channel {
-            background: rgba(37, 211, 102, 0.12);
-            color: #25D366;
-            border: 1px solid rgba(37, 211, 102, 0.4);
-        }
-
-        .btn-whatsapp-channel:hover {
-            background: #25D366;
-            color: #04140a;
-            transform: translateY(-3px);
-        }
-
-        .btn-proton {
-            background: rgba(139, 92, 246, 0.15);
-            color: #c4b5fd;
-            border: 1px solid rgba(139, 92, 246, 0.45);
-        }
-
-        .btn-proton:hover {
-            background: #7c3aed;
-            color: #ffffff;
-            transform: translateY(-3px);
-        }
+        .btn-telegram { background: #2AABEE; color: #ffffff; box-shadow: 0 4px 15px rgba(42, 171, 238, 0.25); }
+        .btn-telegram:hover { background: #2298d6; transform: translateY(-3px); }
+        .btn-whatsapp-chat { background: #25D366; color: #04140a; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25); }
+        .btn-whatsapp-chat:hover { background: #1ebc59; color: #ffffff; transform: translateY(-3px); }
+        .btn-whatsapp-channel { background: rgba(37, 211, 102, 0.12); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.4); }
+        .btn-whatsapp-channel:hover { background: #25D366; color: #04140a; transform: translateY(-3px); }
+        .btn-proton { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.45); }
+        .btn-proton:hover { background: #7c3aed; color: #ffffff; transform: translateY(-3px); }
 
         .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.86rem;
-            color: var(--accent-primary);
-            margin-top: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            padding: 6px 16px;
-            border-radius: 999px;
-            background: rgba(56, 189, 248, 0.08);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            display: inline-flex; align-items: center; gap: 8px; font-size: 0.86rem;
+            color: var(--accent-primary); margin-top: 8px; font-family: 'JetBrains Mono', monospace;
+            padding: 6px 16px; border-radius: 999px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
         }
 
         .security-notice {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-top: 26px;
-            padding: 16px 22px;
-            background: rgba(16, 185, 129, 0.06);
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            border-radius: 12px;
-            color: #10b981;
-            font-size: 0.9rem;
-            text-align: left;
+            display: flex; align-items: center; gap: 14px; margin-top: 26px; padding: 16px 22px;
+            background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px;
+            color: #10b981; font-size: 0.9rem; text-align: left;
         }
 
         /* ==========================================
            FOOTER
         ========================================== */
         footer {
-            background: #020306;
-            border-top: 1px solid var(--border-light);
-            padding: 70px 0 30px 0;
+            background: #020306; border-top: 1px solid var(--border-light); padding: 70px 0 30px 0;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1.8fr 1fr 1.2fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
+        .footer-content { display: grid; grid-template-columns: 1.8fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+        .footer-section h3 { color: #ffffff; margin-bottom: 20px; font-size: 1.15rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-section p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 14px; }
+        .footer-section a { display: flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 12px; font-size: 0.94rem; transition: all 0.25s ease; }
+        .footer-section a:hover { color: var(--accent-primary); transform: translateX(4px); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 26px; border-top: 1px solid var(--border-light); color: var(--text-muted); font-size: 0.86rem; }
 
-        .footer-section h3 {
-            color: #ffffff;
-            margin-bottom: 20px;
-            font-size: 1.15rem;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .footer-section p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 14px;
-        }
-
-        .footer-section a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-bottom: 12px;
-            font-size: 0.94rem;
-            transition: all 0.25s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--accent-primary);
-            transform: translateX(4px);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            padding-top: 26px;
-            border-top: 1px solid var(--border-light);
-            color: var(--text-muted);
-            font-size: 0.86rem;
-        }
-
-        /* ==========================================
-           ANIMATIONS & RESPONSIVE
-        ========================================== */
         .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
@@ -1222,16 +940,8 @@
 
         @media (max-width: 768px) {
             .nav-menu {
-                position: fixed;
-                top: var(--nav-height);
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - var(--nav-height));
-                background: rgba(3, 5, 8, 0.98);
-                flex-direction: column;
-                justify-content: center;
-                gap: 32px;
-                transition: left 0.3s ease;
+                position: fixed; top: var(--nav-height); left: -100%; width: 100%; height: calc(100vh - var(--nav-height));
+                background: rgba(3, 5, 8, 0.98); flex-direction: column; justify-content: center; gap: 32px; transition: left 0.3s ease;
             }
             .nav-menu.active { left: 0; }
             .nav-menu a { font-size: 1.3rem; }
@@ -1252,21 +962,21 @@
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- HEADER -->
+    <!-- HEADER CON REDIRECCIÓN A CADA HTML -->
     <header>
         <nav class="container">
-            <a href="#inicio" class="logo">
+            <a href="inicio.html" class="logo">
                 <div class="logo-box">
                     <i class="fa-solid fa-network-wired"></i>
                 </div>
                 <span>JXLL</span>
             </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#inicio" class="active">Inicio</a></li>
-                <li><a href="#servicios">Nuestra Labor</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#ecosistema">Canales</a></li>
-                <li><a href="#contacto" class="nav-cta"><i class="fa-solid fa-shield-halved"></i> Reportar</a></li>
+                <li><a href="inicio.html" class="active">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="contacto.html" class="nav-cta"><i class="fa-solid fa-shield-halved"></i> Reportar</a></li>
             </ul>
             <div class="hamburger" id="hamburger" aria-label="Abrir menú">
                 <span></span><span></span><span></span>
@@ -1274,11 +984,10 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION CON MARCO DE CELULAR 3D INTERACTIVO -->
+    <!-- HERO SECTION -->
     <section id="inicio" class="hero">
         <div class="container">
             <div class="hero-grid">
-                <!-- Columna Izquierda -->
                 <div class="hero-content fade-in">
                     <div class="hero-badge">
                         <span class="status-dot"></span>
@@ -1289,15 +998,17 @@
                         Somos una comunidad de ciberseguridad 100% gratuita. Analizamos y neutralizamos actividades ilegales, estafas y comportamientos poco éticos en la red mediante el reporte ciudadano, investigación técnica y acción colaborativa.
                     </p>
                     <div class="cta-buttons">
-                        <a href="#contacto" class="btn btn-primary">
+                        <a href="contacto.html" class="btn btn-primary">
                             Reportar Incidente <i class="fa-solid fa-shield-halved"></i>
                         </a>
-                        <a href="#ecosistema" class="btn btn-secondary">
-                            <i class="fa-solid fa-mobile-screen-button"></i> Ver Canales Oficiales
+                        <a href="servicios.html" class="btn btn-secondary">
+                            <i class="fa-solid fa-layer-group"></i> Nuestra Labor
+                        </a>
+                        <a href="nosotros.html" class="btn btn-secondary">
+                            <i class="fa-solid fa-users"></i> Sobre Nosotros
                         </a>
                     </div>
 
-                    <!-- Barra de Telemetría Táctica (Estilo Sparta) -->
                     <div class="hero-telemetry">
                         <div class="telemetry-box">
                             <span class="telemetry-label">REPORTES</span>
@@ -1318,11 +1029,10 @@
                     </div>
                 </div>
 
-                <!-- Columna Derecha: Smartphone 3D + Tarjetas Flotantes -->
+                <!-- Columna Derecha: Smartphone 3D Interactiva -->
                 <div class="hero-visual fade-in">
                     <div class="phone-scene">
-                        <!-- Insignias Flotantes (Estilo Octo SMM) -->
-                        <div class="floating-badge badge-1">
+                        <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="floating-badge badge-1">
                             <div class="badge-icon" style="background: rgba(42,171,238,0.15); color: #2AABEE;">
                                 <i class="fa-brands fa-telegram"></i>
                             </div>
@@ -1330,9 +1040,9 @@
                                 <strong>JXLL [PURGATORY]™</strong>
                                 <span>289 Subscribers · Research</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="floating-badge badge-2">
+                        <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="floating-badge badge-2">
                             <div class="badge-icon" style="background: rgba(37,211,102,0.15); color: #25D366;">
                                 <i class="fa-brands fa-whatsapp"></i>
                             </div>
@@ -1340,35 +1050,30 @@
                                 <strong>Canal Oficial JXLL <i class="fa-solid fa-circle-check" style="color:#38bdf8;"></i></strong>
                                 <span>118 Seguidores · Alertas</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="floating-badge badge-3">
+                        <a href="nosotros.html" class="floating-badge badge-3">
                             <div class="badge-icon" style="background: rgba(56,189,248,0.15); color: #38bdf8;">
-                                <i class="fa-solid fa-user-Astronaut"></i>
+                                <i class="fa-solid fa-user-astronaut"></i>
                             </div>
                             <div class="badge-info">
                                 <strong>@Keybreakerr</strong>
                                 <span>CEO & Red Team Leader</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <!-- Marco Físico del Celular -->
                         <div class="phone-mockup">
                             <div class="phone-inner">
-                                <div class="phone-island">
-                                    <div class="island-camera"></div>
-                                </div>
+                                <div class="phone-island"><div class="island-camera"></div></div>
                                 <div class="phone-glare"></div>
 
                                 <div class="phone-screen-content">
-                                    <!-- Captura Dinámica Principal -->
                                     <img id="heroPhoneImg" 
                                          src="photo_5104934511430012165_w.jpg" 
                                          alt="Captura Oficial JXLL" 
                                          class="phone-screenshot"
                                          onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='flex';">
 
-                                    <!-- Fallback UI en vivo si la imagen aún no está en la carpeta -->
                                     <div id="heroFallback" class="screen-fallback">
                                         <div>
                                             <div style="display:flex; align-items:center; gap:10px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.1);">
@@ -1382,21 +1087,15 @@
                                                 <div style="color:#38bdf8; font-weight:700; font-size:0.75rem; margin-bottom:4px;">php2shell-bypass-aslr-exp</div>
                                                 <p style="font-size:0.7rem; color:#cbd5e1;">A php2shell exploit that requires no modifications to the official version...</p>
                                             </div>
-                                            <div style="margin-top:10px; background:#161f2c; border-radius:10px; padding:10px; border-left:3px solid #f43f5e;">
-                                                <div style="color:#f43f5e; font-weight:700; font-size:0.75rem; margin-bottom:4px;">🔥 PHP2Shell CVE Research</div>
-                                                <p style="font-size:0.7rem; color:#cbd5e1;">Version-aware research toolkit for CVE-2026-109618 / CVE-2026-109619 — pre-auth RCE in PHP session.upload_progress. Build profiles, labs & detection guidance for authorized security testing.</p>
-                                            </div>
                                         </div>
                                         <a href="https://t.me/jxll_canal" target="_blank" style="text-align:center; padding:10px; background:#2AABEE; color:#fff; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.78rem;">UNIRME AL CANAL</a>
                                     </div>
                                 </div>
-
                                 <div class="phone-home-bar"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Selector Interactivo de Capturas en el Hero -->
                     <div class="phone-tabs">
                         <button class="phone-tab-btn active" onclick="switchHeroScreen('photo_5104934511430012165_w.jpg', this)">
                             <i class="fa-brands fa-telegram"></i> Telegram
@@ -1413,7 +1112,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN: NUESTRA LABOR (TARJETAS NUMERADAS 01-06) -->
+    <!-- SECCIÓN: NUESTRA LABOR (REDESIGNA A SERVICIOS.HTML / CONTACTO.HTML) -->
     <section id="servicios" class="services">
         <div class="container">
             <div class="section-header fade-in">
@@ -1425,7 +1124,7 @@
             </div>
             
             <div class="services-grid">
-                <div class="service-card fade-in">
+                <a href="contacto.html" class="service-card fade-in">
                     <div>
                         <div class="service-card-top">
                             <div class="service-icon"><i class="fa-solid fa-inbox"></i></div>
@@ -1435,12 +1134,12 @@
                         <p>Canales seguros y confidenciales para que cualquier ciudadano pueda denunciar páginas fraudulentas, estafas o actividades ilícitas encontradas en internet.</p>
                     </div>
                     <div class="service-footer">
-                        <span>CANAL ENCRIPTADO</span>
+                        <span>ENVIAR REPORTE</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
+                </a>
                 
-                <div class="service-card fade-in">
+                <a href="servicios.html" class="service-card fade-in">
                     <div>
                         <div class="service-card-top">
                             <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
@@ -1450,12 +1149,12 @@
                         <p>Nuestros miembros analizan los reportes recibidos rastreando infraestructura maliciosa, identificando vectores de ataque y documentando el fraude.</p>
                     </div>
                     <div class="service-footer">
-                        <span>OSINT & FORENSE</span>
+                        <span>VER SERVICIOS</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
+                </a>
                 
-                <div class="service-card fade-in">
+                <a href="servicios.html" class="service-card fade-in">
                     <div>
                         <div class="service-card-top">
                             <div class="service-icon"><i class="fa-solid fa-ban"></i></div>
@@ -1465,12 +1164,12 @@
                         <p>Acción comunitaria para neutralizar amenazas. Contactamos a proveedores de hosting y autoridades pertinentes para dar de baja sitios maliciosos.</p>
                     </div>
                     <div class="service-footer">
-                        <span>TAKEDOWN ÉTICO</span>
+                        <span>VER PROTOCOLO</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
+                </a>
                 
-                <div class="service-card fade-in">
+                <a href="servicios.html" class="service-card fade-in">
                     <div>
                         <div class="service-card-top">
                             <div class="service-icon"><i class="fa-solid fa-code"></i></div>
@@ -1480,12 +1179,12 @@
                         <p>Desarrollo colaborativo de scripts, utilidades de seguridad y automatizaciones que se comparten libremente para que todos puedan protegerse.</p>
                     </div>
                     <div class="service-footer">
-                        <span>CÓDIGO ABIERTO</span>
+                        <span>EXPLORAR HERRAMIENTAS</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
+                </a>
                 
-                <div class="service-card fade-in">
+                <a href="servicios.html" class="service-card fade-in">
                     <div>
                         <div class="service-card-top">
                             <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
@@ -1495,12 +1194,12 @@
                         <p>Difusión gratuita de información sobre nuevas vulnerabilidades, métodos de phishing actuales y buenas prácticas de seguridad para usuarios comunes.</p>
                     </div>
                     <div class="service-footer">
-                        <span>DIVULGACIÓN ACTIVA</span>
+                        <span>VER ALERTAS</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
+                </a>
 
-                <div class="service-card fade-in">
+                <a href="contacto.html" class="service-card fade-in">
                     <div>
                         <div class="service-card-top">
                             <div class="service-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
@@ -1510,15 +1209,15 @@
                         <p>Asistencia técnica y orientación sin costo para víctimas de ciberdelitos, ayudándoles a asegurar sus cuentas y entender los pasos a seguir.</p>
                     </div>
                     <div class="service-footer">
-                        <span>ASISTENCIA SIN COSTO</span>
+                        <span>SOLICITAR SOPORTE</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN: NOSOTROS + BENCHMARK TÁCTICO -->
+    <!-- SECCIÓN: NOSOTROS -->
     <section id="nosotros" class="about">
         <div class="container">
             <div class="about-content">
@@ -1528,9 +1227,17 @@
                     <p>Somos una comunidad descentralizada enfocada en el desarrollo de software, la automatización avanzada y la ciberseguridad ética. Nuestro propósito no es lucrar, sino construir una red más segura para todos.</p>
                     <p>Todo nuestro conocimiento, desarrollo de herramientas y asistencia técnica se ofrecen de manera <strong>totalmente gratuita</strong>. No realizamos auditorías de pago ni vendemos cursos; operamos bajo un estricto código de ética colaborativo.</p>
                     <p>Nos dedicamos a limpiar y proteger el ciberespacio. Recibimos reportes ciudadanos sobre actividades ilegales, esquemas de fraude o comportamientos poco éticos, para analizarlos exhaustivamente y mitigar su impacto mediante el reporte a las autoridades y plataformas correspondientes.</p>
+                    
+                    <div style="margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap;">
+                        <a href="nosotros.html" class="btn btn-primary">
+                            Conocer Nuestra Historia <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="servicios.html" class="btn btn-secondary">
+                            Ver Nuestra Labor
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Panel HUD de Rendimiento e Impacto (Inspirado en Sparta X17) -->
                 <div class="hud-benchmark-card fade-in">
                     <div class="stats-grid">
                         <div class="stat-item">
@@ -1588,8 +1295,8 @@
         </div>
     </section>
 
-    <!-- SECCIÓN: ECOSISTEMA MÓVIL (LAS 3 CAPTURAS EN MARCOS DE CELULAR) + CONTACTO -->
-    <section id="ecosistema" class="contact">
+    <!-- ECOSISTEMA MÓVIL Y CONTACTO -->
+    <section id="contacto" class="contact">
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag">VERIFICACIÓN VISUAL</span>
@@ -1599,10 +1306,9 @@
                 </p>
             </div>
 
-            <!-- Galería de 3 Marcos de Celular con las Capturas Adjuntas -->
             <div class="showcase-phones-grid">
                 
-                <!-- CELULAR 1: TELEGRAM CANAL JXLL [PURGATORY]™ -->
+                <!-- CELULAR 1 -->
                 <div class="phone-showcase-card fade-in">
                     <span class="showcase-tag tag-tg"><i class="fa-brands fa-telegram"></i> Telegram Research</span>
                     <div class="phone-frame-sm">
@@ -1610,27 +1316,7 @@
                             <div class="phone-island"><div class="island-camera"></div></div>
                             <div class="phone-glare"></div>
                             <div class="phone-screen-content">
-                                <img src="photo_5104934511430012165_w.jpg" 
-                                     alt="Canal de Telegram JXLL [PURGATORY]" 
-                                     class="phone-screenshot"
-                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <!-- Fallback Réplica -->
-                                <div class="screen-fallback">
-                                    <div>
-                                        <div style="display:flex; align-items:center; gap:8px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
-                                            <i class="fa-brands fa-telegram" style="font-size:1.4rem; color:#2AABEE;"></i>
-                                            <div style="text-align:left;">
-                                                <strong style="display:block; font-size:0.8rem;">JXLL [PURGATORY]™</strong>
-                                                <span style="font-size:0.68rem; color:#94a3b8;">289 subscribers</span>
-                                            </div>
-                                        </div>
-                                        <div style="margin-top:12px; text-align:left; background:#141d2b; padding:10px; border-radius:8px;">
-                                            <span style="color:#38bdf8; font-weight:700; font-size:0.74rem;">🔹 php2shell-CVE-2026-109618-PoC</span>
-                                            <p style="font-size:0.68rem; color:#94a3b8; margin-top:4px;">PoC exploit demonstrating remote code execution in vulnerable PHP environments for authorized security testing.</p>
-                                        </div>
-                                    </div>
-                                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#2AABEE;">t.me/jxll_canal</span>
-                                </div>
+                                <img src="photo_5104934511430012165_w.jpg" alt="Telegram JXLL" class="phone-screenshot" onerror="this.style.display='none';">
                             </div>
                             <div class="phone-home-bar"></div>
                         </div>
@@ -1644,7 +1330,7 @@
                     </div>
                 </div>
 
-                <!-- CELULAR 2 (CENTRAL DESTACADO): WHATSAPP CANAL OFICIAL JXLL -->
+                <!-- CELULAR 2 -->
                 <div class="phone-showcase-card featured fade-in">
                     <span class="showcase-tag tag-wa"><i class="fa-brands fa-whatsapp"></i> Canal Verificado</span>
                     <div class="phone-frame-sm">
@@ -1652,23 +1338,7 @@
                             <div class="phone-island"><div class="island-camera"></div></div>
                             <div class="phone-glare"></div>
                             <div class="phone-screen-content">
-                                <img src="photo_5104934511430012167_w.jpg" 
-                                     alt="Canal Oficial de WhatsApp JXLL" 
-                                     class="phone-screenshot"
-                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <!-- Fallback Réplica -->
-                                <div class="screen-fallback">
-                                    <div style="text-align:center;">
-                                        <div style="width:64px; height:64px; border-radius:50%; margin:0 auto 10px auto; background:radial-gradient(circle,#ef4444,#000); border:2px solid #ef4444; display:flex; align-items:center; justify-content:center; font-weight:900;">JXLL</div>
-                                        <strong style="font-size:1rem;">JXLL <i class="fa-solid fa-circle-check" style="color:#38bdf8;"></i></strong>
-                                        <p style="font-size:0.72rem; color:#94a3b8;">Canal • 118 seguidores</p>
-                                        <div style="margin-top:14px; text-align:left; background:#121820; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
-                                            <p style="font-size:0.72rem; color:#fff;">Ciberseguridad • Tips • Conocimiento<br>Canal oficial de JXLL</p>
-                                            <span style="font-size:0.65rem; color:#64748b;">Rutas de Formación WomenCISO & MenCISO IAP · Google Cloud</span>
-                                        </div>
-                                    </div>
-                                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#25D366;">Canal Público Verificado</span>
-                                </div>
+                                <img src="photo_5104934511430012167_w.jpg" alt="WhatsApp JXLL" class="phone-screenshot" onerror="this.style.display='none';">
                             </div>
                             <div class="phone-home-bar"></div>
                         </div>
@@ -1682,7 +1352,7 @@
                     </div>
                 </div>
 
-                <!-- CELULAR 3: PERFIL KEYBREAKER / RED TEAM LEADER -->
+                <!-- CELULAR 3 -->
                 <div class="phone-showcase-card fade-in">
                     <span class="showcase-tag tag-lead"><i class="fa-solid fa-user-secret"></i> Dirección & Red Team</span>
                     <div class="phone-frame-sm">
@@ -1690,22 +1360,7 @@
                             <div class="phone-island"><div class="island-camera"></div></div>
                             <div class="phone-glare"></div>
                             <div class="phone-screen-content">
-                                <img src="photo_5104934511430012166_w.jpg" 
-                                     alt="Perfil Oficial Keybreaker CEO JXLL" 
-                                     class="phone-screenshot"
-                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <!-- Fallback Réplica -->
-                                <div class="screen-fallback">
-                                    <div style="text-align:center;">
-                                        <div style="width:60px; height:60px; border-radius:50%; margin:0 auto 8px auto; background:#1e293b; border:2px solid #38bdf8; display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-user-hoodie" style="font-size:1.4rem; color:#38bdf8;"></i></div>
-                                        <strong style="font-size:0.85rem;">keybreaker 『 JXLL 』</strong>
-                                        <div style="margin-top:12px; text-align:left; background:#111622; padding:10px; border-radius:8px;">
-                                            <p style="font-size:0.7rem; color:#f8fafc;">🔺 <strong>CEO & Founder JXLL | Red Team Leader | Keybreaker | Pentester & Exploit Dev</strong> 🔺</p>
-                                            <p style="font-size:0.7rem; color:#38bdf8; margin-top:6px;">@Keybreakerr</p>
-                                        </div>
-                                    </div>
-                                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#38bdf8;">Contacto Verificado</span>
-                                </div>
+                                <img src="photo_5104934511430012166_w.jpg" alt="Keybreaker JXLL" class="phone-screenshot" onerror="this.style.display='none';">
                             </div>
                             <div class="phone-home-bar"></div>
                         </div>
@@ -1721,11 +1376,11 @@
 
             </div>
 
-            <!-- HUB CENTRAL DE REPORTES -->
-            <div id="contacto" class="contact-hub-card fade-in">
+            <!-- HUB CENTRAL -->
+            <div class="contact-hub-card fade-in">
                 <i class="fa-solid fa-shield-halved hub-icon"></i>
-                <h3>Centro de Atención y Reportes JXLL</h3>
-                <p>¿Has detectado una estafa, un sitio fraudulento o actividad maliciosa? Contáctanos a través de cualquiera de nuestras vías oficiales. Analizaremos tu caso de forma confidencial y gratuita.</p>
+                <h3>Atención y Conexión JXLL</h3>
+                <p>¿Has detectado una estafa, un sitio fraudulento o actividad maliciosa? Contáctanos a través de cualquiera de nuestras vías oficiales o visita nuestra página de contacto.</p>
                 
                 <div class="channels-buttons">
                     <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="btn-channel btn-telegram">
@@ -1742,6 +1397,12 @@
 
                     <a href="mailto:team_jxll@proton.me" class="btn-channel btn-proton">
                         <i class="fa-solid fa-envelope"></i> team_jxll@proton.me
+                    </a>
+                </div>
+
+                <div style="margin: 18px 0;">
+                    <a href="contacto.html" class="btn btn-secondary" style="padding: 10px 22px; font-size: 0.88rem;">
+                        Ir a la Página de Contacto Completa <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                 </div>
 
@@ -1765,7 +1426,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <a href="#inicio" class="logo" style="margin-bottom: 16px;">
+                    <a href="inicio.html" class="logo" style="margin-bottom: 16px;">
                         <div class="logo-box" style="width:34px; height:34px; font-size:1rem;">
                             <i class="fa-solid fa-network-wired"></i>
                         </div>
@@ -1797,14 +1458,13 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Comunidad JXLL. Por un internet más seguro.</p>
+                <p>&copy; 2026 Comunidad JXLL. Por un internet más seguro. | Open Source Security</p>
                 <span class="mono" style="color: var(--accent-primary); font-size: 0.8rem;">[ STATUS: ALL SYSTEMS OPERATIONAL ]</span>
             </div>
         </div>
     </footer>
 
     <script>
-        // Cambiar dinámicamente la captura del celular 3D en el Hero
         function switchHeroScreen(imageSrc, btnElement) {
             const heroImg = document.getElementById('heroPhoneImg');
             const fallback = document.getElementById('heroFallback');
@@ -1822,7 +1482,6 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            // Menú Móvil
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('navMenu');
 
@@ -1838,7 +1497,6 @@
                 });
             });
 
-            // Barra de Progreso de Lectura
             const scrollProgress = document.getElementById('scrollProgress');
             window.addEventListener('scroll', () => {
                 const totalScroll = document.documentElement.scrollTop;
@@ -1847,7 +1505,6 @@
                 scrollProgress.style.width = scroll;
             });
 
-            // Animaciones al hacer Scroll (Intersection Observer)
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
