@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#030508">
     <title>JXLL | Enterprise Portal</title>
+
+    <!-- Precarga inteligente de la web principal y capturas mientras corre la animación -->
+    <link rel="prefetch" href="inicio.html">
+    <link rel="prefetch" href="photo_5104934511430012165_w.jpg">
+    <link rel="prefetch" href="photo_5104934511430012166_w.jpg">
+    <link rel="prefetch" href="photo_5104934511430012167_w.jpg">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-start: #0f172a;
-            --bg-end: #1e293b;
+            --bg-pure-black: #030508;
+            --bg-card: rgba(10, 15, 26, 0.78);
             --accent-primary: #38bdf8;
             --accent-secondary: #0284c7;
+            --accent-purple: #8b5cf6;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --text-status: #cbd5e1;
             --success-color: #10b981;
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --cube-border: rgba(56, 189, 248, 0.3);
-            --cube-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(56, 189, 248, 0.28);
+            --cube-border: rgba(56, 189, 248, 0.55);
+            --cube-bg: rgba(12, 20, 36, 0.65);
+            --hud-clip: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
         }
 
         * {
@@ -26,48 +40,183 @@
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         body {
-            /* Black background fallback for AMOLED panels, gradient on top */
-            background-color: #000000;
-            background-image: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            background-color: var(--bg-pure-black);
+            background-image: 
+                radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 45%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 42px 42px, 42px 42px;
             height: 100vh;
-            /* SafeArea support for notched devices (Samsung/iOS) */
-            height: calc(100vh - env(safe-area-inset-bottom, 0px));
+            height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-            perspective: 1200px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            perspective: 1400px;
             color: var(--text-primary);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+        body.portal-exit {
+            opacity: 0;
+            transform: scale(1.06);
+        }
+
+        /* ==========================================
+           TACTICAL HUD LOADER CONTAINER
+        ========================================== */
         .loader-container {
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             transform-style: preserve-3d;
-            width: 90%; /* Fluid width */
-            max-width: 450px;
-            padding: 40px 20px;
-            background: var(--glass-bg);
-            border-radius: 24px;
+            width: 90%;
+            max-width: 480px;
+            padding: 46px 32px 36px 32px;
+            background: var(--bg-card);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            clip-path: var(--hud-clip);
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.85),
+                inset 0 0 40px rgba(56, 189, 248, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: transform 0.2s ease-out, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
+        /* Línea superior luminosa */
+        .loader-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), var(--accent-purple), transparent);
+            transition: background 0.4s ease;
+        }
+
+        .loader-container.authorized {
+            border-color: rgba(16, 185, 129, 0.55);
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.85),
+                0 0 35px rgba(16, 185, 129, 0.18),
+                inset 0 0 40px rgba(16, 185, 129, 0.08);
+        }
+
+        .loader-container.authorized::before {
+            background: linear-gradient(90deg, transparent, var(--success-color), transparent);
+        }
+
+        /* Cabecera de Telemetría Superior */
+        .hud-top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.08em;
+            margin-bottom: 32px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .hud-top-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 8px var(--accent-primary);
+            animation: blink 1.4s infinite;
+        }
+
+        .loader-container.authorized .pulse-dot {
+            background: var(--success-color);
+            box-shadow: 0 0 8px var(--success-color);
+        }
+
+        .loader-container.authorized .hud-top-badge {
+            color: var(--success-color);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+
+        /* ==========================================
+           3D CUBE & ORBITAL RINGS
+        ========================================== */
         .scene-3d {
-            width: 90px;
-            height: 90px;
+            width: 110px;
+            height: 110px;
             perspective: 1200px;
-            margin-bottom: 40px;
-            margin-top: 10px;
+            margin: 12px 0 44px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Anillo Orbital Exterior */
+        .orbital-ring {
+            position: absolute;
+            width: 164px;
+            height: 164px;
+            border-radius: 50%;
+            border: 1px dashed rgba(56, 189, 248, 0.28);
+            animation: spinRing 14s linear infinite;
+            pointer-events: none;
+        }
+
+        .orbital-ring::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        .loader-container.authorized .orbital-ring {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .loader-container.authorized .orbital-ring::after {
+            background: var(--success-color);
+            box-shadow: 0 0 10px var(--success-color);
+        }
+
+        @keyframes spinRing {
+            0% { transform: rotateX(65deg) rotateZ(0deg); }
+            100% { transform: rotateX(65deg) rotateZ(360deg); }
+        }
+
+        .cube-wrapper {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out;
         }
 
         .cube-3d {
@@ -75,213 +224,289 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            /* Hardware acceleration hint for One UI / mobile browsers */
-            will-change: transform; 
-            transform: rotateX(-20deg) rotateY(25deg);
-            transition: transform 0.15s ease-out;
+            will-change: transform;
+            animation: rotateCube 9s infinite linear;
         }
 
-        .cube-3d.auto-rotate {
-            animation: rotateCube 8s infinite linear;
+        /* Núcleo interno brillante del cubo */
+        .cube-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 44px;
+            height: 44px;
+            margin-top: -22px;
+            margin-left: -22px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+            filter: blur(8px);
+            opacity: 0.75;
+            transition: background 0.4s ease;
+        }
+
+        .loader-container.authorized .cube-core {
+            background: radial-gradient(circle, var(--success-color) 0%, transparent 70%);
         }
 
         .cube-face {
             position: absolute;
-            width: 90px;
-            height: 90px;
+            width: 110px;
+            height: 110px;
             background: var(--cube-bg);
-            border: 1px solid var(--cube-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(56, 189, 248, 0.1);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid var(--cube-border);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.45),
+                inset 0 0 20px rgba(56, 189, 248, 0.18);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 400;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
             color: var(--accent-primary);
-            font-size: 1.5rem;
+            font-size: 2rem;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+            transition: border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .face-front  { transform: translateZ(45px); }
-        .face-back   { transform: rotateY(180deg) translateZ(45px); }
-        .face-left   { transform: rotateY(-90deg) translateZ(45px); }
-        .face-right  { transform: rotateY(90deg) translateZ(45px); }
-        .face-top    { transform: rotateX(90deg) translateZ(45px); }
-        .face-bottom { transform: rotateX(-90deg) translateZ(45px); }
+        .loader-container.authorized .cube-face {
+            border-color: rgba(16, 185, 129, 0.65);
+            color: var(--success-color);
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.45),
+                inset 0 0 20px rgba(16, 185, 129, 0.22);
+        }
 
+        .face-front  { transform: translateZ(55px); }
+        .face-back   { transform: rotateY(180deg) translateZ(55px); }
+        .face-left   { transform: rotateY(-90deg) translateZ(55px); }
+        .face-right  { transform: rotateY(90deg) translateZ(55px); }
+        .face-top    { transform: rotateX(90deg) translateZ(55px); font-size: 1.4rem; }
+        .face-bottom { transform: rotateX(-90deg) translateZ(55px); font-size: 1.4rem; }
+
+        /* ==========================================
+           BRANDING & PROGRESS TELEMETRY
+        ========================================== */
         .brand-text {
             color: var(--text-primary);
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: 4px;
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: 8px;
             text-transform: uppercase;
             text-align: center;
-            margin-bottom: 5px;
-            margin-left: 4px; /* Optical center alignment for letter-spacing */
+            margin-bottom: 4px;
+            margin-left: 8px;
+            text-shadow: 0 0 30px rgba(56, 189, 248, 0.25);
         }
 
         .brand-subtext {
+            font-family: 'JetBrains Mono', monospace;
             color: var(--text-secondary);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 2px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 35px;
+            margin-bottom: 32px;
             text-align: center;
         }
 
+        .progress-header {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .progress-percent {
+            color: var(--accent-primary);
+            font-weight: 800;
+            transition: color 0.3s ease;
+        }
+
+        .loader-container.authorized .progress-percent {
+            color: var(--success-color);
+        }
+
         .progress-bar-container {
-            width: 85%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            width: 90%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
             overflow: hidden;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .progress-bar-fill {
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-            transition: width 0.2s ease-out, background-color 0.3s ease;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+            transition: width 0.18s ease-out, background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .status-row {
+            margin-top: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 22px;
         }
 
         .status-text {
+            font-family: 'JetBrains Mono', monospace;
             color: var(--text-status);
             font-size: 0.8rem;
-            margin-top: 25px;
-            font-weight: 400;
+            font-weight: 500;
             text-align: center;
-            height: 20px;
             transition: color 0.3s ease;
         }
 
-        @media (min-width: 1024px) {
-            .loader-container {
-                padding: 50px 40px;
-                max-width: 500px;
-            }
-            .brand-text {
-                font-size: 2.5rem;
-                letter-spacing: 8px;
-                margin-left: 8px;
-            }
-            .brand-subtext {
-                font-size: 0.85rem;
-                letter-spacing: 4px;
-            }
-            .scene-3d {
-                width: 110px;
-                height: 110px;
-                margin-bottom: 50px;
-            }
-            .cube-face {
-                width: 110px;
-                height: 110px;
-                font-size: 1.8rem;
-            }
-            /* Adjust Z-translation for larger cube */
-            .face-front  { transform: translateZ(55px); }
-            .face-back   { transform: rotateY(180deg) translateZ(55px); }
-            .face-left   { transform: rotateY(-90deg) translateZ(55px); }
-            .face-right  { transform: rotateY(90deg) translateZ(55px); }
-            .face-top    { transform: rotateX(90deg) translateZ(55px); }
-            .face-bottom { transform: rotateX(-90deg) translateZ(55px); }
-            
-            .progress-bar-container {
-                height: 6px;
-                border-radius: 6px;
-            }
-            .status-text {
-                font-size: 0.9rem;
-            }
+        /* Botón directo por si el usuario desea saltar la animación */
+        .skip-link {
+            margin-top: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(148, 163, 184, 0.55);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .skip-link:hover {
+            color: var(--accent-primary);
         }
 
         @media (max-width: 768px) and (orientation: portrait) {
             .loader-container {
-                padding: 30px 15px;
-                /* Slightly narrower on very tall screens to look more elegant */
-                width: 85%; 
+                padding: 36px 22px 28px 22px;
+                width: 88%;
             }
             .scene-3d {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 30px;
+                width: 90px;
+                height: 90px;
+                margin-bottom: 36px;
+            }
+            .orbital-ring {
+                width: 138px;
+                height: 138px;
             }
             .cube-face {
-                width: 80px;
-                height: 80px;
-                font-size: 1.3rem;
+                width: 90px;
+                height: 90px;
+                font-size: 1.6rem;
             }
-            .face-front  { transform: translateZ(40px); }
-            .face-back   { transform: rotateY(180deg) translateZ(40px); }
-            .face-left   { transform: rotateY(-90deg) translateZ(40px); }
-            .face-right  { transform: rotateY(90deg) translateZ(40px); }
-            .face-top    { transform: rotateX(90deg) translateZ(40px); }
-            .face-bottom { transform: rotateX(-90deg) translateZ(40px); }
+            .face-front  { transform: translateZ(45px); }
+            .face-back   { transform: rotateY(180deg) translateZ(45px); }
+            .face-left   { transform: rotateY(-90deg) translateZ(45px); }
+            .face-right  { transform: rotateY(90deg) translateZ(45px); }
+            .face-top    { transform: rotateX(90deg) translateZ(45px); }
+            .face-bottom { transform: rotateX(-90deg) translateZ(45px); }
             
             .brand-text {
-                font-size: 1.8rem;
+                font-size: 2rem;
+                letter-spacing: 6px;
+                margin-left: 6px;
             }
             .status-text {
-                font-size: 0.75rem;
+                font-size: 0.74rem;
             }
         }
 
         @keyframes rotateCube {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
+            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="loader-container">
+    <div class="loader-container" id="loaderContainer">
+        <!-- Barra Superior de Telemetría HUD -->
+        <div class="hud-top-bar">
+            <span class="hud-top-badge">
+                <span class="pulse-dot"></span>
+                <span id="hudNodeStatus">SEC-NODE // INITIALIZING</span>
+            </span>
+            <span>TLS 1.3 · E2EE</span>
+        </div>
+
+        <!-- Escena 3D con Cubo JXLL y Anillo Orbital -->
         <div class="scene-3d">
-            <div class="cube-3d auto-rotate" id="cube">
-                <div class="cube-face face-front">J</div>
-                <div class="cube-face face-back">X</div>
-                <div class="cube-face face-left">L</div>
-                <div class="cube-face face-right">L</div>
-                <div class="cube-face face-top"></div>
-                <div class="cube-face face-bottom"></div>
+            <div class="orbital-ring"></div>
+            <div class="cube-wrapper" id="cubeWrapper">
+                <div class="cube-3d" id="cube">
+                    <div class="cube-core"></div>
+                    <div class="cube-face face-front">J</div>
+                    <div class="cube-face face-back">X</div>
+                    <div class="cube-face face-left">L</div>
+                    <div class="cube-face face-right">L</div>
+                    <div class="cube-face face-top"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="cube-face face-bottom"><i class="fa-solid fa-network-wired"></i></div>
+                </div>
             </div>
         </div>
 
         <h1 class="brand-text">JXLL</h1>
-        <div class="brand-subtext">Secure Enterprise Portal</div>
+        <div class="brand-subtext">Secure Community Portal</div>
+
+        <!-- Cabecera Numérica + Barra de Progreso -->
+        <div class="progress-header">
+            <span>HANDSHAKE PROGRESS</span>
+            <span class="progress-percent" id="progressPercent">0%</span>
+        </div>
 
         <div class="progress-bar-container">
             <div class="progress-bar-fill" id="progressFill"></div>
         </div>
         
-        <div class="status-text" id="statusText">Initializing secure environment...</div>
+        <div class="status-row">
+            <div class="status-text" id="statusText">Initializing secure environment...</div>
+        </div>
+
+        <!-- Acceso directo manual de respaldo -->
+        <a href="inicio.html" class="skip-link">
+            Saltar introducción <i class="fa-solid fa-chevron-right" style="font-size: 0.6rem;"></i>
+        </a>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const cube = document.getElementById("cube");
+            const loaderContainer = document.getElementById("loaderContainer");
+            const cubeWrapper = document.getElementById("cubeWrapper");
             const progressFill = document.getElementById("progressFill");
+            const progressPercent = document.getElementById("progressPercent");
             const statusText = document.getElementById("statusText");
+            const hudNodeStatus = document.getElementById("hudNodeStatus");
             
-            // Interactive hover effect - Only for desktop devices with mice
+            // Efecto 3D interactivo al mover el mouse en escritorio (sin detener el giro del cubo)
             if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-                cube.classList.remove("auto-rotate");
-                
                 document.addEventListener("mousemove", (e) => {
-                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                    const xAxis = (window.innerWidth / 2 - e.clientX) / 22;
+                    const yAxis = (window.innerHeight / 2 - e.clientY) / 22;
                     
-                    cube.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                    cubeWrapper.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+                    loaderContainer.style.transform = `rotateY(${-xAxis * 0.25}deg) rotateX(${yAxis * 0.25}deg)`;
                 });
             }
 
+            // Vibración háptica en dispositivos móviles compatibles
             const triggerVibration = (ms) => {
                 if (navigator.vibrate) {
                     try {
                         navigator.vibrate(ms);
                     } catch (e) {
-                        console.warn("Haptic feedback restricted by browser.");
+                        // Restringido por el navegador si no hay interacción previa
                     }
                 }
             };
@@ -290,44 +515,50 @@
             const logMessages = [
                 "Verifying session integrity...",
                 "Establishing encrypted connection...",
-                "Authenticating credentials...",
+                "Loading verified JXLL channels...",
                 "Finalizing secure handshake..."
             ];
 
             const loadScheduler = setInterval(() => {
-                progress += Math.floor(Math.random() * 8) + 2; 
+                progress += Math.floor(Math.random() * 8) + 3; 
                 
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(loadScheduler);
                     
-                    statusText.innerText = "Access Authorized.";
+                    loaderContainer.classList.add("authorized");
+                    hudNodeStatus.innerText = "SEC-NODE // VERIFIED";
+                    statusText.innerHTML = '<i class="fa-solid fa-circle-check"></i> Access Authorized. Redirecting...';
                     statusText.style.color = "var(--success-color)"; 
                     
                     progressFill.style.background = "var(--success-color)";
-                    progressFill.style.boxShadow = "0 0 15px rgba(16, 185, 129, 0.4)";
+                    progressFill.style.boxShadow = "0 0 18px rgba(16, 185, 129, 0.65)";
                     
                     triggerVibration([30, 50, 30]); 
 
                     setTimeout(() => {
-                        window.location.href = "inicio.html";
-                    }, 850);
+                        document.body.classList.add("portal-exit");
+                        setTimeout(() => {
+                            window.location.href = "inicio.html";
+                        }, 450);
+                    }, 650);
                 }
 
                 progressFill.style.width = `${progress}%`;
+                progressPercent.innerText = `${progress}%`;
 
                 if (progress > 10 && progress < 35) statusText.innerText = logMessages[0];
-                if (progress > 35 && progress < 65) {
-                    if(statusText.innerText !== logMessages[1]) triggerVibration(10);
+                if (progress >= 35 && progress < 65) {
+                    if (statusText.innerText !== logMessages[1]) triggerVibration(10);
                     statusText.innerText = logMessages[1];
                 }
-                if (progress > 65 && progress < 85) statusText.innerText = logMessages[2];
-                if (progress > 85 && progress < 100) {
-                    if(statusText.innerText !== logMessages[3]) triggerVibration(15);
+                if (progress >= 65 && progress < 85) statusText.innerText = logMessages[2];
+                if (progress >= 85 && progress < 100) {
+                    if (statusText.innerText !== logMessages[3]) triggerVibration(15);
                     statusText.innerText = logMessages[3];
                 }
 
-            }, 150); 
+            }, 135); 
         });
     </script>
 </body>
