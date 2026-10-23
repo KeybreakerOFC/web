@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="JXLL - Comunidad de ciberseguridad ética. Investigamos y reportamos actividades ilegales o poco éticas en la red a través de nuestros canales oficiales verificados.">
     <meta name="theme-color" content="#000000">
-    <title>JXLL | Comunidad de Ciberseguridad</title>
+    <title>JXLL | Comunidad de Ciberseguridad Ética</title>
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-pure-black: #000000;
-            --bg-card: rgba(10, 10, 10, 0.7);
-            --bg-card-hover: rgba(20, 20, 20, 0.9);
+            --bg-pure-black: #030508;
+            --bg-surface: #080c14;
+            --bg-card: rgba(12, 17, 28, 0.75);
+            --bg-card-hover: rgba(18, 26, 42, 0.92);
             --accent-primary: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.15);
+            --accent-secondary: #0ea5e9;
+            --accent-telegram: #2AABEE;
+            --accent-whatsapp: #25D366;
+            --accent-proton: #8b5cf6;
+            --accent-glow: rgba(56, 189, 248, 0.18);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(56, 189, 248, 0.3);
-            --border-light: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(56, 189, 248, 0.32);
+            --border-light: rgba(255, 255, 255, 0.07);
             --nav-height: 80px;
+            --hud-clip: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
         }
 
         * {
@@ -40,77 +46,51 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-pure-black);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             padding-bottom: env(safe-area-inset-bottom);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.06) 0%, transparent 45%),
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
         }
 
         h1, h2, h3, h4 {
             font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
+            line-height: 1.15;
+            letter-spacing: -0.025em;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 14px 28px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-primary);
-            color: #0f172a;
-            box-shadow: 0 4px 14px var(--accent-glow);
-        }
-
-        .btn-primary:hover {
-            background-color: #0284c7;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border-color: var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--accent-glow);
-            border-color: var(--accent-primary);
-        }
-
+        /* ==========================================
+           SCROLL PROGRESS & HEADER HUD
+        ========================================== */
         .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             height: 3px;
-            background: var(--accent-primary);
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-proton), var(--accent-whatsapp));
             width: 0%;
-            z-index: 1000;
+            z-index: 1001;
             transition: width 0.1s;
-            box-shadow: 0 0 10px var(--accent-primary);
+            box-shadow: 0 0 12px var(--accent-primary);
         }
 
         header {
@@ -118,13 +98,24 @@
             top: 0;
             width: 100%;
             height: var(--nav-height);
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(3, 5, 8, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-light);
-            z-index: 999;
+            z-index: 1000;
             display: flex;
             align-items: center;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
         }
 
         nav.container {
@@ -139,27 +130,39 @@
             gap: 12px;
             text-decoration: none;
             color: #ffffff;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 1.5rem;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
         }
 
-        .logo-icon {
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--accent-primary);
-            font-size: 1.8rem;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
         }
 
         .nav-menu {
             display: flex;
             gap: 32px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-menu a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
             transition: color 0.3s ease;
             position: relative;
         }
@@ -171,11 +174,12 @@
         .nav-menu a::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: -8px;
             left: 0;
             width: 0%;
             height: 2px;
             background: var(--accent-primary);
+            box-shadow: 0 0 8px var(--accent-primary);
             transition: width 0.3s ease;
         }
 
@@ -183,12 +187,32 @@
             width: 100%;
         }
 
+        .nav-cta {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid var(--border-color);
+            color: var(--accent-primary) !important;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-primary);
+            color: #030508 !important;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
             gap: 6px;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1002;
         }
 
         .hamburger span {
@@ -198,220 +222,795 @@
             transition: 0.3s ease;
         }
 
-        section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #ffffff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 4rem auto;
-            font-size: 1.1rem;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
+        /* ==========================================
+           BUTTONS
+        ========================================== */
+        .btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding-top: var(--nav-height);
+            gap: 12px;
+            padding: 15px 30px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid transparent;
             position: relative;
             overflow: hidden;
         }
 
-        .floating-elements {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #040914;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.28);
         }
 
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
-            opacity: 0.1;
-            filter: blur(50px);
-            animation: float 10s infinite alternate ease-in-out;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(56, 189, 248, 0.48);
+            color: #000000;
         }
 
-        .floating-element:nth-child(1) { width: 300px; height: 300px; top: -10%; left: -5%; animation-duration: 12s; }
-        .floating-element:nth-child(2) { width: 400px; height: 400px; bottom: -10%; right: -5%; animation-duration: 15s; }
-        .floating-element:nth-child(3) { width: 200px; height: 200px; top: 40%; left: 50%; animation-duration: 18s; }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border-color: var(--border-color);
+            backdrop-filter: blur(8px);
+        }
 
-        .hero-content {
+        .btn-secondary:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        /* ==========================================
+           HERO SECTION (SPLIT 3D PHONE MOCKUP LAYOUT)
+        ========================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--nav-height) + 50px) 0 80px 0;
             position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-whatsapp);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-whatsapp);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.35); opacity: 0.6; }
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.4rem, 5vw, 4.2rem);
+            margin-bottom: 22px;
             color: #ffffff;
-            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #25D366 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 750px;
-            margin-inline: auto;
+            margin-bottom: 34px;
+            max-width: 620px;
         }
 
         .cta-buttons {
             display: flex;
             gap: 16px;
-            justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 42px;
         }
 
+        /* Tactical HUD Telemetry Strip (Sparta Style) */
+        .hero-telemetry {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .telemetry-box {
+            background: rgba(12, 17, 28, 0.65);
+            border: 1px solid var(--border-light);
+            border-left: 2px solid var(--accent-primary);
+            padding: 12px 14px;
+            border-radius: 6px;
+        }
+
+        .telemetry-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .telemetry-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* ==========================================
+           REALISTIC SMARTPHONE FRAME (3D & FLAT)
+        ========================================== */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            perspective: 1400px;
+        }
+
+        .phone-scene {
+            position: relative;
+            width: 310px;
+            height: 635px;
+            transform-style: preserve-3d;
+            transform: rotateY(-14deg) rotateX(4deg);
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .phone-scene:hover {
+            transform: rotateY(-4deg) rotateX(1deg) translateY(-6px);
+        }
+
+        .phone-mockup {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #1e293b, #090d16 55%, #1e293b);
+            border-radius: 48px;
+            padding: 11px;
+            box-shadow: 
+                20px 30px 65px rgba(0, 0, 0, 0.85),
+                -2px -2px 15px rgba(56, 189, 248, 0.22),
+                inset 0 0 2px 1px rgba(255, 255, 255, 0.25);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hardware Buttons on Phone Bezel */
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 115px;
+            width: 3px;
+            height: 45px;
+            background: #334155;
+            border-radius: 3px 0 0 3px;
+            box-shadow: 0 58px 0 #334155;
+        }
+
+        .phone-mockup::after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 145px;
+            width: 3px;
+            height: 70px;
+            background: #334155;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .phone-inner {
+            width: 100%;
+            height: 100%;
+            background: #05070b;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Dynamic Island / Notch */
+        .phone-island {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 96px;
+            height: 24px;
+            background: #000000;
+            border-radius: 20px;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .island-camera {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #1e3a8a 25%, #090d16 70%);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        /* Home Indicator Bar */
+        .phone-home-bar {
+            position: absolute;
+            bottom: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 115px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: 10px;
+            z-index: 15;
+        }
+
+        /* Screen Glare */
+        .phone-glare {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.07) 0%, transparent 38%);
+            pointer-events: none;
+            z-index: 12;
+        }
+
+        .phone-screen-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .phone-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: opacity 0.35s ease;
+        }
+
+        /* Smart Live UI Fallback (Shows if local image file isn't in folder yet) */
+        .screen-fallback {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 44px 16px 24px 16px;
+            background: #0b1017;
+            color: #ffffff;
+            font-size: 0.78rem;
+            overflow-y: auto;
+        }
+
+        /* Floating Orbit Badges around Hero Phone (Octo SMM Style) */
+        .floating-badge {
+            position: absolute;
+            background: rgba(9, 13, 22, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65);
+            z-index: 25;
+            animation: float-card 5s ease-in-out infinite alternate;
+        }
+
+        .floating-badge.badge-1 {
+            top: 40px;
+            right: -55px;
+            border-color: rgba(42, 171, 238, 0.45);
+        }
+
+        .floating-badge.badge-2 {
+            bottom: 150px;
+            left: -70px;
+            border-color: rgba(37, 211, 102, 0.45);
+            animation-delay: 1.2s;
+        }
+
+        .floating-badge.badge-3 {
+            bottom: 45px;
+            right: -45px;
+            border-color: rgba(56, 189, 248, 0.45);
+            animation-delay: 2.4s;
+        }
+
+        @keyframes float-card {
+            0% { transform: translateY(0px) translateZ(30px); }
+            100% { transform: translateY(-10px) translateZ(30px); }
+        }
+
+        .badge-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .badge-info strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #ffffff;
+        }
+
+        .badge-info span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Hero Phone Screen Switcher */
+        .phone-tabs {
+            display: flex;
+            gap: 8px;
+            margin-top: 26px;
+            background: rgba(12, 17, 28, 0.8);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        .phone-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .phone-tab-btn.active {
+            background: var(--accent-primary);
+            color: #030508;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+        }
+
+        /* ==========================================
+           SECTIONS GENERAL
+        ========================================== */
+        section {
+            padding: 110px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 64px auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 12px;
+            padding: 4px 12px;
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 2px solid var(--accent-primary);
+            border-right: 2px solid var(--accent-primary);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.08rem;
+        }
+
+        /* ==========================================
+           SERVICES GRID (OCTO 01-06 + SPARTA HUD)
+        ========================================== */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 26px;
         }
 
         .service-card {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
+            padding: 34px 30px;
+            transition: all 0.35s ease;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            clip-path: var(--hud-clip);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            opacity: 0.25;
+            transition: opacity 0.35s ease;
         }
 
         .service-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-color);
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
         .service-card:hover::before {
             opacity: 1;
         }
 
+        .service-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
         .service-icon {
-            width: 56px;
-            height: 56px;
+            width: 54px;
+            height: 54px;
             background: var(--accent-glow);
+            border: 1px solid rgba(56, 189, 248, 0.3);
             color: var(--accent-primary);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .service-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-light);
         }
 
         .service-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.32rem;
             margin-bottom: 12px;
             color: #ffffff;
         }
 
         .service-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.96rem;
+            margin-bottom: 20px;
+        }
+
+        .service-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            color: var(--accent-primary);
+        }
+
+        /* ==========================================
+           ABOUT & SPARTA BENCHMARK TELEMETRY
+        ========================================== */
+        .about {
+            background: linear-gradient(180deg, transparent, rgba(56, 189, 248, 0.02), transparent);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .about-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.05fr 0.95fr;
             gap: 60px;
             align-items: center;
         }
 
         .about-text h2 {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 3.5vw, 2.7rem);
             margin-bottom: 24px;
             color: #ffffff;
         }
 
         .about-text p {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1.04rem;
         }
 
-        .stats {
+        .about-text strong {
+            color: var(--accent-primary);
+        }
+
+        .hud-benchmark-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            clip-path: var(--hud-clip);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 18px;
+            margin-bottom: 28px;
         }
 
         .stat-item {
-            background: var(--bg-card);
+            background: rgba(5, 8, 15, 0.8);
             border: 1px solid var(--border-light);
-            padding: 32px 24px;
-            border-radius: 16px;
-            text-align: center;
-            transition: transform 0.3s ease;
+            padding: 22px 18px;
+            border-radius: 12px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s ease;
         }
 
         .stat-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--border-color);
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+            flex-shrink: 0;
         }
 
         .stat-number {
             display: block;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            color: var(--accent-primary);
-            margin-bottom: 8px;
+            color: #ffffff;
+            line-height: 1.1;
             font-family: 'JetBrains Mono', monospace;
         }
 
         .stat-label {
-            color: var(--text-main);
+            color: var(--text-muted);
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.95rem;
         }
 
-        .contact {
-            background: linear-gradient(180deg, rgba(56, 189, 248, 0.02) 0%, transparent 100%);
+        /* Sparta Style Progress Bars */
+        .benchmark-bars {
             border-top: 1px solid var(--border-light);
+            padding-top: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
-        .contact-hub-card {
-            background: linear-gradient(145deg, rgba(10, 10, 10, 0.95), rgba(5, 5, 5, 1));
-            border: 1px solid var(--border-color);
+        .bar-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .bar-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            color: var(--text-main);
+        }
+
+        .bar-track {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-whatsapp));
+            box-shadow: 0 0 12px var(--accent-primary);
+        }
+
+        /* ==========================================
+           3 PHONE MOCKUPS SHOWCASE (CAPTURAS REALES)
+        ========================================== */
+        .showcase-phones-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 36px;
+            align-items: center;
+            margin-bottom: 70px;
+        }
+
+        .phone-showcase-card {
+            background: rgba(10, 14, 24, 0.75);
+            border: 1px solid var(--border-light);
             border-radius: 24px;
-            padding: 50px 35px;
-            max-width: 680px;
+            padding: 30px 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.35s ease;
+            position: relative;
+        }
+
+        .phone-showcase-card.featured {
+            border-color: var(--border-color);
+            background: linear-gradient(180deg, rgba(16, 24, 40, 0.9), rgba(8, 12, 20, 0.95));
+            transform: translateY(-14px);
+            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.12);
+        }
+
+        .phone-showcase-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-8px);
+        }
+
+        .phone-showcase-card.featured:hover {
+            transform: translateY(-20px);
+        }
+
+        .showcase-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .tag-tg {
+            background: rgba(42, 171, 238, 0.14);
+            color: var(--accent-telegram);
+            border: 1px solid rgba(42, 171, 238, 0.35);
+        }
+
+        .tag-wa {
+            background: rgba(37, 211, 102, 0.14);
+            color: var(--accent-whatsapp);
+            border: 1px solid rgba(37, 211, 102, 0.35);
+        }
+
+        .tag-lead {
+            background: rgba(56, 189, 248, 0.14);
+            color: var(--accent-primary);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+
+        /* Compact Phone Frame for 3-Column Showcase */
+        .phone-frame-sm {
+            width: 265px;
+            height: 540px;
+            background: linear-gradient(145deg, #1e293b, #090d16 60%, #1e293b);
+            border-radius: 42px;
+            padding: 10px;
+            box-shadow: 
+                0 20px 45px rgba(0, 0, 0, 0.8),
+                inset 0 0 2px 1px rgba(255, 255, 255, 0.22);
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .phone-frame-sm .phone-inner {
+            border-radius: 33px;
+        }
+
+        .phone-showcase-info h3 {
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .phone-showcase-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+
+        /* ==========================================
+           CONTACT HUB CARD
+        ========================================== */
+        .contact-hub-card {
+            background: linear-gradient(145deg, rgba(12, 17, 28, 0.95), rgba(5, 7, 12, 0.98));
+            border: 1px solid var(--border-color);
+            padding: 52px 40px;
+            max-width: 760px;
             margin: 0 auto;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(56, 189, 248, 0.05);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 40px rgba(56, 189, 248, 0.05);
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            clip-path: var(--hud-clip);
         }
 
         .contact-hub-card::before {
@@ -424,47 +1023,42 @@
             background: linear-gradient(90deg, transparent, #2AABEE, #25D366, #6d4aff, transparent);
         }
 
-        .contact-hub-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.12);
-        }
-
         .hub-icon {
-            font-size: 4rem;
+            font-size: 3.6rem;
             color: var(--accent-primary);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             display: inline-block;
-            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.3));
-            animation: pulse-glow 3s infinite alternate ease-in-out;
+            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.35));
         }
 
         .contact-hub-card h3 {
-            font-size: 1.9rem;
-            margin-bottom: 14px;
+            font-size: 2rem;
+            margin-bottom: 12px;
             color: #ffffff;
         }
 
-        .contact-hub-card p {
+        .contact-hub-card > p {
             color: var(--text-muted);
             font-size: 1.05rem;
-            margin-bottom: 30px;
-            padding: 0 10px;
+            margin-bottom: 32px;
+            max-width: 580px;
+            margin-inline: auto;
         }
 
         .channels-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
             width: 100%;
-            max-width: 420px;
-            margin: 0 auto 12px auto;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
         }
 
         .btn-channel {
-            padding: 13px 22px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: 50px;
+            padding: 14px 20px;
+            font-size: 0.94rem;
+            font-weight: 700;
+            border-radius: 12px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -477,146 +1071,153 @@
         .btn-telegram {
             background: #2AABEE;
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);
+            box-shadow: 0 4px 15px rgba(42, 171, 238, 0.25);
         }
 
         .btn-telegram:hover {
             background: #2298d6;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 30px rgba(42, 171, 238, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(42, 171, 238, 0.45);
         }
 
         .btn-whatsapp-chat {
             background: #25D366;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            color: #04140a;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
         }
 
         .btn-whatsapp-chat:hover {
             background: #1ebc59;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
         }
 
         .btn-whatsapp-channel {
             background: rgba(37, 211, 102, 0.12);
             color: #25D366;
             border: 1px solid rgba(37, 211, 102, 0.4);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.1);
         }
 
         .btn-whatsapp-channel:hover {
             background: #25D366;
-            color: #ffffff;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            color: #04140a;
+            transform: translateY(-3px);
         }
 
         .btn-proton {
-            background: rgba(109, 74, 255, 0.15);
-            color: #b7a6ff;
-            border: 1px solid rgba(109, 74, 255, 0.4);
-            box-shadow: 0 4px 15px rgba(109, 74, 255, 0.1);
+            background: rgba(139, 92, 246, 0.15);
+            color: #c4b5fd;
+            border: 1px solid rgba(139, 92, 246, 0.45);
         }
 
         .btn-proton:hover {
-            background: #6d4aff;
+            background: #7c3aed;
             color: #ffffff;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 25px rgba(109, 74, 255, 0.4);
+            transform: translateY(-3px);
         }
 
         .verified-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: #38bdf8;
-            margin-top: 10px;
+            gap: 8px;
+            font-size: 0.86rem;
+            color: var(--accent-primary);
+            margin-top: 8px;
             font-family: 'JetBrains Mono', monospace;
+            padding: 6px 16px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.25);
         }
 
         .security-notice {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-top: 25px;
-            padding: 15px 20px;
-            background: rgba(16, 185, 129, 0.05);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            gap: 14px;
+            margin-top: 26px;
+            padding: 16px 22px;
+            background: rgba(16, 185, 129, 0.06);
+            border: 1px solid rgba(16, 185, 129, 0.25);
             border-radius: 12px;
             color: #10b981;
             font-size: 0.9rem;
             text-align: left;
-            width: 100%;
         }
 
+        /* ==========================================
+           FOOTER
+        ========================================== */
         footer {
-            background: #050505;
+            background: #020306;
             border-top: 1px solid var(--border-light);
-            padding: 60px 0 30px 0;
-            margin-top: 40px;
+            padding: 70px 0 30px 0;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: 1.8fr 1fr 1.2fr;
+            gap: 48px;
+            margin-bottom: 48px;
         }
 
         .footer-section h3 {
             color: #ffffff;
             margin-bottom: 20px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .footer-section p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .footer-section a {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: var(--text-muted);
             text-decoration: none;
             margin-bottom: 12px;
-            transition: color 0.3s ease;
+            font-size: 0.94rem;
+            transition: all 0.25s ease;
         }
 
         .footer-section a:hover {
             color: var(--accent-primary);
+            transform: translateX(4px);
         }
 
         .footer-bottom {
-            text-align: center;
-            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-top: 26px;
             border-top: 1px solid var(--border-light);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.86rem;
         }
 
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        /* ==========================================
+           ANIMATIONS & RESPONSIVE
+        ========================================== */
+        .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-        .fade-in-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .fade-in-left.visible { opacity: 1; transform: translateX(0); }
-        .fade-in-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .fade-in-right.visible { opacity: 1; transform: translateX(0); }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(20px, 20px) scale(1.05); }
-        }
-
-        @keyframes pulse-glow {
-            0% { filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.2)); }
-            100% { filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.6)); }
-        }
-
-        @media (max-width: 1024px) {
-            .about-content { grid-template-columns: 1fr; gap: 40px; }
-            .footer-content { grid-template-columns: 1fr 1fr; }
+        @media (max-width: 1080px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 50px; }
+            .hero-subtitle { margin-inline: auto; }
+            .cta-buttons { justify-content: center; }
+            .phone-scene { transform: none !important; }
+            .about-content { grid-template-columns: 1fr; }
+            .showcase-phones-grid { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; }
+            .phone-showcase-card.featured { transform: none; }
         }
 
         @media (max-width: 768px) {
@@ -626,153 +1227,504 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - var(--nav-height));
-                background: var(--bg-pure-black);
+                background: rgba(3, 5, 8, 0.98);
                 flex-direction: column;
-                align-items: center;
                 justify-content: center;
-                gap: 40px;
+                gap: 32px;
                 transition: left 0.3s ease;
             }
             .nav-menu.active { left: 0; }
-            .nav-menu a { font-size: 1.5rem; }
+            .nav-menu a { font-size: 1.3rem; }
             .hamburger { display: flex; }
             .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-            .stats { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; text-align: center; }
-            .contact-hub-card { padding: 40px 20px; }
+            .hero-telemetry { grid-template-columns: 1fr 1fr; }
+            .floating-badge { display: none; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .channels-buttons { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .contact-hub-card { padding: 36px 20px; }
         }
     </style>
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
 
+    <!-- HEADER -->
     <header>
         <nav class="container">
-            <a href="inicio.html" class="logo">
-                <i class="fa-solid fa-network-wired logo-icon"></i>
+            <a href="#inicio" class="logo">
+                <div class="logo-box">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
                 <span>JXLL</span>
             </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="inicio.html" class="active">Inicio</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#servicios">Nuestra Labor</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#ecosistema">Canales</a></li>
+                <li><a href="#contacto" class="nav-cta"><i class="fa-solid fa-shield-halved"></i> Reportar</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
+            <div class="hamburger" id="hamburger" aria-label="Abrir menú">
                 <span></span><span></span><span></span>
             </div>
         </nav>
     </header>
 
+    <!-- HERO SECTION CON MARCO DE CELULAR 3D INTERACTIVO -->
     <section id="inicio" class="hero">
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
         <div class="container">
-            <div class="hero-content fade-in">
-                <h1>Por un Ciberespacio Limpio y Ético</h1>
-                <p class="hero-subtitle">Somos una comunidad de ciberseguridad 100% gratuita. Analizamos y neutralizamos actividades ilegales, estafas y comportamientos poco éticos en la red mediante el reporte ciudadano y la acción colaborativa.</p>
-                <div class="cta-buttons">
-                    <a href="contacto.html" class="btn btn-primary">
-                        Reportar Incidente <i class="fa-solid fa-shield-halved"></i>
-                    </a>
-                    <a href="servicios.html" class="btn btn-secondary">
-                        Nuestra Labor
-                    </a>
+            <div class="hero-grid">
+                <!-- Columna Izquierda -->
+                <div class="hero-content fade-in">
+                    <div class="hero-badge">
+                        <span class="status-dot"></span>
+                        <span>DEFENSA DIGITAL COLECTIVA · 100% GRATUITO</span>
+                    </div>
+                    <h1>Por un Ciberespacio <span class="text-gradient">Limpio y Ético</span></h1>
+                    <p class="hero-subtitle">
+                        Somos una comunidad de ciberseguridad 100% gratuita. Analizamos y neutralizamos actividades ilegales, estafas y comportamientos poco éticos en la red mediante el reporte ciudadano, investigación técnica y acción colaborativa.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#contacto" class="btn btn-primary">
+                            Reportar Incidente <i class="fa-solid fa-shield-halved"></i>
+                        </a>
+                        <a href="#ecosistema" class="btn btn-secondary">
+                            <i class="fa-solid fa-mobile-screen-button"></i> Ver Canales Oficiales
+                        </a>
+                    </div>
+
+                    <!-- Barra de Telemetría Táctica (Estilo Sparta) -->
+                    <div class="hero-telemetry">
+                        <div class="telemetry-box">
+                            <span class="telemetry-label">REPORTES</span>
+                            <span class="telemetry-val">+2,000</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="telemetry-label">HERRAMIENTAS</span>
+                            <span class="telemetry-val">+50 OSINT</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="telemetry-label">COSTO OPERATIVO</span>
+                            <span class="telemetry-val">0$ (100% FREE)</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="telemetry-label">MONITOREO</span>
+                            <span class="telemetry-val">24/7 ACTIVO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Smartphone 3D + Tarjetas Flotantes -->
+                <div class="hero-visual fade-in">
+                    <div class="phone-scene">
+                        <!-- Insignias Flotantes (Estilo Octo SMM) -->
+                        <div class="floating-badge badge-1">
+                            <div class="badge-icon" style="background: rgba(42,171,238,0.15); color: #2AABEE;">
+                                <i class="fa-brands fa-telegram"></i>
+                            </div>
+                            <div class="badge-info">
+                                <strong>JXLL [PURGATORY]™</strong>
+                                <span>289 Subscribers · Research</span>
+                            </div>
+                        </div>
+
+                        <div class="floating-badge badge-2">
+                            <div class="badge-icon" style="background: rgba(37,211,102,0.15); color: #25D366;">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div class="badge-info">
+                                <strong>Canal Oficial JXLL <i class="fa-solid fa-circle-check" style="color:#38bdf8;"></i></strong>
+                                <span>118 Seguidores · Alertas</span>
+                            </div>
+                        </div>
+
+                        <div class="floating-badge badge-3">
+                            <div class="badge-icon" style="background: rgba(56,189,248,0.15); color: #38bdf8;">
+                                <i class="fa-solid fa-user-Astronaut"></i>
+                            </div>
+                            <div class="badge-info">
+                                <strong>@Keybreakerr</strong>
+                                <span>CEO & Red Team Leader</span>
+                            </div>
+                        </div>
+
+                        <!-- Marco Físico del Celular -->
+                        <div class="phone-mockup">
+                            <div class="phone-inner">
+                                <div class="phone-island">
+                                    <div class="island-camera"></div>
+                                </div>
+                                <div class="phone-glare"></div>
+
+                                <div class="phone-screen-content">
+                                    <!-- Captura Dinámica Principal -->
+                                    <img id="heroPhoneImg" 
+                                         src="photo_5104934511430012165_w.jpg" 
+                                         alt="Captura Oficial JXLL" 
+                                         class="phone-screenshot"
+                                         onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='flex';">
+
+                                    <!-- Fallback UI en vivo si la imagen aún no está en la carpeta -->
+                                    <div id="heroFallback" class="screen-fallback">
+                                        <div>
+                                            <div style="display:flex; align-items:center; gap:10px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.1);">
+                                                <div style="width:36px; height:36px; border-radius:50%; background:#ffffff; color:#000; display:flex; align-items:center; justify-content:center; font-weight:900;">JX</div>
+                                                <div>
+                                                    <strong style="display:block; font-size:0.85rem;">JXLL [PURGATORY]™</strong>
+                                                    <span style="font-size:0.7rem; color:#94a3b8;">289 subscribers</span>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top:12px; background:#161f2c; border-radius:10px; padding:10px; border-left:3px solid #38bdf8;">
+                                                <div style="color:#38bdf8; font-weight:700; font-size:0.75rem; margin-bottom:4px;">php2shell-bypass-aslr-exp</div>
+                                                <p style="font-size:0.7rem; color:#cbd5e1;">A php2shell exploit that requires no modifications to the official version...</p>
+                                            </div>
+                                            <div style="margin-top:10px; background:#161f2c; border-radius:10px; padding:10px; border-left:3px solid #f43f5e;">
+                                                <div style="color:#f43f5e; font-weight:700; font-size:0.75rem; margin-bottom:4px;">🔥 PHP2Shell CVE Research</div>
+                                                <p style="font-size:0.7rem; color:#cbd5e1;">Version-aware research toolkit for CVE-2026-109618 / CVE-2026-109619 — pre-auth RCE in PHP session.upload_progress. Build profiles, labs & detection guidance for authorized security testing.</p>
+                                            </div>
+                                        </div>
+                                        <a href="https://t.me/jxll_canal" target="_blank" style="text-align:center; padding:10px; background:#2AABEE; color:#fff; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.78rem;">UNIRME AL CANAL</a>
+                                    </div>
+                                </div>
+
+                                <div class="phone-home-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selector Interactivo de Capturas en el Hero -->
+                    <div class="phone-tabs">
+                        <button class="phone-tab-btn active" onclick="switchHeroScreen('photo_5104934511430012165_w.jpg', this)">
+                            <i class="fa-brands fa-telegram"></i> Telegram
+                        </button>
+                        <button class="phone-tab-btn" onclick="switchHeroScreen('photo_5104934511430012167_w.jpg', this)">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </button>
+                        <button class="phone-tab-btn" onclick="switchHeroScreen('photo_5104934511430012166_w.jpg', this)">
+                            <i class="fa-solid fa-user-shield"></i> Keybreaker
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN: NUESTRA LABOR (TARJETAS NUMERADAS 01-06) -->
     <section id="servicios" class="services">
         <div class="container">
-            <h2 class="section-title fade-in">Nuestra Labor</h2>
-            <p class="section-subtitle fade-in">Nuestra comunidad no ofrece servicios de pago. Todo nuestro esfuerzo está enfocado en proteger a los usuarios y mantener la red segura mediante la acción colectiva.</p>
+            <div class="section-header fade-in">
+                <span class="section-tag">OPERACIONES ÉTICAS</span>
+                <h2 class="section-title">Nuestra Labor en la Red</h2>
+                <p class="section-subtitle">
+                    Nuestra comunidad no ofrece servicios de pago. Todo nuestro esfuerzo está enfocado en proteger a los usuarios y mantener la red segura mediante la acción colectiva.
+                </p>
+            </div>
             
             <div class="services-grid">
                 <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fa-solid fa-inbox"></i></div>
-                    <h3>Recepción de Reportes</h3>
-                    <p>Canales seguros y confidenciales para que cualquier ciudadano pueda denunciar páginas fraudulentas, estafas o actividades ilícitas encontradas en internet.</p>
-                </div>
-                
-                <div class="service-card fade-in" style="transition-delay: 0.1s;">
-                    <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                    <h3>Análisis e Investigación</h3>
-                    <p>Nuestros miembros analizan los reportes recibidos rastreando infraestructura maliciosa, identificando vectores de ataque y documentando el fraude.</p>
-                </div>
-                
-                <div class="service-card fade-in" style="transition-delay: 0.2s;">
-                    <div class="service-icon"><i class="fa-solid fa-ban"></i></div>
-                    <h3>Intervención y Mitigación</h3>
-                    <p>Acción comunitaria para neutralizar amenazas. Contactamos a proveedores de hosting y autoridades pertinentes para dar de baja sitios maliciosos.</p>
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-inbox"></i></div>
+                            <span class="service-number">01</span>
+                        </div>
+                        <h3>Recepción de Reportes</h3>
+                        <p>Canales seguros y confidenciales para que cualquier ciudadano pueda denunciar páginas fraudulentas, estafas o actividades ilícitas encontradas en internet.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>CANAL ENCRIPTADO</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
                 
                 <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fa-solid fa-code"></i></div>
-                    <h3>Herramientas Open-Source</h3>
-                    <p>Desarrollo colaborativo de scripts, utilidades de seguridad y automatizaciones que se comparten libremente para que todos puedan protegerse.</p>
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                            <span class="service-number">02</span>
+                        </div>
+                        <h3>Análisis e Investigación</h3>
+                        <p>Nuestros miembros analizan los reportes recibidos rastreando infraestructura maliciosa, identificando vectores de ataque y documentando el fraude.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>OSINT & FORENSE</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
                 
-                <div class="service-card fade-in" style="transition-delay: 0.1s;">
-                    <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
-                    <h3>Educación y Alertas</h3>
-                    <p>Difusión gratuita de información sobre nuevas vulnerabilidades, métodos de phishing actuales y buenas prácticas de seguridad para usuarios comunes.</p>
+                <div class="service-card fade-in">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-ban"></i></div>
+                            <span class="service-number">03</span>
+                        </div>
+                        <h3>Intervención y Mitigación</h3>
+                        <p>Acción comunitaria para neutralizar amenazas. Contactamos a proveedores de hosting y autoridades pertinentes para dar de baja sitios maliciosos.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>TAKEDOWN ÉTICO</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+                            <span class="service-number">04</span>
+                        </div>
+                        <h3>Herramientas Open-Source</h3>
+                        <p>Desarrollo colaborativo de scripts, utilidades de seguridad y automatizaciones que se comparten libremente para que todos puedan protegerse.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>CÓDIGO ABIERTO</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                            <span class="service-number">05</span>
+                        </div>
+                        <h3>Educación y Alertas</h3>
+                        <p>Difusión gratuita de información sobre nuevas vulnerabilidades, métodos de phishing actuales y buenas prácticas de seguridad para usuarios comunes.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>DIVULGACIÓN ACTIVA</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
 
-                <div class="service-card fade-in" style="transition-delay: 0.2s;">
-                    <div class="service-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                    <h3>Soporte Comunitario</h3>
-                    <p>Asistencia técnica y orientación sin costo para víctimas de ciberdelitos, ayudándoles a asegurar sus cuentas y entender los pasos a seguir.</p>
+                <div class="service-card fade-in">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                            <span class="service-number">06</span>
+                        </div>
+                        <h3>Soporte Comunitario</h3>
+                        <p>Asistencia técnica y orientación sin costo para víctimas de ciberdelitos, ayudándoles a asegurar sus cuentas y entender los pasos a seguir.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>ASISTENCIA SIN COSTO</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN: NOSOTROS + BENCHMARK TÁCTICO -->
     <section id="nosotros" class="about">
         <div class="container">
             <div class="about-content">
-                <div class="about-text fade-in-left">
-                    <h2>¿JXLL?</h2>
+                <div class="about-text fade-in">
+                    <span class="section-tag">IDENTIDAD & FILOSOFÍA</span>
+                    <h2>¿Qué es JXLL?</h2>
                     <p>Somos una comunidad descentralizada enfocada en el desarrollo de software, la automatización avanzada y la ciberseguridad ética. Nuestro propósito no es lucrar, sino construir una red más segura para todos.</p>
                     <p>Todo nuestro conocimiento, desarrollo de herramientas y asistencia técnica se ofrecen de manera <strong>totalmente gratuita</strong>. No realizamos auditorías de pago ni vendemos cursos; operamos bajo un estricto código de ética colaborativo.</p>
                     <p>Nos dedicamos a limpiar y proteger el ciberespacio. Recibimos reportes ciudadanos sobre actividades ilegales, esquemas de fraude o comportamientos poco éticos, para analizarlos exhaustivamente y mitigar su impacto mediante el reporte a las autoridades y plataformas correspondientes.</p>
                 </div>
-                <div class="stats fade-in-right">
-                    <div class="stat-item">
-                        <span class="stat-number">+2K</span>
-                        <span class="stat-label">Reportes Analizados</span>
+
+                <!-- Panel HUD de Rendimiento e Impacto (Inspirado en Sparta X17) -->
+                <div class="hud-benchmark-card fade-in">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-shield-virus"></i></div>
+                            <div>
+                                <span class="stat-number">+2K</span>
+                                <span class="stat-label">Reportes Analizados</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-lock-open"></i></div>
+                            <div>
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Gratuito y Abierto</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-terminal"></i></div>
+                            <div>
+                                <span class="stat-number">+50</span>
+                                <span class="stat-label">Herramientas Aportadas</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                            <div>
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Recepción Comunitaria</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Gratuito y Abierto</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">+50</span>
-                        <span class="stat-label">Herramientas Aportadas</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">Recepción Comunitaria</span>
+
+                    <div class="benchmark-bars">
+                        <div class="bar-item">
+                            <div class="bar-header">
+                                <span>TASA DE RESPUESTA Y ANÁLISIS COMUNITARIO</span>
+                                <span>98.4%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 98.4%;"></div>
+                            </div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-header">
+                                <span>TRANSPARENCIA Y ÉTICA OPEN-SOURCE</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contacto" class="contact">
+    <!-- SECCIÓN: ECOSISTEMA MÓVIL (LAS 3 CAPTURAS EN MARCOS DE CELULAR) + CONTACTO -->
+    <section id="ecosistema" class="contact">
         <div class="container">
-            <h2 class="section-title fade-in">Canal de Reportes</h2>
-            <p class="section-subtitle fade-in">Para mantener la privacidad y seguridad, toda recepción de reportes se gestiona mediante nuestros canales oficiales y seguros.</p>
-            
-            <div class="contact-hub-card fade-in">
+            <div class="section-header fade-in">
+                <span class="section-tag">VERIFICACIÓN VISUAL</span>
+                <h2 class="section-title">Ecosistema Oficial en Vivo</h2>
+                <p class="section-subtitle">
+                    Conoce nuestros canales verificados de investigación técnica, difusión de formación y contacto directo para evitar suplantaciones.
+                </p>
+            </div>
+
+            <!-- Galería de 3 Marcos de Celular con las Capturas Adjuntas -->
+            <div class="showcase-phones-grid">
+                
+                <!-- CELULAR 1: TELEGRAM CANAL JXLL [PURGATORY]™ -->
+                <div class="phone-showcase-card fade-in">
+                    <span class="showcase-tag tag-tg"><i class="fa-brands fa-telegram"></i> Telegram Research</span>
+                    <div class="phone-frame-sm">
+                        <div class="phone-inner">
+                            <div class="phone-island"><div class="island-camera"></div></div>
+                            <div class="phone-glare"></div>
+                            <div class="phone-screen-content">
+                                <img src="photo_5104934511430012165_w.jpg" 
+                                     alt="Canal de Telegram JXLL [PURGATORY]" 
+                                     class="phone-screenshot"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <!-- Fallback Réplica -->
+                                <div class="screen-fallback">
+                                    <div>
+                                        <div style="display:flex; align-items:center; gap:8px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+                                            <i class="fa-brands fa-telegram" style="font-size:1.4rem; color:#2AABEE;"></i>
+                                            <div style="text-align:left;">
+                                                <strong style="display:block; font-size:0.8rem;">JXLL [PURGATORY]™</strong>
+                                                <span style="font-size:0.68rem; color:#94a3b8;">289 subscribers</span>
+                                            </div>
+                                        </div>
+                                        <div style="margin-top:12px; text-align:left; background:#141d2b; padding:10px; border-radius:8px;">
+                                            <span style="color:#38bdf8; font-weight:700; font-size:0.74rem;">🔹 php2shell-CVE-2026-109618-PoC</span>
+                                            <p style="font-size:0.68rem; color:#94a3b8; margin-top:4px;">PoC exploit demonstrating remote code execution in vulnerable PHP environments for authorized security testing.</p>
+                                        </div>
+                                    </div>
+                                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#2AABEE;">t.me/jxll_canal</span>
+                                </div>
+                            </div>
+                            <div class="phone-home-bar"></div>
+                        </div>
+                    </div>
+                    <div class="phone-showcase-info">
+                        <h3>JXLL [PURGATORY]™</h3>
+                        <p>Laboratorios técnicos, análisis de vulnerabilidades (CVEs), PoCs educativas y herramientas de ciberseguridad.</p>
+                        <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="btn-channel btn-telegram">
+                            <i class="fa-brands fa-telegram"></i> Unirse al Canal
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CELULAR 2 (CENTRAL DESTACADO): WHATSAPP CANAL OFICIAL JXLL -->
+                <div class="phone-showcase-card featured fade-in">
+                    <span class="showcase-tag tag-wa"><i class="fa-brands fa-whatsapp"></i> Canal Verificado</span>
+                    <div class="phone-frame-sm">
+                        <div class="phone-inner">
+                            <div class="phone-island"><div class="island-camera"></div></div>
+                            <div class="phone-glare"></div>
+                            <div class="phone-screen-content">
+                                <img src="photo_5104934511430012167_w.jpg" 
+                                     alt="Canal Oficial de WhatsApp JXLL" 
+                                     class="phone-screenshot"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <!-- Fallback Réplica -->
+                                <div class="screen-fallback">
+                                    <div style="text-align:center;">
+                                        <div style="width:64px; height:64px; border-radius:50%; margin:0 auto 10px auto; background:radial-gradient(circle,#ef4444,#000); border:2px solid #ef4444; display:flex; align-items:center; justify-content:center; font-weight:900;">JXLL</div>
+                                        <strong style="font-size:1rem;">JXLL <i class="fa-solid fa-circle-check" style="color:#38bdf8;"></i></strong>
+                                        <p style="font-size:0.72rem; color:#94a3b8;">Canal • 118 seguidores</p>
+                                        <div style="margin-top:14px; text-align:left; background:#121820; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+                                            <p style="font-size:0.72rem; color:#fff;">Ciberseguridad • Tips • Conocimiento<br>Canal oficial de JXLL</p>
+                                            <span style="font-size:0.65rem; color:#64748b;">Rutas de Formación WomenCISO & MenCISO IAP · Google Cloud</span>
+                                        </div>
+                                    </div>
+                                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#25D366;">Canal Público Verificado</span>
+                                </div>
+                            </div>
+                            <div class="phone-home-bar"></div>
+                        </div>
+                    </div>
+                    <div class="phone-showcase-info">
+                        <h3>Canal Oficial WhatsApp</h3>
+                        <p>Alertas tempranas, becas y rutas de formación en ciberseguridad, tips de prevención y avisos oficiales.</p>
+                        <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-chat">
+                            <i class="fa-solid fa-bullhorn"></i> Seguir en WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CELULAR 3: PERFIL KEYBREAKER / RED TEAM LEADER -->
+                <div class="phone-showcase-card fade-in">
+                    <span class="showcase-tag tag-lead"><i class="fa-solid fa-user-secret"></i> Dirección & Red Team</span>
+                    <div class="phone-frame-sm">
+                        <div class="phone-inner">
+                            <div class="phone-island"><div class="island-camera"></div></div>
+                            <div class="phone-glare"></div>
+                            <div class="phone-screen-content">
+                                <img src="photo_5104934511430012166_w.jpg" 
+                                     alt="Perfil Oficial Keybreaker CEO JXLL" 
+                                     class="phone-screenshot"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <!-- Fallback Réplica -->
+                                <div class="screen-fallback">
+                                    <div style="text-align:center;">
+                                        <div style="width:60px; height:60px; border-radius:50%; margin:0 auto 8px auto; background:#1e293b; border:2px solid #38bdf8; display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-user-hoodie" style="font-size:1.4rem; color:#38bdf8;"></i></div>
+                                        <strong style="font-size:0.85rem;">keybreaker 『 JXLL 』</strong>
+                                        <div style="margin-top:12px; text-align:left; background:#111622; padding:10px; border-radius:8px;">
+                                            <p style="font-size:0.7rem; color:#f8fafc;">🔺 <strong>CEO & Founder JXLL | Red Team Leader | Keybreaker | Pentester & Exploit Dev</strong> 🔺</p>
+                                            <p style="font-size:0.7rem; color:#38bdf8; margin-top:6px;">@Keybreakerr</p>
+                                        </div>
+                                    </div>
+                                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#38bdf8;">Contacto Verificado</span>
+                                </div>
+                            </div>
+                            <div class="phone-home-bar"></div>
+                        </div>
+                    </div>
+                    <div class="phone-showcase-info">
+                        <h3>Liderazgo & Red Team</h3>
+                        <p>Coordinación de investigaciones, recepción de casos críticos y dirección técnica por @Keybreakerr.</p>
+                        <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-channel">
+                            <i class="fa-brands fa-whatsapp"></i> Contacto Directo
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- HUB CENTRAL DE REPORTES -->
+            <div id="contacto" class="contact-hub-card fade-in">
                 <i class="fa-solid fa-shield-halved hub-icon"></i>
-                <h3>Atención y Conexión JXLL</h3>
+                <h3>Centro de Atención y Reportes JXLL</h3>
                 <p>¿Has detectado una estafa, un sitio fraudulento o actividad maliciosa? Contáctanos a través de cualquiera de nuestras vías oficiales. Analizaremos tu caso de forma confidencial y gratuita.</p>
                 
                 <div class="channels-buttons">
@@ -781,7 +1733,7 @@
                     </a>
 
                     <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-chat">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
                     </a>
 
                     <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-channel">
@@ -794,63 +1746,83 @@
                 </div>
 
                 <div class="verified-badge">
-                    <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Canales Oficiales
+                    <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Canales Oficiales Verificados
                 </div>
 
                 <div class="security-notice">
-                    <i class="fa-solid fa-shield-halved" style="font-size: 1.4rem;"></i>
+                    <i class="fa-solid fa-shield-halved" style="font-size: 1.5rem; flex-shrink: 0;"></i>
                     <div>
-                        <strong>100% Gratuito y Confidencial</strong><br>
-                        Ningún administrador de JXLL te cobrará por revisar un reporte o brindarte ayuda.
+                        <strong>100% Gratuito, Ético y Confidencial</strong><br>
+                        Ningún administrador o miembro de JXLL te cobrará dinero por revisar un reporte, investigar un fraude o brindarte orientación técnica.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <a href="inicio.html" class="logo" style="margin-bottom: 16px;">
-                        <i class="fa-solid fa-network-wired logo-icon" style="font-size: 1.4rem;"></i>
+                    <a href="#inicio" class="logo" style="margin-bottom: 16px;">
+                        <div class="logo-box" style="width:34px; height:34px; font-size:1rem;">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
                         <span>JXLL</span>
                     </a>
-                    <p>Comunidad ética dedicada a investigar actividades ilícitas y proteger el ciberespacio de forma 100% gratuita.</p>
+                    <p>Comunidad ética dedicada a investigar actividades ilícitas, desarrollar herramientas abiertas y proteger el ciberespacio de forma 100% gratuita.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Navegación</h3>
-                    <a href="inicio.html">Inicio</a>
-                    <a href="servicios.html">Nuestra Labor</a>
-                    <a href="nosotros.html">Comunidad JXLL</a>
-                    <a href="contacto.html">Reportar Incidente</a>
+                    <a href="inicio.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Inicio</a>
+                    <a href="servicios.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Nuestra Labor</a>
+                    <a href="nosotros.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Comunidad JXLL</a>
+                    <a href="contacto.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Reportar Incidente</a>
                 </div>
                 <div class="footer-section">
                     <h3>Contacto Oficial</h3>
-                    <p>Canales oficiales para reportes y material educativo:</p>
                     <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 600;">
-                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> Canal Telegram
+                        <i class="fa-brands fa-telegram"></i> Canal Telegram (JXLL)
                     </a>
                     <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
-                        <i class="fa-brands fa-whatsapp" style="margin-right: 5px;"></i> WhatsApp (+57 350 5807674)
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp (+57 350 5807674)
                     </a>
                     <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
-                        <i class="fa-solid fa-bullhorn" style="margin-right: 5px;"></i> Canal de WhatsApp
+                        <i class="fa-solid fa-bullhorn"></i> Canal Oficial de WhatsApp
                     </a>
-                    <a href="mailto:team_jxll@proton.me" style="color: #b7a6ff; font-weight: 600;">
-                        <i class="fa-solid fa-envelope" style="margin-right: 5px;"></i> team_jxll@proton.me
+                    <a href="mailto:team_jxll@proton.me" style="color: #c4b5fd; font-weight: 600;">
+                        <i class="fa-solid fa-envelope"></i> team_jxll@proton.me
                     </a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Comunidad JXLL. Por un internet más seguro. | Open Source Security</p>
+                <p>&copy; 2026 Comunidad JXLL. Por un internet más seguro.</p>
+                <span class="mono" style="color: var(--accent-primary); font-size: 0.8rem;">[ STATUS: ALL SYSTEMS OPERATIONAL ]</span>
             </div>
         </div>
     </footer>
 
     <script>
+        // Cambiar dinámicamente la captura del celular 3D en el Hero
+        function switchHeroScreen(imageSrc, btnElement) {
+            const heroImg = document.getElementById('heroPhoneImg');
+            const fallback = document.getElementById('heroFallback');
+            
+            document.querySelectorAll('.phone-tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            heroImg.style.opacity = '0';
+            setTimeout(() => {
+                heroImg.style.display = 'block';
+                fallback.style.display = 'none';
+                heroImg.src = imageSrc;
+                heroImg.style.opacity = '1';
+            }, 180);
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
-            // Mobile Menu Logic
+            // Menú Móvil
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('navMenu');
 
@@ -859,7 +1831,14 @@
                 navMenu.classList.toggle('active');
             });
 
-            // Scroll Progress Bar
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Barra de Progreso de Lectura
             const scrollProgress = document.getElementById('scrollProgress');
             window.addEventListener('scroll', () => {
                 const totalScroll = document.documentElement.scrollTop;
@@ -868,24 +1847,17 @@
                 scrollProgress.style.width = scroll;
             });
 
-            // Intersection Observer for Fade-in Animations
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            // Animaciones al hacer Scroll (Intersection Observer)
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); 
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.12 });
 
-            const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
-            animatedElements.forEach(el => observer.observe(el));
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         });
     </script>
 </body>
