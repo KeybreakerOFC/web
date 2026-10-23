@@ -79,6 +79,46 @@
             padding: 0 24px;
         }
 
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 26px;
+            font-size: 0.94rem;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #040914;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.28);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(56, 189, 248, 0.48);
+            color: #000000;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border-color: var(--border-color);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
         /* ==========================================
            SCROLL PROGRESS & HEADER HUD
         ========================================== */
@@ -292,16 +332,15 @@
             font-size: clamp(1.02rem, 1.8vw, 1.22rem);
             color: var(--text-muted);
             max-width: 760px;
-            margin: 0 auto 42px auto;
+            margin: 0 auto 30px auto;
         }
 
-        /* Sparta Style Telemetry Strip */
         .identity-strip {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 14px;
             max-width: 860px;
-            margin: 0 auto;
+            margin: 34px auto 0 auto;
         }
 
         .identity-metric {
@@ -394,9 +433,9 @@
             font-weight: 700;
         }
 
-        /* Tactical Feature Checklist inside Story */
         .story-Points {
             margin-top: 26px;
+            margin-bottom: 28px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
@@ -431,7 +470,6 @@
             padding: 20px 0;
         }
 
-        /* Background Glow behind Phone */
         .story-phone-stage::before {
             content: '';
             position: absolute;
@@ -479,7 +517,6 @@
             flex-direction: column;
         }
 
-        /* Side Hardware Buttons */
         .phone-bezel::before {
             content: '';
             position: absolute;
@@ -565,7 +602,6 @@
             display: block;
         }
 
-        /* Live UI Fallback if local screenshot isn't in directory */
         .phone-fallback-ui {
             display: none;
             width: 100%;
@@ -579,7 +615,6 @@
             text-align: left;
         }
 
-        /* Floating Telemetry Cards on Phone Mockup (Octo SMM Style) */
         .float-card {
             position: absolute;
             background: rgba(9, 13, 22, 0.9);
@@ -594,29 +629,13 @@
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
             z-index: 20;
             animation: float-bob 4.5s ease-in-out infinite alternate;
+            text-decoration: none;
         }
 
-        .float-card.pos-top-right {
-            top: 45px;
-            right: -35px;
-        }
-
-        .float-card.pos-bottom-left {
-            bottom: 65px;
-            left: -40px;
-            animation-delay: 1.5s;
-        }
-
-        .float-card.pos-top-left {
-            top: 50px;
-            left: -35px;
-        }
-
-        .float-card.pos-bottom-right {
-            bottom: 70px;
-            right: -35px;
-            animation-delay: 1.5s;
-        }
+        .float-card.pos-top-right { top: 45px; right: -35px; }
+        .float-card.pos-bottom-left { bottom: 65px; left: -40px; animation-delay: 1.5s; }
+        .float-card.pos-top-left { top: 50px; left: -35px; }
+        .float-card.pos-bottom-right { bottom: 70px; right: -35px; animation-delay: 1.5s; }
 
         @keyframes float-bob {
             0% { transform: translateY(0px); }
@@ -647,7 +666,7 @@
         }
 
         /* ==========================================
-           VALUES / PILARES (OCTO 01-03 + SPARTA HUD)
+           VALUES / PILARES
         ========================================== */
         .pillars-section {
             background: linear-gradient(180deg, rgba(8, 12, 20, 0.6) 0%, rgba(3, 5, 8, 0.95) 100%);
@@ -1022,7 +1041,7 @@
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- HEADER -->
+    <!-- HEADER CON REDIRECCIÓN A INICIO.HTML, SERVICIOS.HTML, NOSOTROS.HTML Y CONTACTO.HTML -->
     <header>
         <nav class="container">
             <a href="inicio.html" class="logo">
@@ -1056,6 +1075,16 @@
                 <p class="hero-subtitle">
                     No somos una empresa. Somos un colectivo descentralizado de usuarios, desarrolladores y analistas comprometidos con limpiar el internet de actividades ilícitas mediante el esfuerzo conjunto y canales oficiales verificados.
                 </p>
+
+                <!-- Botones de navegación rápida -->
+                <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+                    <a href="servicios.html" class="btn btn-primary">
+                        <i class="fa-solid fa-layer-group"></i> Ver Nuestra Labor
+                    </a>
+                    <a href="contacto.html" class="btn btn-secondary">
+                        <i class="fa-solid fa-shield-halved"></i> Reportar Incidente
+                    </a>
+                </div>
 
                 <!-- Barra de Telemetría de Identidad -->
                 <div class="identity-strip">
@@ -1101,13 +1130,16 @@
                             <i class="fa-solid fa-graduation-cap"></i> Rutas de Formación Abiertas
                         </div>
                     </div>
+
+                    <a href="contacto.html" class="btn btn-primary">
+                        Enviar un Reporte Ciudadano <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <!-- Marco de Celular 1: Canal Oficial de WhatsApp JXLL -->
                 <div class="story-phone-stage fade-in-right">
                     <div class="phone-3d-wrap tilt-left">
-                        <!-- Insignias Flotantes -->
-                        <div class="float-card pos-top-right">
+                        <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="float-card pos-top-right">
                             <div class="float-card-icon" style="background: rgba(37, 211, 102, 0.15); color: #25D366;">
                                 <i class="fa-brands fa-whatsapp"></i>
                             </div>
@@ -1115,9 +1147,9 @@
                                 <strong>JXLL Oficial <i class="fa-solid fa-circle-check" style="color:#38bdf8;"></i></strong>
                                 <span>118 Seguidores · Público</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="float-card pos-bottom-left">
+                        <a href="servicios.html" class="float-card pos-bottom-left">
                             <div class="float-card-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
@@ -1125,7 +1157,7 @@
                                 <strong>Cultura & Prevención</strong>
                                 <span>Tips · Rutas de Formación</span>
                             </div>
-                        </div>
+                        </a>
 
                         <div class="phone-bezel">
                             <div class="phone-screen">
@@ -1137,16 +1169,10 @@
                                      class="phone-img"
                                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 
-                                <!-- Fallback en vivo si la imagen no está en la carpeta -->
                                 <div class="phone-fallback-ui">
                                     <div style="text-align:center;">
-                                        <div style="width:68px; height:68px; border-radius:50%; margin:0 auto 10px auto; background:radial-gradient(circle,#ef4444,#05070b); border:2px solid #ef4444; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1rem;">JXLL</div>
                                         <strong style="font-size:1.05rem;">JXLL <i class="fa-solid fa-circle-check" style="color:#38bdf8;"></i></strong>
                                         <p style="font-size:0.74rem; color:#94a3b8;">Canal • 118 seguidores</p>
-                                        <div style="margin-top:16px; text-align:left; background:#121824; padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.07);">
-                                            <p style="color:#fff; font-weight:600; margin-bottom:6px;">Ciberseguridad • Tips • Conocimiento<br>Canal oficial de JXLL</p>
-                                            <span style="font-size:0.68rem; color:#94a3b8;">Difusión de Rutas de Formación WomenCISO & MenCISO IAP en colaboración con Google Cloud.</span>
-                                        </div>
                                     </div>
                                     <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" style="text-align:center; padding:10px; background:#25D366; color:#04140a; border-radius:8px; text-decoration:none; font-weight:800;">SEGUIR CANAL OFICIAL</a>
                                 </div>
@@ -1163,8 +1189,7 @@
                 <!-- Marco de Celular 2: Canal de Telegram JXLL [PURGATORY]™ -->
                 <div class="story-phone-stage fade-in-left">
                     <div class="phone-3d-wrap tilt-right">
-                        <!-- Insignias Flotantes -->
-                        <div class="float-card pos-top-left">
+                        <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="float-card pos-top-left">
                             <div class="float-card-icon" style="background: rgba(42, 171, 238, 0.15); color: #2AABEE;">
                                 <i class="fa-brands fa-telegram"></i>
                             </div>
@@ -1172,9 +1197,9 @@
                                 <strong>JXLL [PURGATORY]™</strong>
                                 <span>289 Subscribers · Lab</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="float-card pos-bottom-right">
+                        <a href="servicios.html" class="float-card pos-bottom-right">
                             <div class="float-card-icon" style="background: rgba(139, 92, 246, 0.15); color: #c4b5fd;">
                                 <i class="fa-solid fa-code-branch"></i>
                             </div>
@@ -1182,7 +1207,7 @@
                                 <strong>Open-Source Research</strong>
                                 <span>CVE Analysis & Toolkits</span>
                             </div>
-                        </div>
+                        </a>
 
                         <div class="phone-bezel">
                             <div class="phone-screen">
@@ -1194,24 +1219,10 @@
                                      class="phone-img"
                                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 
-                                <!-- Fallback en vivo si la imagen no está en la carpeta -->
                                 <div class="phone-fallback-ui">
                                     <div>
-                                        <div style="display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
-                                            <div style="width:36px; height:36px; border-radius:50%; background:#fff; color:#000; display:flex; align-items:center; justify-content:center; font-weight:900;">JX</div>
-                                            <div>
-                                                <strong style="display:block; font-size:0.82rem;">JXLL [PURGATORY]™</strong>
-                                                <span style="font-size:0.68rem; color:#94a3b8;">289 subscribers</span>
-                                            </div>
-                                        </div>
-                                        <div style="margin-top:12px; background:#141d2b; padding:10px; border-radius:8px; border-left:3px solid #38bdf8;">
-                                            <strong style="color:#38bdf8; font-size:0.74rem;">php2shell-CVE-2026-109618-PoC</strong>
-                                            <p style="font-size:0.68rem; color:#cbd5e1; margin-top:4px;">PoC exploit for php2shell, demonstrating remote code execution in vulnerable PHP environments.</p>
-                                        </div>
-                                        <div style="margin-top:10px; background:#141d2b; padding:10px; border-radius:8px; border-left:3px solid #f43f5e;">
-                                            <strong style="color:#f43f5e; font-size:0.74rem;">🔥 PHP2Shell Toolkit</strong>
-                                            <p style="font-size:0.68rem; color:#cbd5e1; margin-top:4px;">Version-aware research toolkit for authorized security testing & detection guidance.</p>
-                                        </div>
+                                        <strong style="display:block; font-size:0.82rem;">JXLL [PURGATORY]™</strong>
+                                        <span style="font-size:0.68rem; color:#94a3b8;">289 subscribers</span>
                                     </div>
                                     <a href="https://t.me/jxll_canal" target="_blank" style="text-align:center; padding:10px; background:#2AABEE; color:#fff; border-radius:8px; text-decoration:none; font-weight:800;">UNIRME EN TELEGRAM</a>
                                 </div>
@@ -1237,6 +1248,10 @@
                             <i class="fa-solid fa-bug-slash"></i> Mitigación Colaborativa
                         </div>
                     </div>
+
+                    <a href="servicios.html" class="btn btn-secondary">
+                        Explorar Todos Nuestros Servicios <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
 
@@ -1327,6 +1342,12 @@
                             </a>
                         </div>
 
+                        <div style="margin-bottom: 16px;">
+                            <a href="contacto.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.86rem;">
+                                Ir al Centro de Reportes (contacto.html) <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+
                         <div class="verified-badge">
                             <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Canales Oficiales
                         </div>
@@ -1353,18 +1374,10 @@
                                          class="phone-img"
                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 
-                                    <!-- Fallback en vivo si la imagen no está en la carpeta -->
                                     <div class="phone-fallback-ui">
                                         <div style="text-align:center;">
-                                            <div style="width:62px; height:62px; border-radius:50%; margin:0 auto 10px auto; background:#1e293b; border:2px solid #38bdf8; display:flex; align-items:center; justify-content:center;">
-                                                <i class="fa-solid fa-user-shield" style="font-size:1.5rem; color:#38bdf8;"></i>
-                                            </div>
                                             <strong style="font-size:0.9rem;">keybreaker 『 JXLL 』</strong>
-                                            <span style="display:block; font-size:0.68rem; color:#94a3b8; margin-bottom:12px;">last seen recently</span>
-                                            <div style="text-align:left; background:#121824; padding:12px; border-radius:10px; border:1px solid rgba(56,189,248,0.2);">
-                                                <p style="font-size:0.72rem; color:#fff;">🔺 <strong>CEO & Founder JXLL | Red Team Leader | Keybreaker | Pentester & Exploit Dev</strong> 🔺</p>
-                                                <p style="font-size:0.72rem; color:#38bdf8; margin-top:8px; font-family:'JetBrains Mono',monospace;">@Keybreakerr</p>
-                                            </div>
+                                            <p style="font-size:0.72rem; color:#38bdf8; margin-top:8px; font-family:'JetBrains Mono',monospace;">@Keybreakerr</p>
                                         </div>
                                         <span style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#38bdf8;">DIRECCIÓN & COORDINACIÓN</span>
                                     </div>
@@ -1425,7 +1438,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Lógica del menú móvil
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('navMenu');
 
@@ -1441,7 +1453,6 @@
                 });
             });
 
-            // Barra de progreso de scroll
             const scrollProgress = document.getElementById('scrollProgress');
             window.addEventListener('scroll', () => {
                 const totalScroll = document.documentElement.scrollTop;
@@ -1450,7 +1461,6 @@
                 scrollProgress.style.width = scroll;
             });
 
-            // Animaciones al hacer scroll (Intersection Observer)
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
