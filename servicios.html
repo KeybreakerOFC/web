@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Nuestra Labor en JXLL - Recepción de reportes ciudadanos y formación gratuita en ciberseguridad a través de nuestros canales oficiales de Telegram, WhatsApp y Proton.">
+    <meta name="description" content="Servicios y Labor de JXLL - Recepción de reportes, análisis de ciberseguridad, mitigación de amenazas y herramientas open-source 100% gratuitas.">
     <meta name="theme-color" content="#000000">
-    <title>JXLL | Servicios y Labor Comunitaria</title>
+    <title>JXLL | Nuestra Labor y Servicios</title>
 
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-pure-black: #000000;
-            --bg-card: rgba(10, 10, 10, 0.7);
-            --bg-card-hover: rgba(20, 20, 20, 0.9);
+            --bg-pure-black: #030508;
+            --bg-surface: #080c14;
+            --bg-card: rgba(12, 17, 28, 0.75);
+            --bg-card-hover: rgba(18, 26, 42, 0.92);
             --accent-primary: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.15);
+            --accent-secondary: #0ea5e9;
+            --accent-telegram: #2AABEE;
+            --accent-whatsapp: #25D366;
+            --accent-proton: #8b5cf6;
+            --accent-glow: rgba(56, 189, 248, 0.18);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(56, 189, 248, 0.3);
-            --border-light: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(56, 189, 248, 0.32);
+            --border-light: rgba(255, 255, 255, 0.07);
             --nav-height: 80px;
+            --hud-clip: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
         }
 
         * {
@@ -39,24 +46,34 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-pure-black);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             padding-bottom: env(safe-area-inset-bottom);
+            background-image: 
+                radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 15% 75%, rgba(139, 92, 246, 0.06) 0%, transparent 45%),
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
         }
 
         h1, h2, h3, h4 {
             font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
+            line-height: 1.15;
+            letter-spacing: -0.025em;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -65,11 +82,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 14px 28px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
+            gap: 10px;
+            padding: 14px 26px;
+            font-size: 0.94rem;
+            font-weight: 700;
+            border-radius: 10px;
             text-decoration: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
@@ -77,28 +94,43 @@
         }
 
         .btn-primary {
-            background-color: var(--accent-primary);
-            color: #0f172a;
-            box-shadow: 0 4px 14px var(--accent-glow);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #040914;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.28);
         }
 
         .btn-primary:hover {
-            background-color: #0284c7;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(56, 189, 248, 0.48);
+            color: #000000;
         }
 
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border-color: var(--border-color);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        /* ==========================================
+           SCROLL PROGRESS & HEADER HUD
+        ========================================== */
         .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             height: 3px;
-            background: var(--accent-primary);
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-proton), var(--accent-whatsapp));
             width: 0%;
-            z-index: 1000;
+            z-index: 1001;
             transition: width 0.1s;
-            box-shadow: 0 0 10px var(--accent-primary);
+            box-shadow: 0 0 12px var(--accent-primary);
         }
 
         header {
@@ -106,13 +138,24 @@
             top: 0;
             width: 100%;
             height: var(--nav-height);
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(3, 5, 8, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-light);
-            z-index: 999;
+            z-index: 1000;
             display: flex;
             align-items: center;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
         }
 
         nav.container {
@@ -127,27 +170,39 @@
             gap: 12px;
             text-decoration: none;
             color: #ffffff;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 1.5rem;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
         }
 
-        .logo-icon {
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--accent-primary);
-            font-size: 1.8rem;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
         }
 
         .nav-menu {
             display: flex;
             gap: 32px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-menu a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
             transition: color 0.3s ease;
             position: relative;
         }
@@ -159,11 +214,12 @@
         .nav-menu a::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: -8px;
             left: 0;
             width: 0%;
             height: 2px;
             background: var(--accent-primary);
+            box-shadow: 0 0 8px var(--accent-primary);
             transition: width 0.3s ease;
         }
 
@@ -171,12 +227,32 @@
             width: 100%;
         }
 
+        .nav-cta {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid var(--border-color);
+            color: var(--accent-primary) !important;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-primary);
+            color: #030508 !important;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
             gap: 6px;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1002;
         }
 
         .hamburger span {
@@ -186,22 +262,19 @@
             transition: 0.3s ease;
         }
 
-        section {
-            padding: 100px 0;
-            position: relative;
-        }
-
+        /* ==========================================
+           HERO SECTION (SERVICIOS)
+        ========================================== */
         .hero {
-            min-height: 50vh;
+            min-height: 55vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: calc(var(--nav-height) + 40px);
+            padding: calc(var(--nav-height) + 50px) 0 70px 0;
             position: relative;
             overflow: hidden;
             border-bottom: 1px solid var(--border-light);
-            background: radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.05) 0%, transparent 60%);
         }
 
         .hero-content {
@@ -211,321 +284,291 @@
             margin: 0 auto;
         }
 
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-whatsapp);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-whatsapp);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.35); opacity: 0.6; }
+        }
+
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+            margin-bottom: 20px;
             color: #ffffff;
-            text-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
         }
 
         .hero h1 span {
-            color: var(--accent-primary);
+            background: linear-gradient(90deg, #38bdf8, #8b5cf6, #25D366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.15rem);
+            font-size: clamp(1.02rem, 1.8vw, 1.18rem);
             color: var(--text-muted);
-            max-width: 750px;
-            margin-inline: auto;
-            line-height: 1.8;
+            max-width: 760px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        /* ==========================================
+           SERVICES GRID
+        ========================================== */
+        section {
+            padding: 100px 0;
+            position: relative;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            max-width: 760px;
+            margin: 0 auto 64px auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 12px;
+            padding: 4px 12px;
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 2px solid var(--accent-primary);
+            border-right: 2px solid var(--accent-primary);
         }
 
         .section-title {
-            font-size: 2.2rem;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 16px;
             color: #ffffff;
-            margin-bottom: 15px;
         }
 
-        .section-description {
+        .section-subtitle {
             color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.05rem;
+            font-size: 1.08rem;
         }
 
-        .labor-grid {
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 38px 32px;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            clip-path: var(--hud-clip);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0.25;
+            transition: opacity 0.35s ease;
+        }
+
+        .service-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-color);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 26px;
+        }
+
+        .service-icon {
+            width: 58px; height: 58px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .service-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-light);
+        }
+
+        .service-card h3 { font-size: 1.35rem; margin-bottom: 12px; color: #ffffff; }
+        .service-card p { color: var(--text-muted); font-size: 0.96rem; margin-bottom: 24px; line-height: 1.7; }
+
+        .service-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        /* ==========================================
+           WORKFLOW SECTION (METODOLOGÍA)
+        ========================================== */
+        .workflow-section {
+            background: linear-gradient(180deg, rgba(8, 12, 20, 0.5) 0%, rgba(3, 5, 8, 0.95) 100%);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
-        .labor-card {
+        .workflow-step {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
+            padding: 36px 28px;
             border-radius: 16px;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
         }
 
-        .labor-card::before {
-            content: '';
+        .workflow-step-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: rgba(56, 189, 248, 0.15);
             position: absolute;
-            top: 0; left: 0; width: 3px; height: 100%;
-            background: var(--accent-primary);
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: transform 0.4s ease;
+            top: 20px;
+            right: 24px;
         }
 
-        .labor-card:hover {
-            border-color: var(--border-color);
-            background: var(--bg-card-hover);
-            transform: translateY(-5px);
-        }
+        .workflow-step h4 { font-size: 1.2rem; color: #ffffff; margin-bottom: 12px; }
+        .workflow-step p { color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; }
 
-        .labor-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        .labor-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-        }
-
-        .labor-card h3 {
-            font-size: 1.3rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-
-        .labor-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .channels-highlight {
-            background: linear-gradient(145deg, rgba(10, 10, 10, 0.95), rgba(5, 5, 5, 1));
+        /* ==========================================
+           CALL TO ACTION HUB
+        ========================================== */
+        .cta-hub-box {
+            background: linear-gradient(145deg, rgba(12, 17, 28, 0.95), rgba(5, 7, 12, 0.98));
             border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 50px 35px;
+            padding: 56px 40px;
+            max-width: 800px;
+            margin: 0 auto;
             text-align: center;
-            margin-top: 80px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(56, 189, 248, 0.05);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 40px rgba(56, 189, 248, 0.05);
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            clip-path: var(--hud-clip);
         }
 
-        .channels-highlight::before {
+        .cta-hub-box::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
+            top: 0; left: 0; width: 100%; height: 4px;
             background: linear-gradient(90deg, transparent, #2AABEE, #25D366, #6d4aff, transparent);
         }
 
-        .channels-highlight::after {
-            content: '\f3ed'; /* Shield Icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 16rem;
-            color: rgba(56, 189, 248, 0.03);
-            pointer-events: none;
-            transform: rotate(-15deg);
-        }
+        .cta-hub-box h3 { font-size: 2rem; color: #ffffff; margin-bottom: 14px; }
+        .cta-hub-box p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 30px; max-width: 600px; margin-inline: auto; }
 
-        .channels-highlight h2 {
-            font-size: 2.2rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .channels-highlight p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 650px;
-            margin: 0 auto 30px auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .channels-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 420px;
-            margin-bottom: 12px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-channel {
-            padding: 13px 22px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .btn-telegram {
-            background: #2AABEE;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);
-        }
-
-        .btn-telegram:hover {
-            background: #2298d6;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 30px rgba(42, 171, 238, 0.5);
-        }
-
-        .btn-whatsapp-chat {
-            background: #25D366;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-whatsapp-chat:hover {
-            background: #1ebc59;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
-        }
-
-        .btn-whatsapp-channel {
-            background: rgba(37, 211, 102, 0.12);
-            color: #25D366;
-            border: 1px solid rgba(37, 211, 102, 0.4);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.1);
-        }
-
-        .btn-whatsapp-channel:hover {
-            background: #25D366;
-            color: #ffffff;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-        }
-
-        .btn-proton {
-            background: rgba(109, 74, 255, 0.15);
-            color: #b7a6ff;
-            border: 1px solid rgba(109, 74, 255, 0.4);
-            box-shadow: 0 4px 15px rgba(109, 74, 255, 0.1);
-        }
-
-        .btn-proton:hover {
-            background: #6d4aff;
-            color: #ffffff;
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 10px 25px rgba(109, 74, 255, 0.4);
-        }
-
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: #38bdf8;
-            margin-top: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            position: relative;
-            z-index: 2;
-        }
-
-        .security-notice {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 25px;
-            padding: 15px 20px;
-            background: rgba(16, 185, 129, 0.05);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 12px;
-            color: #10b981;
-            font-size: 0.9rem;
-            text-align: left;
-            width: 100%;
-            max-width: 550px;
-            position: relative;
-            z-index: 2;
-        }
-
+        /* ==========================================
+           FOOTER
+        ========================================== */
         footer {
-            background: #050505;
+            background: #020306;
             border-top: 1px solid var(--border-light);
-            padding: 60px 0 30px 0;
-            margin-top: 40px;
+            padding: 70px 0 30px 0;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: 1.8fr 1fr 1.2fr;
+            gap: 48px;
+            margin-bottom: 48px;
         }
 
         .footer-section h3 {
             color: #ffffff;
             margin-bottom: 20px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .footer-section p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-        }
-
-        .footer-section a {
-            display: block;
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-bottom: 12px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--accent-primary);
-        }
+        .footer-section p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 14px; }
+        .footer-section a { display: flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 12px; font-size: 0.94rem; transition: all 0.25s ease; }
+        .footer-section a:hover { color: var(--accent-primary); transform: translateX(4px); }
 
         .footer-bottom {
-            text-align: center;
-            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-top: 26px;
             border-top: 1px solid var(--border-light);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.86rem;
         }
 
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.75s ease-out, transform 0.75s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-        .fade-in-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 1024px) {
+            .workflow-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr 1fr; }
-            .labor-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -535,32 +578,34 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - var(--nav-height));
-                background: var(--bg-pure-black);
+                background: rgba(3, 5, 8, 0.98);
                 flex-direction: column;
-                align-items: center;
                 justify-content: center;
-                gap: 40px;
+                gap: 32px;
                 transition: left 0.3s ease;
             }
             .nav-menu.active { left: 0; }
-            .nav-menu a { font-size: 1.5rem; }
+            .nav-menu a { font-size: 1.3rem; }
             .hamburger { display: flex; }
             .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-            .footer-content { grid-template-columns: 1fr; text-align: center; }
-            .channels-highlight { padding: 40px 20px; }
+            .footer-content { grid-template-columns: 1fr; }
+            .cta-hub-box { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
 
+    <!-- HEADER CON REDIRECCIÓN A CADA HTML -->
     <header>
         <nav class="container">
             <a href="inicio.html" class="logo">
-                <i class="fa-solid fa-network-wired logo-icon"></i>
+                <div class="logo-box">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
                 <span>JXLL</span>
             </a>
             <ul class="nav-menu" id="navMenu">
@@ -568,137 +613,237 @@
                 <li><a href="servicios.html" class="active">Servicios</a></li>
                 <li><a href="nosotros.html">Nosotros</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="contacto.html" class="nav-cta"><i class="fa-solid fa-shield-halved"></i> Reportar</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
+            <div class="hamburger" id="hamburger" aria-label="Abrir menú">
                 <span></span><span></span><span></span>
             </div>
         </nav>
     </header>
 
+    <!-- HERO SECTION -->
     <section class="hero">
         <div class="container">
             <div class="hero-content fade-in">
-                <h1>Nuestra <span>Labor</span></h1>
-                <p class="hero-subtitle">En JXLL no ofrecemos auditorías privadas ni servicios comerciales. Nuestra única labor es educar a la comunidad y neutralizar amenazas en la red mediante la recepción de reportes ciudadanos a través de canales oficiales y seguros.</p>
+                <div class="hero-badge">
+                    <span class="status-dot"></span>
+                    <span>DEFENSA & ASISTENCIA COMUNITARIA</span>
+                </div>
+                <h1>Nuestra Labor y <span>Servicios</span></h1>
+                <p class="hero-subtitle">
+                    Nuestra comunidad no ofrece servicios de pago ni consultorías comerciales. Todo nuestro esfuerzo tecnológico está enfocado en proteger a los usuarios y mantener el ciberespacio seguro mediante la acción colectiva y abierta.
+                </p>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN: TARJETAS DE SERVICIOS (01 - 06) -->
     <section>
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="section-title">¿Qué hacemos exactamente?</h2>
-                <p class="section-description">Todo lo que ofrece JXLL es 100% gratuito. Nuestro ecosistema funciona gracias a la colaboración de todos los miembros.</p>
-            </div>
-            
-            <div class="labor-grid">
-                
-                <div class="labor-card fade-in-up">
-                    <div class="labor-icon"><i class="fa-solid fa-bullhorn"></i></div>
-                    <h3>Recepción de Denuncias</h3>
-                    <p>Actuamos como un buzón seguro. Si encuentras un sitio de phishing, una estafa en línea o una plataforma de fraude, puedes reportarla con nosotros. Recopilamos la información para tomar acciones defensivas.</p>
-                </div>
-
-                <div class="labor-card fade-in-up" style="transition-delay: 0.1s;">
-                    <div class="labor-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <h3>Formación Gratuita</h3>
-                    <p>Creemos en democratizar la ciberseguridad. En nuestros canales oficiales compartimos guías, herramientas, tutoriales de concientización y recursos gratuitos para que cualquier persona aprenda a defenderse.</p>
-                </div>
-
-                <div class="labor-card fade-in-up" style="transition-delay: 0.2s;">
-                    <div class="labor-icon"><i class="fa-solid fa-microscope"></i></div>
-                    <h3>Análisis de Amenazas</h3>
-                    <p>Una vez recibido un reporte, nuestra comunidad de especialistas voluntarios se encarga de analizar la infraestructura del atacante, documentando IPs, proveedores de hosting y vectores utilizados.</p>
-                </div>
-
-                <div class="labor-card fade-in-up" style="transition-delay: 0.3s;">
-                    <div class="labor-icon"><i class="fa-solid fa-handshake-angle"></i></div>
-                    <h3>Intervención Solidaria</h3>
-                    <p>Tras verificar un reporte de fraude o actividad ilícita, procedemos a realizar las denuncias (abuse reports) a los proveedores correspondientes con el objetivo de dar de baja el contenido malicioso.</p>
-                </div>
-
+                <span class="section-tag">PILARES OPERATIVOS</span>
+                <h2 class="section-title">Lo que Hacemos por la Red</h2>
+                <p class="section-subtitle">
+                    Conoce las 6 áreas clave en las que nuestra comunidad descentralizada aporta valor sin costo alguno.
+                </p>
             </div>
 
-            <div class="channels-highlight fade-in">
-                <h2>Puntos de Encuentro Oficiales</h2>
-                <p>Tanto si deseas acceder a nuestra biblioteca de conocimientos gratuitos, como si necesitas reportar un sitio fraudulento de manera confidencial, contáctanos mediante nuestros canales autorizados.</p>
+            <div class="services-grid">
                 
-                <div class="channels-buttons">
-                    <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="btn-channel btn-telegram">
-                        <i class="fa-brands fa-telegram"></i> Ir a Canal De Telegram
-                    </a>
-
-                    <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-chat">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                    </a>
-
-                    <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" class="btn-channel btn-whatsapp-channel">
-                        <i class="fa-solid fa-bullhorn"></i> Canal Oficial de WhatsApp
-                    </a>
-
-                    <a href="mailto:team_jxll@proton.me" class="btn-channel btn-proton">
-                        <i class="fa-solid fa-envelope"></i> team_jxll@proton.me
-                    </a>
-                </div>
-
-                <div class="verified-badge">
-                    <i class="fa-solid fa-circle-check"></i> +57 350 5807674 · Canales Oficiales
-                </div>
-
-                <div class="security-notice">
-                    <i class="fa-solid fa-shield-halved" style="font-size: 1.4rem;"></i>
+                <!-- 01 -->
+                <div class="service-card fade-in">
                     <div>
-                        <strong>100% Gratuito y Confidencial</strong><br>
-                        Ningún administrador de JXLL te cobrará por revisar un reporte o brindarte ayuda. Tu identidad se mantiene privada.
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-inbox"></i></div>
+                            <span class="service-number">01</span>
+                        </div>
+                        <h3>Recepción de Reportes</h3>
+                        <p>Canales seguros, cifrados y confidenciales para que cualquier ciudadano pueda denunciar páginas fraudulentas, esquemas de phishing o actividades ilícitas encontradas en internet.</p>
                     </div>
+                    <div class="service-footer">
+                        <span>CANAL SEGURO</span>
+                        <a href="contacto.html" style="color: var(--accent-primary); text-decoration: none;">Reportar <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- 02 -->
+                <div class="service-card fade-in" style="transition-delay: 0.1s;">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                            <span class="service-number">02</span>
+                        </div>
+                        <h3>Análisis e Investigación</h3>
+                        <p>Nuestros miembros investigan los reportes recibidos rastreando infraestructura maliciosa, identificando vectores de ataque, huellas digitales y documentando el fraude.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>OSINT & FORENSE</span>
+                        <span>ACTIVO</span>
+                    </div>
+                </div>
+
+                <!-- 03 -->
+                <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-ban"></i></div>
+                            <span class="service-number">03</span>
+                        </div>
+                        <h3>Intervención y Mitigación</h3>
+                        <p>Acción comunitaria para neutralizar amenazas activas. Contactamos a proveedores de hosting, registradores de dominio y autoridades competentes para dar de baja sitios maliciosos.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>TAKEDOWN ÉTICO</span>
+                        <span>COLABORATIVO</span>
+                    </div>
+                </div>
+
+                <!-- 04 -->
+                <div class="service-card fade-in">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+                            <span class="service-number">04</span>
+                        </div>
+                        <h3>Herramientas Open-Source</h3>
+                        <p>Desarrollo colaborativo de scripts en Python, utilidades de seguridad y automatizaciones que se comparten libremente para que cualquier usuario pueda protegerse.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>CÓDIGO ABIERTO</span>
+                        <a href="https://t.me/jxll_canal" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Ver Canal <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- 05 -->
+                <div class="service-card fade-in" style="transition-delay: 0.1s;">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                            <span class="service-number">05</span>
+                        </div>
+                        <h3>Educación y Alertas</h3>
+                        <p>Difusión gratuita de información sobre nuevas vulnerabilidades (CVEs), métodos actuales de estafa cibernética y buenas prácticas de seguridad para el público general.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>DIVULGACIÓN</span>
+                        <span>24/7</span>
+                    </div>
+                </div>
+
+                <!-- 06 -->
+                <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                    <div>
+                        <div class="service-card-top">
+                            <div class="service-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                            <span class="service-number">06</span>
+                        </div>
+                        <h3>Soporte Comunitario</h3>
+                        <p>Asistencia técnica y orientación sin costo para víctimas de ciberdelitos, ayudándoles a asegurar sus cuentas comprometidas y entender los pasos a seguir.</p>
+                    </div>
+                    <div class="service-footer">
+                        <span>100% GRATUITO</span>
+                        <a href="contacto.html" style="color: var(--accent-primary); text-decoration: none;">Contactar <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: METODOLOGÍA DE TRABAJO -->
+    <section class="workflow-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">PROCESO TÉCNICO</span>
+                <h2 class="section-title">¿Cómo Trabajamos un Reporte?</h2>
+                <p class="section-subtitle">
+                    Nuestro protocolo de actuación prioriza la discreción, el rigor técnico y la velocidad de respuesta.
+                </p>
+            </div>
+
+            <div class="workflow-grid">
+                <div class="workflow-step fade-in">
+                    <span class="workflow-step-num">01</span>
+                    <h4>Recepción y Filtro</h4>
+                    <p>Recibimos la denuncia ciudadana a través de nuestros canales oficiales verificados, manteniendo la confidencialidad de los datos del informante.</p>
+                </div>
+                <div class="workflow-step fade-in" style="transition-delay: 0.1s;">
+                    <span class="workflow-step-num">02</span>
+                    <h4>Análisis Técnico OSINT</h4>
+                    <p>Investigamos la infraestructura del atacante, analizamos cabeceras, localizamos los servidores de alojamiento y recopilamos pruebas irrefutables.</p>
+                </div>
+                <div class="workflow-step fade-in" style="transition-delay: 0.2s;">
+                    <span class="workflow-step-num">03</span>
+                    <h4>Mitigación y Aviso</h4>
+                    <p>Ejecutamos el reporte formal ante los abusos detectados con los proveedores de red correspondientes para lograr la neutralización del sitio fraudulento.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN CTA -->
+    <section>
+        <div class="container">
+            <div class="cta-hub-box fade-in">
+                <h3>¿Necesitas reportar una amenaza o fraude?</h3>
+                <p>Nuestros canales de atención comunitaria están abiertos. Escríbenos de forma confidencial y totalmente gratuita.</p>
+                <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+                    <a href="contacto.html" class="btn btn-primary">
+                        Ir al Centro de Reportes <i class="fa-solid fa-shield-halved"></i>
+                    </a>
+                    <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        <i class="fa-brands fa-telegram"></i> Canal de Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <a href="inicio.html" class="logo" style="margin-bottom: 16px;">
-                        <i class="fa-solid fa-network-wired logo-icon" style="font-size: 1.4rem;"></i>
+                        <div class="logo-box" style="width:34px; height:34px; font-size:1rem;">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
                         <span>JXLL</span>
                     </a>
-                    <p>Comunidad ética dedicada a investigar actividades ilícitas y proteger el ciberespacio de forma 100% gratuita.</p>
+                    <p>Comunidad ética dedicada a investigar actividades ilícitas, desarrollar herramientas abiertas y proteger el ciberespacio de forma 100% gratuita.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Navegación</h3>
-                    <a href="inicio.html">Inicio</a>
-                    <a href="servicios.html">Servicios</a>
-                    <a href="nosotros.html">Comunidad JXLL</a>
-                    <a href="contacto.html">Contacto</a>
+                    <a href="inicio.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Inicio</a>
+                    <a href="servicios.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Nuestra Labor</a>
+                    <a href="nosotros.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Comunidad JXLL</a>
+                    <a href="contacto.html"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem;"></i> Reportar Incidente</a>
                 </div>
                 <div class="footer-section">
-                    <h3>Atención Exclusiva</h3>
-                    <p>Canales oficiales para reportes y material educativo:</p>
+                    <h3>Contacto Oficial</h3>
                     <a href="https://t.me/jxll_canal" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 600;">
-                        <i class="fa-brands fa-telegram" style="margin-right: 5px;"></i> Canal Telegram
+                        <i class="fa-brands fa-telegram"></i> Canal Telegram (JXLL)
                     </a>
                     <a href="https://wa.me/sebaxtianlayton" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
-                        <i class="fa-brands fa-whatsapp" style="margin-right: 5px;"></i> WhatsApp (+57 350 5807674)
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp (+57 350 5807674)
                     </a>
                     <a href="https://whatsapp.com/channel/0029VbDcW41CxoB4LwpCER3u" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">
-                        <i class="fa-solid fa-bullhorn" style="margin-right: 5px;"></i> Canal de WhatsApp
+                        <i class="fa-solid fa-bullhorn"></i> Canal Oficial de WhatsApp
                     </a>
-                    <a href="mailto:team_jxll@proton.me" style="color: #b7a6ff; font-weight: 600;">
-                        <i class="fa-solid fa-envelope" style="margin-right: 5px;"></i> team_jxll@proton.me
+                    <a href="mailto:team_jxll@proton.me" style="color: #c4b5fd; font-weight: 600;">
+                        <i class="fa-solid fa-envelope"></i> team_jxll@proton.me
                     </a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Comunidad JXLL. Por un internet más seguro. | Free & Open Community</p>
+                <p>&copy; 2026 Comunidad JXLL. Por un internet más seguro. | Open Source Security</p>
+                <span class="mono" style="color: var(--accent-primary); font-size: 0.8rem;">[ NODE: SERVICIOS // VERIFIED ]</span>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Lógica del menú móvil
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('navMenu');
 
@@ -707,7 +852,13 @@
                 navMenu.classList.toggle('active');
             });
 
-            // Barra de progreso de scroll
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
             const scrollProgress = document.getElementById('scrollProgress');
             window.addEventListener('scroll', () => {
                 const totalScroll = document.documentElement.scrollTop;
@@ -716,24 +867,16 @@
                 scrollProgress.style.width = scroll;
             });
 
-            // Animaciones al hacer scroll (Intersection Observer)
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); 
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.12 });
 
-            const animatedElements = document.querySelectorAll('.fade-in, .fade-in-up');
-            animatedElements.forEach(el => observer.observe(el));
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         });
     </script>
 </body>
